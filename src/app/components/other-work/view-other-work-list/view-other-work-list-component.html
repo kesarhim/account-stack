@@ -1,0 +1,16 @@
+<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
+  <div class="col-6">
+    <h2>
+       Other Works
+      <span>
+        <button mat-mini-fab color="primary" (click)="onAddOtherWork()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </span>
+    </h2>
+  </div>
+</div>
+<div class="">
+  <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig"></app-table-component>
+</div>
+

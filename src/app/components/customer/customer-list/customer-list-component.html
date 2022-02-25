@@ -1,0 +1,19 @@
+<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
+  <h2>
+    Clients
+      <button mat-mini-fab color="primary" (click)="onAddCandidate()">
+        <mat-icon>add</mat-icon>
+      </button>
+  </h2>
+</div>
+<div>
+  <app-table-component [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
+
+</div>
+<div *ngIf="showAddItrDrawer">
+  <app-drawer-component [opened]="showAddItrDrawer" [headerTitle] = "'Add ITR Detials'" (onClose)="onCloseDrawer()">
+    <app-customer-add-itr [searchAllowed] = "false" [showTitle] = "false" [customer]="selectedCustomer"></app-customer-add-itr>
+  </app-drawer-component>
+</div>
+
+

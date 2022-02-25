@@ -1,0 +1,50 @@
+
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  align-items: center;
+}
+
+.mat-header-cell {
+  font-size: 15px;
+  color: #fff;
+  background-color: #3e93e8;
+  opacity: 0.5px;
+  font-size: 15px;
+  font-weight: 400;
+  border-right: 1px solid #fff;
+}
+
+
+:host ::ng-deep.mat-paginator .mat-paginator-container{
+  color: #1976d2;;
+  padding: 0px 12px;
+  justify-content: flex-end;
+}
+
+.search-icon {
+  background-color: #1976d2;
+  border: 1px solid #1976d2;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.example-container {
+  position: relative;
+  min-width: 400px;
+  min-height: 600px;
+  max-height: 800px;
+  overflow: auto;
+}
+
+.mat-column-fullName {
+  min-width: 300px;
+  border-right: 1px solid #ccc;
+}
+
+tr.mat-header-row{
+  height: 42px;
+}
+

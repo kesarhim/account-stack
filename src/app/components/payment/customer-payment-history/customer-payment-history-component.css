@@ -1,0 +1,83 @@
+.heading1 {
+  font-size: 16px;
+  color: #1A237E
+}
+
+.days {
+  font-size: 15px;
+  color: #9FA8DA
+}
+
+th {
+  font-size: 14px;
+  color: #D50000
+}
+
+tr {
+  font-size: 13px
+}
+
+.solditems {
+  font-size: 13px;
+  color: #9FA8DA
+}
+
+.balance {
+  font-size: 45px;
+  color: green
+}
+
+.account {
+  margin-bottom: 36px !important;
+  font-size: 16px;
+  color: #1A237E
+}
+
+.transaction {
+  font-size: 13px
+}
+
+.progress {
+  height: 3px !important
+}
+
+.money {
+  color: #9FA8DA
+}
+
+.goal {
+  font-size: 17px;
+  color: #D50000;
+  font-weight: 400
+}
+
+.revenue {
+  font-size: 14px;
+  color: #311B92;
+  font-weight: 500
+}
+
+.orders {
+  font-size: 14px;
+  color: #311B92;
+  font-weight: 500
+}
+
+.customer {
+  font-size: 14px;
+  color: #311B92;
+  font-weight: 500
+}
+.demo-table {
+  width: 100%;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+
+

@@ -1,0 +1,26 @@
+
+
+<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
+  <div class="col-6">
+    <h2>
+      GST Details
+      <span>
+        <button mat-mini-fab color="primary" (click)="onAddGST()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </span>
+    </h2>
+  </div>
+  <div class="col-6 row assesment-year">
+    <div class="col-3">
+      <span>Assesment Year :</span>
+    </div>
+    <div class="col-9">
+       <app-catalog-loader-component [catId]="'YEAR'" placeHolder="Select Assesment Year"
+      (onChangeSelection)="onSelectAssesmentYear($event)" [ngModel]="selectedAssesmentYear"></app-catalog-loader-component>
+    </div>
+  </div>
+</div>
+<div class="">
+  <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig"></app-table-component>
+</div>

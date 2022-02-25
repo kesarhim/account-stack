@@ -1,0 +1,192 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav [mode]="mode.value" opened>
+    <div style="background-color: #f5f9fc !important;width: 250px;">
+
+      <nav
+        class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg"
+        id="navbarVertical">
+        <div class="container-fluid">
+          <!-- User menu (mobile) -->
+
+          <div class="collapse navbar-collapse" id="sidebarCollapse">
+
+            <!-- Navigation -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <h4 class="nav-link" style="font-size: 22px;">Account Stack</h4>
+                <div style="position: absolute;z-index: 100;right: 0;top: 0;">
+                  <button class="btn-primary" style="width: 60px;" (click)="sidenav.toggle()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                  </button>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/home/dashboard']" [routerLinkActive]="['active-link']"
+                  [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon>dashboard</mat-icon> Dashboard
+                </a>
+
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link cursor-pointer" (click)="collapse.toggle()">
+                  <mat-icon>add_circle_outline</mat-icon>Client
+                </a>
+                <div #collapse="ngbCollapse" [ngbCollapse]="true">
+                  <ul class="navbar-nav" style="margin-left: 15px;">
+
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/create']"
+                        [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>person</mat-icon> Add Client
+                      </a>
+                    </li>
+
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/all']"
+                        [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>person</mat-icon> View All Client
+                      </a>
+                    </li>
+
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/add/password']"
+                      [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                      <mat-icon>add_circle_outline</mat-icon> Add ITR/GST Password
+                    </a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </li>
+              <li class="nav-item">
+                <a class="nav-link cursor-pointer" (click)="collapseITR.toggle()">
+                  <mat-icon>add_circle_outline</mat-icon>ITR
+                </a>
+
+                <div #collapseITR="ngbCollapse" [ngbCollapse]="true">
+                  <ul class="navbar-nav" style="margin-left: 15px;">
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/add/itr']"
+                        [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>add_circle_outline</mat-icon> Add ITR
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/home/viewItr']" [routerLinkActive]="['active-link']"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>payment</mat-icon> View All
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link cursor-pointer" (click)="collapseGST.toggle()">
+                  <mat-icon>add_circle_outline</mat-icon>GST
+                </a>
+
+                <div #collapseGST="ngbCollapse" [ngbCollapse]="true">
+                  <ul class="navbar-nav" style="margin-left: 15px;">
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/add/gst']"
+                        [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>add_circle_outline</mat-icon> Add GST
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/home/gst-list']" [routerLinkActive]="['active-link']"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>payment</mat-icon> View All
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link cursor-pointer" (click)="collapseOther.toggle()">
+                  <mat-icon>add_circle_outline</mat-icon>Other Work
+                </a>
+
+                <div #collapseOther="ngbCollapse" [ngbCollapse]="true">
+                  <ul class="navbar-nav" style="margin-left: 15px;">
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/add/other-work']"
+                        [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>add_circle_outline</mat-icon> Add Other Work
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/home/other-work-list']" [routerLinkActive]="['active-link']"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon>payment</mat-icon> View All
+                      </a>
+                    </li>
+
+                  </ul>
+                </div>
+              </li>
+
+
+              <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/payment/history']"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon>payment</mat-icon> Payments
+                </a>
+
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/home/receive-payment']" [routerLinkActive]="['active-link']"
+                  [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon>payment</mat-icon> Recieve Payment
+                </a>
+              </li>
+
+              <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/payment/history']"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon>payment</mat-icon> Work
+                </a>
+              </li>
+
+              <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/customer/search']"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon>search</mat-icon>Search Client
+                </a> </li>
+            </ul>
+
+            <ul class="navbar-nav">
+              <li class="nav-item"> <a class="nav-link" [routerLink]="['/home/add/user']"
+                  [routerLinkActive]="['active-link']" [routerLinkActiveOptions]="{exact: true}">
+                  <mat-icon size="48px" name="person" type="material" cuClass="icon" Class="profile-icon">
+                    person
+                  </mat-icon> Account
+                </a> </li>
+              <li class="nav-item"> <a class="nav-link cursor-pointer" (click)="logout()">
+                  <mat-icon class="bi bi-box-arrow-left">exit_to_app</mat-icon> Logout
+                </a> </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div style="position: absolute;z-index: 100;left: 0;top: 5px" *ngIf="showOpenIcon">
+      <button class="btn-primary" (click)="showSideNav()" style="width: 40px;height: 40px;">
+        <mat-icon class="primary" size="15px">keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+    <div class="" [ngClass]="{'ml-45':showOpenIcon}" style="padding: 8px 24px 10px 24px">
+      <!-- Header -->
+      <!-- <app-customer-payment-history></app-customer-payment-history> -->
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- Copyright 2022 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at https://angular.io/license -->

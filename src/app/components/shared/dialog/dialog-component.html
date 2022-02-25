@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{dialogConfig.title}}</h1>
+
+<mat-dialog-content>
+
+  <div ng-template *ngIf="dialogConfig.isConfirmationDialog">
+      {{dialogConfig.confirmationMessage}}
+  </div>
+
+  <ng-container *ngTemplateOutlet="dialogConfig.template" ngIf="!dialogConfig.isConfirmationDialog">
+
+  </ng-container>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="action.isCloseButton"
+    *ngFor="let action of dialogConfig.actions" (click)="action.method($event)">{{action.linkName}}
+  </button>
+</div>
+
+
+
+

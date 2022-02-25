@@ -1,0 +1,39 @@
+@import '../../../../../assets/sass/abstracts/variables';
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1004;
+  background-color: rgba(255, 255, 255, 0.82);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.loader {
+  position: fixed;
+  left: 48%;
+  top: 45%;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  transform: translate(-45%, -48%);
+  border: 8px solid $color-assets-primary;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+}
+
+.loader-text {
+  position: relative;
+  top: 45%;
+  right: 30%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: #1D1C1C;
+}
+

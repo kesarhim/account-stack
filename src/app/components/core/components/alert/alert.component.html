@@ -1,0 +1,55 @@
+<!--Alert error box -->
+<div class="alert alert-error d-flex align-items-center {{cssClass(alert)}}" *ngIf="alert?.type === 'ERROR'">
+  <mat-icon size="26px" type="material" class="float-left mr-24">error</mat-icon>
+  <div class="alert-content float-left">
+    <h3 class="mb-0">{{'Error'}}</h3>
+    <p [innerHTML]="alert?.message">
+    </p>
+  </div>
+  <span class="cursor-pointer position-absolute" (click)="closeAlert()">
+    <mat-icon name="clear" size="16px" type="material" class="ml-8 d-flex" cuClass="cu-icon">clear</mat-icon>
+  </span>
+</div>
+<!--Alert error box -->
+
+<!--Alert info box -->
+<div class="alert alert-info d-flex align-items-center {{cssClass(alert)}}" *ngIf="alert?.type === 'INFO'">
+  <mat-icon name="info" size="26px" type="material" class="float-left mr-24">info</mat-icon>
+  <div class="alert-content float-left">
+    <h3 class="mb-0">{{'Info'}}</h3>
+    <p [innerHTML]="alert?.message">
+    </p>
+  </div>
+  <span class="cursor-pointer position-absolute" (click)="closeAlert()">
+    <mat-icon name="clear" size="16px" type="material" class="ml-8 d-flex" cuClass="cu-icon">clear</mat-icon>
+  </span>
+</div>
+<!--Alert info box -->
+
+<!--Alert warning box -->
+<div class="alert alert-warning d-flex align-items-center {{cssClass(alert)}}" *ngIf="alert?.type === 'WARNING'">
+  <mat-icon size="26px" type="material" class="float-left mr-24">warning</mat-icon>
+  <div class="alert-content float-left">
+    <h3 class="mb-0">{{'Warning'}}</h3>
+    <p [innerHTML]="alert?.message">
+    </p>
+  </div>
+  <span class="cursor-pointer position-absolute" (click)="closeAlert()">
+    <mat-icon name="clear" size="16px" type="material" class="ml-8 d-flex" cuClass="cu-icon">clear</mat-icon>
+  </span>
+</div>
+<!--Alert warning box -->
+
+<!--Alert success box -->
+<div class="alert alert-success d-flex align-items-center {{cssClass(alert)}}" *ngIf="alert?.type === 'SUCCESS'">
+  <mat-icon name="check_circle" size="26px" type="material" class="float-left mr-24">check_circle</mat-icon>
+  <div class="alert-content float-left">
+    <h3 class="mb-0">{{'Success'}}</h3>
+    <p [innerHTML]="alert?.message">
+    </p>
+  </div>
+  <span class="cursor-pointer position-absolute" (click)="closeAlert()">
+    <mat-icon name="clear" size="16px" type="material" class="ml-8 d-flex" cuClass="cu-icon">clear</mat-icon>
+  </span>
+</div>
+<!--Alert success box -->

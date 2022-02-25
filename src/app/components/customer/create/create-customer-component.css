@@ -1,0 +1,18 @@
+.dob {
+  display: inline !important;
+}
+
+.date-icon {
+  position: absolute ;
+  right: 0;
+  padding-right: 6px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  color: #1976d2;
+}
+
+

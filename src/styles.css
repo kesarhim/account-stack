@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;width: 100%;overflow: hidden; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "~@ng-select/ng-select/themes/default.theme.css";
+label {
+  font-size: 16px;
+  color: #222428;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 400;
+}
+
+.action-button {
+  width: 146px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.require{
+  color: red;
+}
+
+.mat-drawer-container{
+  background-color: #fff;
+}
+
+.save-btn-row {
+  position: absolute;
+    float: right;
+    bottom: 0;
+    right: 0;
+    margin: 38px;
+}
+
+button:disabled{
+  cursor: not-allowed;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px;
+  background: grey;
+  box-shadow: inset 0 0 4px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3e93e8;
+  border-radius: 10px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  color: #000000;
+}
+

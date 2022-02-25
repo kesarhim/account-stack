@@ -1,0 +1,111 @@
+<div class="" >
+  <h2 >Fill GST Details </h2>
+  <form [formGroup]="addGSTForm">
+    <div class="row" style="justify-content: center;margin-left: 177px;" *ngIf="searchAllowed">
+      <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4">
+          <input formControlName="firstName" class="form-control" placeholder="*First Name"  readonly />
+        </div>
+        <div class="col-sm-4"><input formControlName="middleName" class="form-control" placeholder="Middle Name" readonly />
+        </div>
+        <div class="col-sm-4"><input formControlName="lastName" class="form-control" placeholder="Last Name" readonly /></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4">
+          <label>Pan Number</label><input formControlName="panNumber" class="form-control" placeholder="*Pan Number" style="text-transform: uppercase" required
+            readonly />
+        </div>
+        <div class="col-sm-4">
+          <label>Aadhaar Number</label><input formControlName="aadhaarNumber" class="form-control"
+            placeholder="*Aadhaar Number (XXXX-XXXX-XXXX)" pattern="^\d{4}-\d{4}-\d{4}$" readonly />
+        </div>
+        <div class="col-sm-4">
+          <label>Mobile Number</label><input formControlName="mobileNumber" class="form-control" type="tel"
+            placeholder="*Mobile Number" readonly  />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+
+        <div class="col-sm-6">
+          <label >GST Number</label> <input formControlName="gstNumber"  class="form-control"
+            placeholder="GST Number"  />
+        </div>
+
+        <div class="col-sm-6">
+          <label >Type<span class="require"> *</span></label>
+          <app-catalog-loader-component [catId]="'GST_TYPE'" formControlName="gstType" placeHolder="Select Assesment Year"
+          ></app-catalog-loader-component>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4">
+          <label >Financial Year<span class="require"> *</span></label>
+          <app-catalog-loader-component [catId]="'YEAR'" formControlName="year" placeHolder="Select Year"
+          ></app-catalog-loader-component>
+        </div>
+        <div class="col-sm-4">
+          <label >Month <span class="require"> *</span></label>
+          <app-catalog-loader-component [catId]="'MONTHS'" formControlName="month" placeHolder="Select Month"
+          ></app-catalog-loader-component>
+        </div>
+        <div class="col-sm-4">
+          <label>File Date <span class="require">*</span></label>
+          <div class="input-group">
+            <input matInput [matDatepicker]="picker" class="form-control"  placeholder="*File Date"
+            formControlName="fileDate"  />
+            <div class="input-group-append date-icon">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-6">
+          <label >Total Fees <span class="require"> *</span></label><input formControlName="totalFees" class="form-control" type="number"
+            placeholder="*Total Fees" value="0"  />
+        </div>
+
+        <div class="col-sm-6">
+          <label >Fees Paid</label> <button mat-mini-fab color="primary" (click)="onAddPayment()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+      <div class="col-sm-6">
+        <label>Remark</label>
+        <textarea  class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea>
+      </div>
+      <div class="col-sm-6"  style="justify-content: end;display: flex; align-items: flex-end;">
+        <button style="height: 45px;" type="button" id="addNew" class="btn btn-primary action-button" (click)="onSaveGstDetails()"
+        [disabled]= >{{ selectedCustomer?.id>0 || gstDetailId >0 ? 'Update': 'Save'}}</button>
+        </div>
+    </div>
+  </div>
+
+
+  </form>
+</div>
+

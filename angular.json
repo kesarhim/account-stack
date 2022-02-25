@@ -27,6 +27,11 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              //"src/assets/_define-custom-theme.scss",
+
+              "./node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.css"
             ],
             "scripts": []

@@ -1,0 +1,26 @@
+<ngb-carousel *ngIf="images">
+  <ng-template *ngFor="let image of images" ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="../../../../../../assets/images/slide-1.jpg" style="width: 100%;height: 70vh;"
+        alt="Random second slide">
+    </div>
+    <div class="carousel-caption">
+      <h2 class="animated fadeInDown">Welcome to <span>Peeyush Kesharwani & Associates</span></h2>
+      <p class="animated fadeInUp">
+        There are various laws in India that govern different kinds of audit like income tax audit, stock audit, cost
+        audit, company or statutory audit as per company law, to name a few. Section 44AB of the Income Tax Act, 1961,
+        lays down the provisions for income tax audit.
+
+        Income Tax audit, as evident from the name, is aimed at evaluating whether an individual or company has
+        accurately filed the income tax returns of an assessment year. An external agency is mandated to assess returns
+        filed from income, deductions and expenditures and other rules as mentioned by the Income Tax Act, 1961. The tax
+        audit process simplifies the computation of tax returns. The Chartered Accountant of the concerned agency
+        performing the tax audit has to submit Form 3CA or Form 3CB, and Form 3CD, as an audit report comprising of the
+        observations.
+      </p>
+      <a href="https://en.wikipedia.org/wiki/Income_tax_audit" target="_blank"
+        class="btn-get-started animated fadeInUp">Read More</a>
+    </div>
+
+  </ng-template>
+</ngb-carousel>

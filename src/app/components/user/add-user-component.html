@@ -1,0 +1,67 @@
+<div class="register">
+  <h2>Create Account</h2>
+  <form [formGroup]="addUserForm" autocomplete="disabled">
+    <div class="row">
+      <div class="col-md-12 register-right">
+
+        <ul ngbNav #nav="ngbNav" class="nav-tabs nav-justified">
+          <li ngbNavItem class="nav-item">
+            <a ngbNavLink (click)="onSelectUserType(0)">Employee</a>
+            <ng-template ngbNavContent>Employee</ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink (click)="onSelectUserType(1)">Admin</a>
+            <ng-template ngbNavContent>Admin</ng-template>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="from">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>User Name <span class="require">*</span></label>
+            <input formControlName="username" class="form-control" type="text" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Email <span class="require">*</span></label>
+            <input formControlName="userEmail" class="form-control" type="email" required />
+
+            <p class="require" *ngIf="userEmail?.invalid && userEmail?.dirty">Please enter valid email address.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Password <span class="require">*</span></label>
+            <input class="form-control" type="password" formControlName="userPassword" required />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Confirm Password <span class="require">*</span></label>
+            <input class="form-control" id="confirmpassword" type="password" formControlName="confirmpassword" required />
+            <p class="require"
+                *ngIf="addUserForm.get('confirmpassword')?.invalid && addUserForm.get('confirmpassword')?.dirty && addUserForm.get('confirmpassword')?.errors?.['passwordNotMatch']">Password doe's not match. Please enter the same password</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row save-btn-row">
+        <div class="col-sm-12" style="justify-content: end;display: flex;">
+          <button type="button" class="btn btn-primary action-button" (click)="onSave()">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

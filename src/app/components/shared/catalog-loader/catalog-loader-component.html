@@ -1,0 +1,10 @@
+
+<div>
+  <ng-select #combo placeholder="{{placeHolder}}"
+  [items]="catalogData" bindLabel="description" bindValue="code"
+  (change)="onChangeValue($event)" [(ngModel)]="_value">
+</ng-select>
+</div>
+
+
+

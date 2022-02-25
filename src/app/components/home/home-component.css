@@ -1,0 +1,22 @@
+@import url(./external.css);
+
+.active-link {
+  color: #4e52d0 !important;
+  opacity: 1;
+}
+
+.example-container {
+  position: absolute;
+  top: 65px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.h-lg-screen {
+  height: calc(100vh - 65px) !important;
+}
+
+.ml-45 {
+  margin-left: 45px;
+}

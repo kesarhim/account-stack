@@ -25,16 +25,29 @@ export class CustomerAddPasswordComponent implements OnInit {
 
   onSelectCustomer = (customer: Customer) => {
     this.selectedCustomer = customer;
-    this.patchData(this.selectedCustomer);
+    this.patchCustomer();
   }
 
   createForm = () => {
     this.addPasswordForm = this.formBuilder.group({
+      fullName: [null],
+      aadhaarNumber: [null],
+      panNumber: [null],
       incomeTaxUserId: [null],
       incomeTaxPassword: [null],
       gstUserId: [null],
       gstPassword: [null],
     });
+  }
+
+  patchCustomer = () => {
+    if (this.selectedCustomer) {
+      this.addPasswordForm.patchValue({
+        fullName: this.selectedCustomer.fullName,
+        aadhaarNumber: this.selectedCustomer.aadhaarNo,
+        panNumber: this.selectedCustomer.panNo,
+      });
+    }
   }
 
   patchData = (customer: Customer) => {

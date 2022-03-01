@@ -15,7 +15,7 @@ import { Subscriber, Subscription } from 'rxjs';
 export class SearchComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
-  public customers:Array<Customer>;
+  public customers:Array<Customer> ;;
   public showOptions:boolean = false;
   private openSubs:Subscription;
   @Output() onSelectClient:EventEmitter<Customer> = new EventEmitter();
@@ -34,9 +34,13 @@ export class SearchComponent implements OnInit {
       let url = `/customer/search?searchString=${this.searchText}`
       this.httpService.get(url).subscribe((result :any) => {
           if(result?.response){
-            this.customers = result.response;
-            this.showOptions = true;
+        //    this.customers = result.response;
+            this.customers = [];
             this.customers.push(...result.response);
+            this.showOptions = true;
+
+          }else {
+            this.customers = [];
           }
       });
     }

@@ -49,6 +49,18 @@ export class CreateCustomerComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.createCustomerForm.get('email')?.valueChanges.subscribe(value => {
+      if(value){
+        this.createCustomerForm.get('email')?.setValidators([Validators.email]);
+      }else{
+        this.createCustomerForm.get('email')?.removeValidators([Validators.email]);
+      }
+    });
+  }
+
   onAddNewClient = () => {
     if(this.createCustomerForm.valid){
       this.loaderService.show();
@@ -82,7 +94,7 @@ export class CreateCustomerComponent implements OnInit {
       panNo: [null, [Validators.required, ValidatePanNo()]],
       aadhaarNo: [null],
       mobileNo: [null, Validators.required],
-      email: [null, [Validators.email]],
+      email: [null],
       street: [null],
       city: [null],
       state: [null],

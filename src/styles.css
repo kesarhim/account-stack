@@ -13,6 +13,7 @@ label {
 
 .action-button {
   width: 146px;
+  margin: 0;
 }
 
 .cursor-pointer{
@@ -28,11 +29,12 @@ label {
 }
 
 .save-btn-row {
-  position: absolute;
+  position: relative;
     float: right;
     bottom: 0;
     right: 0;
-    margin: 38px;
+    /* margin: 3px; */
+    margin-bottom: 50px;
 }
 
 button:disabled{

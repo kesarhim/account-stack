@@ -5,7 +5,22 @@
   color: #fff;
 }
 
-.search-list{
+.search-list {
   height: 500px;
-  background: #fff;
+  background-color: #fff;
 }
+
+.search-close-icon {
+  position: absolute;
+  right: 70px;
+  top: 10px;
+  font-size: 18px;
+  color: #427bab;
+  cursor: pointer;
+}
+.input-group > .custom-file .custom-file-input:focus ~ .custom-file-label,
+.input-group > .custom-select:focus,
+.input-group > .form-control:focus {
+  z-index: 0;
+}
+

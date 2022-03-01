@@ -7,10 +7,30 @@
         <span class="input-group-text search-icon">
           <mat-icon>search</mat-icon>
         </span>
+        <button mat-mini-fab color="primary" style="margin-left: 18px;" [matMenuTriggerFor]="menu" #menuTrigger>
+          <mat-icon>filter_alt</mat-icon>
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<mat-menu #menu="matMenu" [hasBackdrop]="false" xPosition="before">
+  <div style="width: 300px;padding: 12px;height: 400px;">
+    <div *ngFor="let filter of tableFilterSource" style="margin-bottom: 8px;">
+      <label>{{filter.filterName}}</label>
+      <ng-select placeholder="Select Name" [items]="filter.dataSource" [(ngModel)]="filter.selectValue"
+      (click)="$event.stopPropagation();$event.preventDefault();"></ng-select>
+    </div>
+
+  </div>
+  <div style="justify-content: end;
+      display: flex;
+      margin-right: 14px;">
+    <button mat-flat-button>Cancel</button>
+    <button mat-flat-button cdkFocusInitial color="primary" (click)="onApplyFilter()">Apply</button>
+  </div>
+</mat-menu>
 
 <div class="example-container mat-elevation-z8">
 
@@ -38,7 +58,8 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="action.method(row)" *ngFor="let action of column.actions">
                   <span style="margin-right: 14px;">{{action.linkName}}</span>
-                  <mat-icon mat-mini-fab color="primary" *ngIf="action.showIcon" style="font-size: 20px;">{{action.icon}}</mat-icon>
+                  <mat-icon mat-mini-fab color="primary" *ngIf="action.showIcon" style="font-size: 20px;">
+                    {{action.icon}}</mat-icon>
                 </button>
               </mat-menu>
             </div>
@@ -46,13 +67,14 @@
         </div>
         <ng-template #other_content>
 
-            <div *ngIf="column.type===coloumnType.DATE;else other_row">
-              {{ getPropertyValue(row,column?.name) | date : 'mediumDate'}}
-            </div>
+          <div *ngIf="column.type===coloumnType.DATE;else other_row">
+            {{ getPropertyValue(row,column?.name) | date : 'mediumDate'}}
+          </div>
 
-            <ng-template #other_row>
-              {{ column.showUpperCase ? ( getPropertyValue(row,column?.name) ?? 'N.A' | uppercase) : getPropertyValue(row,column?.name) ?? 'N.A'}}
-            </ng-template>
+          <ng-template #other_row>
+            {{ column.showUpperCase ? ( getPropertyValue(row,column?.name) ?? 'N.A' | uppercase) :
+            getPropertyValue(row,column?.name) ?? 'N.A'}}
+          </ng-template>
 
         </ng-template>
       </td>

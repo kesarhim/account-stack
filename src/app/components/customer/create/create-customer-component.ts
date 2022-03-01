@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../service/customer-service';
 import { Customer } from './models/customer-model';
 import { Location } from '@angular/common';
+import { ValidateAadhaarNo, ValidatePanNo } from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-create-customer-component',
@@ -24,8 +25,8 @@ export class CreateCustomerComponent implements OnInit {
     private formBuilder: FormBuilder, private httpService: HttpService,
     private route: ActivatedRoute,
     private customerService: CustomerService,
-    private _location:Location,
-    private router:Router) { }
+    private _location: Location,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((value) => {
@@ -41,7 +42,7 @@ export class CreateCustomerComponent implements OnInit {
           this.patchData(data.response);
         }
         this.loaderService.hide();
-      },err => {
+      }, err => {
         this.alertService.error(err?.error?.message);
         this.loaderService.hide();
       })
@@ -51,19 +52,19 @@ export class CreateCustomerComponent implements OnInit {
   onAddNewClient = () => {
     this.loaderService.show();
     let payLoad = this.createCustomerForm.value;
-    if(this.customerId > 0){
+    if (this.customerId > 0) {
       payLoad.id = this.customerId;
     }
     this.httpService.post('/Customer/Create', this.createCustomerForm.value).subscribe(result => {
       this.loaderService.hide();
-      let messageToShow :string = this.customerId > 0  ? 'Updated Successfully.' : 'New Client Added Successfully.';
+      let messageToShow: string = this.customerId > 0 ? 'Updated Successfully.' : 'New Client Added Successfully.';
       this.alertService.success(messageToShow);
       this.createCustomerForm.reset(true);
       this.goToCandidateListPage();
     }, err => {
       this.alertService.error(err?.error?.message);
       this.loaderService.hide();
-    } );
+    });
 
   }
 
@@ -74,9 +75,9 @@ export class CreateCustomerComponent implements OnInit {
       lastName: [null, Validators.required],
       fatherName: [null, Validators.required],
       dob: [new Date(), Validators.required],
-      panNo: [null, Validators.required],
-      aadhaarNo: [null, Validators.required],
-      mobileNo: [null, [Validators.required]],
+      panNo: [null, [Validators.required, ValidatePanNo()]],
+      aadhaarNo: [null],
+      mobileNo: [null, Validators.required],
       email: [null, [Validators.email]],
       street: [null],
       city: [null],
@@ -85,19 +86,37 @@ export class CreateCustomerComponent implements OnInit {
     });
   }
 
+  get panNumber() {
+    return this.createCustomerForm.get('panNo');
+  }
+
+  get aaDhharNumber() {
+    return this.createCustomerForm.get('aadhaarNo');
+  }
+
   patchData = (customer: Customer): void => {
     this.createCustomerForm.patchValue(customer)
   }
 
   formatAddhaarNumber = () => {
-
+    let aadhaarNumber: string = this.createCustomerForm.get('aadhaarNo')?.value;
+    if (aadhaarNumber && aadhaarNumber.length === 12) {
+      let value = aadhaarNumber.substring(0, 4) + '-' + aadhaarNumber.substring(4, 8) + '-' + aadhaarNumber.substring(8, 12);
+      if (ValidateAadhaarNo(value)) {
+        this.createCustomerForm.patchValue({
+          aadhaarNo: value
+        });
+      }
+    } else {
+      this.aaDhharNumber?.setErrors({ invalidAadhaarNo: true })
+    }
   }
 
   backClicked() {
     this._location.back();
   }
 
-  goToCandidateListPage =() => {
+  goToCandidateListPage = () => {
     this.router.navigateByUrl('/home/customer/all')
   }
 

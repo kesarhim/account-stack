@@ -10,6 +10,7 @@ export interface ITableColumn {
   type?: ColumnType,
   actions? :Array<ITableActionLinks>;
   showUpperCase?:boolean;
+  applyFilter?:boolean;
 }
 
 export interface ITableActionLinks{
@@ -17,6 +18,13 @@ export interface ITableActionLinks{
    icon: string;
    method:Function;
    showIcon:boolean;
+}
+
+export interface ITableFilter {
+   filterName:string;
+   dataSource:Array<any>;
+   selectValue?:any;
+   fieldName:string;
 }
 
 export enum ColumnType {

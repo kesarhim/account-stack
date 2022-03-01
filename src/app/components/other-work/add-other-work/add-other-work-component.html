@@ -1,22 +1,20 @@
 <div class="" >
-  <h2>Add Work Details </h2>
-  <form [formGroup]="addOtheWorkForm">
-    <div class="row" style="justify-content: center;margin-left: 177px;" *ngIf="searchAllowed">
+  <h2 class="mb-0" *ngIf="showTitle">Add Work Details </h2>
+  <div class="form-group">
+    <div class="row" style="justify-content: end;margin: 0px 0px 28px 0;
+    width: 100%;" *ngIf="searchAllowed">
       <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
     </div>
+  </div>
+  <form [formGroup]="addOtheWorkForm">
     <div class="form-group">
       <div class="row">
         <div class="col-sm-4">
-          <input formControlName="firstName" class="form-control" placeholder="*First Name"  readonly />
+          <label>Name</label>
+          <input formControlName="fullName" class="form-control" placeholder="Client Name" required readonly
+            style="text-transform: uppercase" />
         </div>
-        <div class="col-sm-4"><input formControlName="middleName" class="form-control" placeholder="Middle Name" readonly />
-        </div>
-        <div class="col-sm-4"><input formControlName="lastName" class="form-control" placeholder="Last Name" readonly /></div>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <div class="row">
         <div class="col-sm-4">
           <label>Pan Number</label><input formControlName="panNumber" class="form-control" placeholder="*Pan Number" style="text-transform: uppercase"
             readonly />
@@ -24,10 +22,6 @@
         <div class="col-sm-4">
           <label>Aadhaar Number</label><input formControlName="aadhaarNumber" class="form-control"
             placeholder="*Aadhaar Number (XXXX-XXXX-XXXX)" pattern="^\d{4}-\d{4}-\d{4}$" readonly />
-        </div>
-        <div class="col-sm-4">
-          <label>Mobile Number</label><input formControlName="mobileNumber" class="form-control" type="tel"
-            placeholder="*Mobile Number" readonly  />
         </div>
       </div>
     </div>
@@ -52,12 +46,8 @@
         <div class="col-sm-6">
           <label>File Date <span class="require">*</span></label>
           <div class="input-group">
-            <input matInput [matDatepicker]="picker" class="form-control"  placeholder="*File Date"
-            formControlName="fileDate"  />
-            <div class="input-group-append date-icon">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
+            <app-date-picker-component placeholder="Select File Date" formControlName="fileDate" style="width: 100%;">
+            </app-date-picker-component>
           </div>
         </div>
         <div class="col-sm-6">
@@ -77,6 +67,8 @@
         <div class="col-sm-6">
           <label >Fees Paid</label> <input formControlName="feesPaid" class="form-control" type="number"
             placeholder="Fees Paid" value="0"  />
+            <p class="require" *ngIf="feesPaid?.dirty && feesPaid?.invalid && feesPaid?.errors['invalidFees']">Fees paid
+              can not be greater than total fees.</p>
         </div>
       </div>
 

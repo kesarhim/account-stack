@@ -53,6 +53,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './components/shared/dialog/dialog-component';
 import { GstListComponent } from './components/view-all-gst/view-gst-list-component';
 import { ViewOtherWorkListComponent } from './components/other-work/view-other-work-list/view-other-work-list-component';
+import { DatePickerComponent } from './components/shared/date-picker/date-picker-component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ViewOtherWorkListComponent } from './components/other-work/view-other-w
     GstListComponent,
     ViewOtherWorkListComponent,
     AddOtherWorkComponent,
-    ReceivePaymentComponent
+    ReceivePaymentComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,

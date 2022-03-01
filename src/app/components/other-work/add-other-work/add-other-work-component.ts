@@ -9,6 +9,7 @@ import { Customer } from '../../customer/create/models/customer-model';
 import { User } from '../../shared/models/user-cred.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageKeys, StorageService } from '../../core/services/storage.service';
+import { feesPaidValidator } from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-add-other-work-component',
@@ -19,6 +20,13 @@ import { StorageKeys, StorageService } from '../../core/services/storage.service
 
 export class AddOtherWorkComponent implements OnInit {
   @Input() searchAllowed: boolean = true;
+  @Input() showTitle:boolean = true;
+
+  @Input() set customer(value: Customer) {
+    if (value) {
+      this.onSelectCustomer(value);
+    }
+  };
   public addOtheWorkForm:FormGroup;
   private selectedCustomer:Customer | null;
   public othweWorkDetailId:number;
@@ -26,10 +34,16 @@ export class AddOtherWorkComponent implements OnInit {
   private otheWorkDetails : OtherWorkDetailDTO | null;
   constructor(private formbuilder:FormBuilder,
     private otherWorkDetailService : OtherWorkDetailService,private loaderService:LoaderService,
-    private alertService:AlertService, private router: Router, private route: ActivatedRoute,private storageService:StorageService) { }
+    private alertService:AlertService, private router: Router, private route: ActivatedRoute,
+    private storageService:StorageService) {
+       this.creatForm();
+     }
 
   ngOnInit() {
-    this.creatForm();
+ //   this.creatForm();
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
     this.route.queryParams.subscribe((value) => {
       this.othweWorkDetailId = value['id'];
@@ -52,12 +66,9 @@ export class AddOtherWorkComponent implements OnInit {
    patchOtherWorkDetails = () => {
      if(this.otheWorkDetails){
        this.addOtheWorkForm.patchValue({
-        firstName: this.otheWorkDetails.firstName,
-        middleName: this.otheWorkDetails.middleName,
-        lastName: this.otheWorkDetails.lastName,
+        fullName: this.otheWorkDetails.fullName,
         panNumber: this.otheWorkDetails.panNo,
         aadhaarNumber: this.otheWorkDetails.aadhaarNo,
-        mobileNumber: this.otheWorkDetails.mobileNo,
         clientName: this.otheWorkDetails.clientName,
         work: this.otheWorkDetails.work,
         careOf: this.otheWorkDetails.careOf,
@@ -72,18 +83,15 @@ export class AddOtherWorkComponent implements OnInit {
   creatForm = () => {
     let currdate = new Date();
     this.addOtheWorkForm = this.formbuilder.group({
-      firstName: [null],
-      middleName: [null],
-      lastName: [null],
+      fullName: [null],
       panNumber: [null],
       aadhaarNumber: [null],
-      mobileNumber: [null],
       clientName: [null,Validators.required],
       work:[null,Validators.required],
       careOf: [null, Validators.required],
       fileDate: [currdate, Validators.required],
       totalFees: [null, Validators.required],
-      feesPaid: [null],
+      feesPaid: [null,feesPaidValidator()],
       remark: [null],
     });
 
@@ -92,13 +100,15 @@ export class AddOtherWorkComponent implements OnInit {
   onSelectCustomer = (customer: Customer) => {
     this.selectedCustomer = customer;
     this.addOtheWorkForm?.patchValue({
-      firstName: this.selectedCustomer?.firstName,
-      middleName: this.selectedCustomer?.middleName,
-      lastName: this.selectedCustomer?.lastName,
+      fullName: this.selectedCustomer?.fullName,
       panNumber: this.selectedCustomer?.panNo,
       aadhaarNumber: this.selectedCustomer?.aadhaarNo,
       mobileNumber: this.selectedCustomer?.mobileNo
     });
+  }
+
+  get feesPaid() {
+    return this.addOtheWorkForm.get('feesPaid');
   }
 
   onSaveWorkDetails = () => {

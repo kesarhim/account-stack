@@ -1,3 +1,4 @@
+import { DrawerService } from './../../shared/drawer/drawer.service';
 import { ITRDetailsDTO } from './../../view-itr/model/itr-details-dto-model';
 import { CustomerService } from './../service/customer-service';
 import { ITRDetailService } from './../service/itr-details-service';
@@ -10,7 +11,8 @@ import { HttpService } from './../../core/services/http.service';
 import { Customer } from './../create/models/customer-model';
 import { AlertService } from './../../core/components/alert/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { feesPaidValidator } from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-customer-add-itr',
@@ -23,8 +25,8 @@ export class CustomerAddITRComponent implements OnInit {
   public selectedCustomer: Customer | null;
   @Input() searchAllowed: boolean = true;
   @Input() showTitle: boolean = true;
-
-
+  @ViewChild('receivePaymentTemp') receivePaymentTemplate:TemplateRef<any>;
+  showFeesDetails: boolean = false;
   @Input() set customer(value: Customer) {
     if (value) {
       this.onSelectCustomer(value);
@@ -39,12 +41,15 @@ export class CustomerAddITRComponent implements OnInit {
     private loaderService: LoaderService, private storageService: StorageService,
     private itrDetailService: ITRDetailService,
     private customerService: CustomerService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,private drawerService : DrawerService) {
     this.createForm();
   }
 
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
     this.route.queryParams.subscribe((value) => {
       this.itrDetailId = value['id'];
     });
@@ -66,34 +71,36 @@ export class CustomerAddITRComponent implements OnInit {
     }
   }
 
+  get feesPaid() {
+    return this.addITRForm.get('feesPaid');
+  }
+
   createForm = () => {
     this.addITRForm = this.fromBuilder.group({
-      firstName: [null],
-      middleName: [null],
-      lastName: [null],
-      panNumber: [null],
-      mobileNumber: [null],
+      fullName: [null],
       aadhaarNumber: [null],
+      panNumber:[null],
       ackNo: [null, Validators.required],
       fileDate: [new Date(), Validators.required],
       taxAmount: [ Validators.required],
       refundAmount: [Validators.required],
       totalFees: [Validators.required],
-      feesPaid: [ ],
+      feesPaid: [null,feesPaidValidator() ],
       yearCode: ['4', Validators.required],
-      remark: [null]
+      remark: [null],
+      cheuqeNumber:[null],
+      transactionNo:[null],
+      receivedBy:[null],
+      paymentMethod:['CASH']
     });
   }
 
   onSelectCustomer = (customer: Customer) => {
     this.selectedCustomer = customer;
     this.addITRForm?.patchValue({
-      firstName: this.selectedCustomer?.firstName,
-      middleName: this.selectedCustomer?.middleName,
-      lastName: this.selectedCustomer?.lastName,
+      fullName: this.selectedCustomer?.fullName,
       panNumber: this.selectedCustomer?.panNo,
       aadhaarNumber: this.selectedCustomer?.aadhaarNo,
-      mobileNumber: this.selectedCustomer?.mobileNo
     });
   }
 
@@ -137,6 +144,10 @@ export class CustomerAddITRComponent implements OnInit {
 
   goToViewITRList = () => {
     this.router.navigateByUrl('/home/viewItr');
+  }
+
+  receivePayment = () => {
+    this.drawerService.openDrawer(this.receivePaymentTemplate,'Receive Payment');
   }
 
 }

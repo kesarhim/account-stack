@@ -16,4 +16,9 @@ export class ITRDetailsDTO {
   invoiceId:number;
   balanceAmount:number;
   receivedPaymentId:number;
+  cheuqeNumber: string;
+  transactionNumber: string;
+  receivedBy: string;
+  paymentMethod: CatalogData;
 }
+

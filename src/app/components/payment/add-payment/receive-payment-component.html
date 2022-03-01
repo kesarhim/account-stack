@@ -1,88 +1,104 @@
+<div style="display: flex;flex-direction: row;">
+  <div class="col-sm-6">
+    <h2 id="exampleModalLabel" *ngIf="showTitle">Receive Payment</h2>
 
-  <h2 id="exampleModalLabel" >Receive Payment</h2>
+    <form [formGroup]="receivePaymentForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Enter Amount <span class="require">*</span></label>
+            <input formControlName="amount" type="number" class="form-control" placeholder="Enter Amount" required />
+          </div>
+        </div>
+      </div>
 
-<form [formGroup]="receivePaymentForm">
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-4">
-        <label>Enter Amount</label><input formControlName="amount" class="form-control" placeholder="Enter Amount"
-          required />
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Payment Method <span class="require">*</span></label>
+            <app-catalog-loader-component [catId]="'PAYMENT'" formControlName="paymentMethod"
+              placeHolder="Please Select Payment Method"></app-catalog-loader-component>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="receivePaymentForm.get('paymentMethod')?.value === 'CHEQUE'">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Cheque Number </label><input formControlName="cheuqeNumber" class="form-control"
+              placeholder="Enter Cheuqe Number" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="receivePaymentForm.get('paymentMethod')?.value !== 'CHEQUE'">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Transaction Number </label><input formControlName="transactionNumber" class="form-control"
+              placeholder="Enter Transaction Details" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Received By <span class="require">*</span> </label><input formControlName="receivedBy"
+              class="form-control" placeholder="Received By" />
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Date<span class="require">*</span></label>
+            <div class="input-group">
+              <app-date-picker-component placeholder="Select Date" formControlName="date" style="width: 100%;">
+              </app-date-picker-component>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Remark</label>
+            <textarea class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-6" style="justify-content: end;display: flex; align-items: flex-end;">
+          <button type="button" id="addNew" class="btn btn-primary action-button"
+            (click)="onSavePaymentDetails()">Save</button>
+        </div>
       </div>
     </div>
+
   </div>
-
-
-  <div class="form-group">
+  <div class="col-sm-6">
     <div class="row">
-      <div class="col-sm-4">
-        <label>Payment Method</label>
-        <app-catalog-loader-component [catId]="'PAYMENT'" formControlName="paymentMethod"
-          placeHolder="Please Select Payment Method"></app-catalog-loader-component>
-      </div>
-    </div>
-  </div>
+      <div class="col-xl-12 col-sm-12 cursor-pointer" style="height: 115px;min-height: 115px;">
+        <div class="card shadow border-0" style="text-align: center;font-size: medium;height: 115px;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <span class="h6 font-semibold text-muted text-sm d-block mb-2">Himanshu Kesarwani</span>
 
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-4">
-        <label>Cheuqe Number </label><input formControlName="cheuqeNumber" class="form-control" placeholder="Enter Cheuqe Number"
-          required />
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-4">
-        <label>Transaction Details </label><input formControlName="transactionNumber" class="form-control" placeholder="Enter Transaction Details"
-          required />
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-4">
-        <label>Received By</label><input formControlName="receivedBy" class="form-control" placeholder="Received By" />
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-4">
-        <label>Date<span class="require">*</span></label>
-        <div class="input-group">
-          <input matInput [matDatepicker]="picker" class="form-control" placeholder="*Date" formControlName="date"
-            required />
-          <div class="input-group-append date-icon">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
-
-
-  <div class="form-group">
-    <div class="row">
-      <div class="col-sm-6">
-        <label>Remark</label>
-        <textarea class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="row save-btn-row">
-      <div class="col-sm-6" style="justify-content: end;display: flex; align-items: flex-end;">
-        <button type="button" id="addNew" class="btn btn-primary action-button"
-          (click)="onSavePaymentDetails()">Save</button>
-      </div>
-    </div>
-  </div>
-
-</form>

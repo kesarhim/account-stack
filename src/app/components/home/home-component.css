@@ -1,5 +1,4 @@
-@import url(./external.css);
-
+@import url(../../../assets/css/external.css);
 .active-link {
   color: #4e52d0 !important;
   opacity: 1;

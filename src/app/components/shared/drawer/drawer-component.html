@@ -1,14 +1,14 @@
-<mat-drawer #drawer class="example-sidenav" mode="over" position="end" [(opened)]="opened">
-  <h2>{{headerTitle}}
-    <button (click)="onCloseBtnClick()" class="btn btn-outline-light" style="float: right;background: transparent;
-    border: none;">
-      <mat-icon style="
-        color: #999595;cursor: pointer;">close</mat-icon>
-    </button>
-  </h2>
+<div>
+  <mat-drawer #drawer class="example-sidenav " [mode]="'over'" position="end" [(opened)]="opened">
+    <h2>{{headerTitle}}
+      <button (click)="onCloseBtnClick()" class="btn btn-outline-light" style="float: right;background: transparent;
+        border: none;">
+        <mat-icon style="
+            color: #999595;cursor: pointer;">close</mat-icon>
+      </button>
+    </h2>
 
-  <hr />
-  <ng-content>
-
-  </ng-content>
-</mat-drawer>
+    <hr />
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </mat-drawer>
+</div>

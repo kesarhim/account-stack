@@ -31,12 +31,9 @@
         <div class="col-sm-6">
           <label>DOB <span class="require">*</span></label>
           <div class="input-group">
-            <input matInput [matDatepicker]="picker" class="form-control"
-            formControlName="dob" required />
-            <div class="input-group-append date-icon">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
+            <app-date-picker-component placeholder="Select File Date" formControlName="dob" style="width: 100%;">
+            </app-date-picker-component>
+
           </div>
         </div>
       </div>
@@ -49,15 +46,17 @@
             <input style="text-transform: uppercase"
             formControlName="panNo"
             class="form-control" maxlength="10" placeholder="Pan Number" required />
+            <p class="require" *ngIf="panNumber?.dirty && panNumber?.invalid && panNumber?.errors['invalidPanNo']">Please enter valid Pan Number.</p>
         </div>
         <div class="col-sm-6">
           <label>Aadhaar No </label>
           <input class="form-control"
             formControlName="aadhaarNo"
-            type="number"
+            type="text"
             placeholder="Aadhaar Number(XXXX-XXXX-XXXX)"
             (blur)="formatAddhaarNumber()"
             maxlength="12"/>
+            <p class="require" *ngIf="aaDhharNumber?.dirty && aaDhharNumber?.invalid && aaDhharNumber?.errors['invalidAadhaarNo']">Please enter valid Aadhaar Number.</p>
         </div>
       </div>
     </div>

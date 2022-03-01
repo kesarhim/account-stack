@@ -35,8 +35,8 @@
 .example-container {
   position: relative;
   min-width: 400px;
-  min-height: 600px;
-  max-height: 800px;
+  min-height: 500px;
+  max-height: 560px;
   overflow: auto;
 }
 
@@ -66,4 +66,7 @@ tr.mat-header-row {
   color: #fff;
 }
 
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+}
 

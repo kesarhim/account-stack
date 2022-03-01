@@ -4,11 +4,11 @@ html, body { height: 100%;width: 100%;overflow: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "~@ng-select/ng-select/themes/default.theme.css";
 label {
-  font-size: 16px;
+  font-size: 14px;
   color: #222428;
   margin-bottom: 8px;
   display: block;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .action-button {
@@ -65,5 +65,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form-control:disabled, .form-control[readonly] {
   color: #000000;
+}
+
+.name-initial {
+  height: 35px;
+    width: 35px;
+    background-color: #427bab;
+    color: #fff;
+    border-radius: 17px;
+    text-align: center;
+    display: block;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 

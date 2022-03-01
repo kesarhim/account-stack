@@ -1,19 +1,27 @@
 <div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
-  <h2>
+  <h2 class="mb-0">
     Clients
-      <button mat-mini-fab color="primary" (click)="onAddCandidate()">
-        <mat-icon>add</mat-icon>
-      </button>
+    <button mat-mini-fab color="primary" (click)="onAddCandidate()">
+      <mat-icon>add</mat-icon>
+    </button>
   </h2>
 </div>
 <div>
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
 
 </div>
-<div *ngIf="showAddItrDrawer">
-  <app-drawer-component [opened]="showAddItrDrawer" [headerTitle] = "'Add ITR Detials'" (onClose)="onCloseDrawer()">
-    <app-customer-add-itr [searchAllowed] = "false" [showTitle] = "false" [customer]="selectedCustomer"></app-customer-add-itr>
-  </app-drawer-component>
-</div>
+<ng-template #addITR>
+  <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
+  </app-customer-add-itr>
+</ng-template>
 
+<ng-template #addGst>
+  <app-customer-add-gst  [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
+  </app-customer-add-gst>
+</ng-template>
 
+<ng-template #addOtherWork>
+  <app-add-other-work-component [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
+
+  </app-add-other-work-component>
+</ng-template>

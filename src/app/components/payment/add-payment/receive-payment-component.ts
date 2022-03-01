@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,33 +10,32 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class ReceivePaymentComponent implements OnInit {
 
+  @Input() showTitle : boolean = false;
   constructor(
    private formBuilder :FormBuilder,
-  ) { }
+  ) {
+    this.creatForm();
+   }
 
   public receivePaymentForm : FormGroup;
   ngOnInit() {
-    this.creatForm();
+
   }
 
 
 creatForm = () =>{
   this.receivePaymentForm= this.formBuilder.group({
-
    amount:[null,Validators.required],
-   paymentMethod:[null,Validators.required],
-   cheuqeNumber:[null,Validators.required],
+   paymentMethod:['CASH',Validators.required],
+   cheuqeNumber:[null],
    transactionNumber:[null],
    receivedBy:[null,Validators.required],
-   date:[null,Validators.required],
+   date:[new Date(),Validators.required],
    remark:[null]
-
-
   });
   }
 
-  onSavePaymentDetails=()=>
-  {
+  onSavePaymentDetails=()=> {
 
   }
 }

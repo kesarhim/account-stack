@@ -85,16 +85,16 @@ export class GstListComponent implements OnInit {
     actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => this.onEditGSTDetail($event) });
 
 
-    tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks });
-    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true });
-    tableColumns.push({ columnDef: 'gstNumber', header: 'GST Number', name: 'gstNumber' });
-    tableColumns.push({ columnDef: 'gstTypeCode.description', header: 'GST Type', name: 'gstTypeCode.description' });
+    tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks,applyFilter:true });
+    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true,applyFilter:true });
+    tableColumns.push({ columnDef: 'totalfees', header: 'Total Fees', name: 'totalfees' });
+    tableColumns.push({ columnDef: 'feespaid', header: 'Fees Paid', name: 'feespaid' });
+    tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount',applyFilter:true });
+    tableColumns.push({ columnDef: 'gstNumber', header: 'GST Number', name: 'gstNumber',applyFilter:true });
+    tableColumns.push({ columnDef: 'gstTypeCode.description', header: 'GST Type', name: 'gstTypeCode.description',applyFilter:true });
     tableColumns.push({ columnDef: 'yearCode.description', header: 'Assesment Year', name: 'yearCode.description' });
     tableColumns.push({ columnDef: 'monthCode.description', header: 'Month', name: 'monthCode.description' });
     tableColumns.push({ columnDef: 'fileDate', header: 'File Date', name: 'fileDate', type: ColumnType.DATE });
-    tableColumns.push({ columnDef: 'totalfees', header: 'Total Fees', name: 'totalfees' });
-    tableColumns.push({ columnDef: 'feespaid', header: 'Fees Paid', name: 'feespaid' });
-    tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount' });
     tableColumns.push({ columnDef: 'remark', header: 'Remark', name: 'remark' });
     tableColumns.push({ columnDef: 'doneBy', header: 'Done By', name: 'doneBy' });
     this.tableConfig = {

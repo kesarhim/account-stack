@@ -1,5 +1,5 @@
 import { AlertService } from './../../../../core/components/alert/alert.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-component',
@@ -9,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class CardComponent implements OnInit {
   constructor(private alertService:AlertService) { }
+
+  @Input() title :string;
+  @Input() subTitle:string;
+
 
   ngOnInit() { }
 

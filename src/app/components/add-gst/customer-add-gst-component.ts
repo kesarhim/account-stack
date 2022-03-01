@@ -13,6 +13,7 @@ import { GstDetails } from '../customer/models/gst-details-model';
 import { Customer } from '../customer/create/models/customer-model';
 import { StorageKeys, StorageService } from '../core/services/storage.service';
 import { User } from '../shared/models/user-cred.model';
+import { feesPaidValidator } from '../validators/custom-validators';
 
 @Component({
   selector: 'app-customer-add-gst',
@@ -28,17 +29,28 @@ export class CustomerAddGSTComponent implements OnInit {
   private loggedInUser: User;
   private gstDetail: GSTDetailsDTO;
   @Input() searchAllowed: boolean = true;
+  @Input() showTitle:boolean = true;
 
+  @Input() set customer(value: Customer) {
+    if (value) {
+      this.onSelectCustomer(value);
+    }
+  };
   constructor(private formbuilder: FormBuilder, private httpService: HttpService,
     private alertService: AlertService,
     private loaderService: LoaderService,
     private storageService: StorageService,
     private router: Router, private route: ActivatedRoute,
     private customerService: CustomerService,
-    private gstDetailService: GSTDetailService) { }
+    private gstDetailService: GSTDetailService) {
+      this.creatForm();
+    }
 
   ngOnInit() {
-    this.creatForm();
+    //this.creatForm();
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
     this.route.queryParams.subscribe((value) => {
       this.gstDetailId = value['id'];
@@ -65,22 +77,22 @@ export class CustomerAddGSTComponent implements OnInit {
     let currdate = new Date();
 
     this.addGSTForm = this.formbuilder.group({
-      firstName: [null],
-      middleName: [null],
-      lastName: [null],
+      fullName: [null],
       panNumber: [null],
       aadhaarNumber: [null],
-      mobileNumber: [null],
       gstNumber: [null],
       gstType: [null, Validators.required],
       fileDate: [currdate, Validators.required],
       year: [currdate.getFullYear().toString(), Validators.required],
       month: [currdate.getMonth().toString(), Validators.required],
       totalFees: [null, Validators.required],
-      feesPaid: [null, Validators.required],
+      feesPaid: [null, [Validators.required,feesPaidValidator()]],
       remark: [null],
-
     });
+  }
+
+  get feesPaid() {
+    return this.addGSTForm.get('feesPaid');
   }
 
   patchGStDetails = (gstDetail: GSTDetailsDTO) => {
@@ -101,12 +113,9 @@ export class CustomerAddGSTComponent implements OnInit {
   onSelectCustomer = (customer: Customer) => {
     this.selectedCustomer = customer;
     this.addGSTForm?.patchValue({
-      firstName: this.selectedCustomer?.firstName,
-      middleName: this.selectedCustomer?.middleName,
-      lastName: this.selectedCustomer?.lastName,
+      fullName: this.selectedCustomer?.fullName,
       panNumber: this.selectedCustomer?.panNo,
       aadhaarNumber: this.selectedCustomer?.aadhaarNo,
-      mobileNumber: this.selectedCustomer?.mobileNo
     });
   }
 

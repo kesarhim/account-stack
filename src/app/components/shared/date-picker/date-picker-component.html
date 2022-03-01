@@ -1,0 +1,15 @@
+<div class="input-group">
+  <input [matDatepicker]="picker" class="form-control"  placeholder="{{placeholder}}"
+  [(ngModel)]="_value"  (dateChange)="addEvent('change', $event)"/>
+  <div class="input-group-append date-icon">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+</div>
+
+<!-- <mat-form-field class="example-form-field" appearance="fill">
+  <input matInput [matDatepicker]="picker" class="form-control"  placeholder="{{placeholder}}"
+  [(ngModel)]="_value"  (dateChange)="addEvent('change', $event)"/>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field> -->

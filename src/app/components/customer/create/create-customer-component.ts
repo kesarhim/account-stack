@@ -50,22 +50,26 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   onAddNewClient = () => {
-    this.loaderService.show();
-    let payLoad = this.createCustomerForm.value;
-    if (this.customerId > 0) {
-      payLoad.id = this.customerId;
-    }
-    this.httpService.post('/Customer/Create', this.createCustomerForm.value).subscribe(result => {
-      this.loaderService.hide();
-      let messageToShow: string = this.customerId > 0 ? 'Updated Successfully.' : 'New Client Added Successfully.';
-      this.alertService.success(messageToShow);
-      this.createCustomerForm.reset(true);
-      this.goToCandidateListPage();
-    }, err => {
-      this.alertService.error(err?.error?.message);
-      this.loaderService.hide();
-    });
+    if(this.createCustomerForm.valid){
+      this.loaderService.show();
+      let payLoad = this.createCustomerForm.value;
+      if (this.customerId > 0) {
+        payLoad.id = this.customerId;
+      }
+      this.httpService.post('/Customer/Create', this.createCustomerForm.value).subscribe(result => {
+        this.loaderService.hide();
+        let messageToShow: string = this.customerId > 0 ? 'Updated Successfully.' : 'New Client Added Successfully.';
+        this.alertService.success(messageToShow);
+        this.createCustomerForm.reset(true);
+        this.goToCandidateListPage();
+      }, err => {
+        this.alertService.error(err?.error?.message);
+        this.loaderService.hide();
+      });
 
+    }else {
+      this.alertService.error("Please enter all the mandatory details");
+    }
   }
 
   createForm = () => {

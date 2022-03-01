@@ -59,6 +59,7 @@ export class CustomerAddGSTComponent implements OnInit {
       this.searchAllowed = false;
     }
     if (this.gstDetailId > 0) {
+      this.loaderService.show();
       this.gstDetailService.getGstDetailsById(this.gstDetailId).subscribe((result: any) => {
         if (result && result.response) {
           this.gstDetail = result.response;
@@ -68,8 +69,9 @@ export class CustomerAddGSTComponent implements OnInit {
         this.customerService.getCustomerDetailsById(result.response?.customerId).subscribe((value: any) => {
           let customer: Customer = value.response;
           this.onSelectCustomer(customer);
-        });
-      })
+          this.loaderService.hide();
+        },err => this.loaderService.hide);
+      },err => this.loaderService.hide())
     }
   }
 

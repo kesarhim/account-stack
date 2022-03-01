@@ -55,7 +55,7 @@
             type="text"
             placeholder="Aadhaar Number(XXXX-XXXX-XXXX)"
             (blur)="formatAddhaarNumber()"
-            maxlength="12"/>
+            maxlength="14"/>
             <p class="require" *ngIf="aaDhharNumber?.dirty && aaDhharNumber?.invalid && aaDhharNumber?.errors['invalidAadhaarNo']">Please enter valid Aadhaar Number.</p>
         </div>
       </div>
@@ -68,8 +68,7 @@
             type="tel" placeholder="Mobile Number" required />
         </div>
         <div class="col-sm-6">
-          <label>Email </label> <input class="form-control" formControlName="email" type="email" placeholder="Email"
-            required />
+          <label>Email </label> <input class="form-control" formControlName="email" type="email" placeholder="Email" />
         </div>
       </div>
     </div>

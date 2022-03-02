@@ -58,6 +58,7 @@ export class CustomerAddITRComponent implements OnInit {
     }
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
     if (this.itrDetailId > 0) {
+      this.loaderService.show();
       this.itrDetailService.getITRDetailsById(this.itrDetailId).subscribe((result: any) => {
         if (result && result.response) {
           this.itrDetail = result.response;
@@ -66,8 +67,9 @@ export class CustomerAddITRComponent implements OnInit {
         this.customerService.getCustomerDetailsById(result.response?.customerId).subscribe((value: any) => {
           let customer: Customer = value.response;
           this.onSelectCustomer(customer);
+          this.loaderService.hide();
         });
-      })
+      },err => this.loaderService.hide())
     }
   }
 

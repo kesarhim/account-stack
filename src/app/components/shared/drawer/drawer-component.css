@@ -10,6 +10,10 @@
   overflow: none !important;
 }
 
+.mat-drawer-inner-container {
+  overflow: none !important;
+}
+
 .apply-backdrop {
   opacity: 1;
 

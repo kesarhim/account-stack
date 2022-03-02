@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { DrawerService } from './../shared/drawer/drawer.service';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -22,7 +23,8 @@ export class ViewITRFilledComponent implements OnInit {
   dataSource: MatTableDataSource<ITRDetailsDTO>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  public selectedCustomer: ITRDetailsDTO;
+  @ViewChild('receivePayment') receivePaymentTemplate:TemplateRef<any>;
+  public selectedITR: ITRDetailsDTO;
   public showAddItrDrawer: boolean = false;
   public selectedAssesmentYear:string = '4';
   public customerTableConfig: ITableConfig;
@@ -32,7 +34,8 @@ export class ViewITRFilledComponent implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private dialogService: ConfirmationDialogService,
-    private itrDetailService: ITRDetailService) {
+    private itrDetailService: ITRDetailService,
+    private drawerService : DrawerService) {
 
   }
 
@@ -48,6 +51,7 @@ export class ViewITRFilledComponent implements OnInit {
     let actionLinks: Array<ITableActionLinks> = new Array<ITableActionLinks>();
 
     actionLinks.push({ linkName: 'Edit', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditITRDetail($event) });
+    actionLinks.push({ linkName: 'Receive Payment', icon: 'payments', showIcon: true, method: ($event: any) => this.onReceivePayment($event) });
     actionLinks.push({ linkName: 'Delete', icon: 'delete', showIcon: true, method: ($event: any) => this.onDeleteITR($event) });
     actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => this.onEditITRDetail($event) });
 
@@ -98,6 +102,11 @@ export class ViewITRFilledComponent implements OnInit {
 
   onAddITR = () => {
     this.router.navigate(['home/customer/add/itr']);
+  }
+
+  onReceivePayment = (value:ITRDetailsDTO) =>{
+     this.selectedITR = value;
+     this.drawerService.openDrawer(this.receivePaymentTemplate,'Receive Payment');
   }
 
   onDeleteITR = (data: ITRDetailsDTO) => {

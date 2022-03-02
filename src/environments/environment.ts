@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   projectName:"Peeyuesh Kesharwani & Associates",
   //http://himanshu5421-001-site1.itempurl.com/
-  API_ENDPOINT:"http://himanshu5421-001-site1.itempurl.com/api",
- // API_ENDPOINT:"https://localhost:5001/api"
+ // API_ENDPOINT:"http://himanshu5421-001-site1.itempurl.com/api",
+  API_ENDPOINT:"https://localhost:5001/api"
 };
 
 /*

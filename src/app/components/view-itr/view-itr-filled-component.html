@@ -28,3 +28,7 @@
     </app-customer-add-itr>
   </app-drawer-component>
 </div>
+
+<ng-template #receivePayment>
+    <app-receive-payment-component [pendingAmount]="selectedITR?.balanceAmount"></app-receive-payment-component>
+</ng-template>

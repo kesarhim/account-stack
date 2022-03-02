@@ -1,3 +1,4 @@
+import { LoaderService } from './../../core/components/loader/loader.service';
 import { CatalogData } from './models/catalog.model';
 import { HttpService } from './../../core/services/http.service';
 import { Component, OnInit, Input, SimpleChanges, forwardRef, ViewChild, Output, EventEmitter } from '@angular/core';
@@ -33,7 +34,7 @@ export class CatalogLoaderComponent implements ControlValueAccessor {
   /**
    *
    */
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService,private loaderService : LoaderService) {
 
   }
 
@@ -77,12 +78,15 @@ export class CatalogLoaderComponent implements ControlValueAccessor {
   }
 
   loaderCatIdCatalog = () => {
+    this.loaderService.show();
     this.httpService.get(`/Catalog/get?catId=${this.catId}`).subscribe((result: any) => {
       if (result) {
         this.catalogData = result.response;
+        this.loaderService.hide();
       }
     }, err => {
       this.catalogData = [];
+      this.loaderService.hide();
     });
   }
 

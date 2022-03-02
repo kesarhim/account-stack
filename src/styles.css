@@ -35,6 +35,12 @@ label {
   font-size: 17px;
 }
 
+.info-comman-header{
+  justify-content: space-between !important;
+  margin: 0px 0px 28px 0;
+  width: 100%;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

@@ -1,8 +1,7 @@
 <div>
   <h2 class="mb-0" *ngIf="showTitle">Fill ITR Details </h2>
   <div class="form-group" *ngIf="searchAllowed">
-    <div class="row" style="justify-content: space-between;margin: 0px 0px 28px 0;
-    width: 100%;">
+    <div class="row info-comman-header">
       <p class="info-header">Please select client to fill ITR Details</p>
       <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
     </div>
@@ -78,9 +77,11 @@
       </div>
     </div>
 
-    <button type="submit" id="addNew" class="btn btn-primary action-button" (click)="onSaveITRFileDetails()"
+    <div  style="justify-content: end;display: flex; align-items: flex-end;">
+    <button style="height: 45px;" type="button" id="addNew" class="btn btn-primary action-button" (click)="onSaveITRFileDetails()"
       [disabled]="addITRForm.invalid ">{{ itrDetailId >0 ? 'Update': 'Save'}}
     </button>
+  </div>
 
   </form>
 

@@ -98,8 +98,16 @@
 
     <div class="row">
       <div class="col-sm-12" style="justify-content: end;display: flex;">
-        <button type="button" id="addNew" class="btn btn-primary action-button " (click)="onAddNewClient()">{{saveBtnLabel}}</button>
+        
+
+        <div  style="justify-content: end;display: flex; align-items: flex-end;">
+          <button style="height: 45px;" type="button" id="addNew" class="btn btn-primary action-button" (click)="onAddNewClient()"
+          [disabled]="createCustomerForm.invalid ">{{ customerId >0 ? 'Update': 'Save'}}
+          </button>
+        </div>
       </div>
+
+
 
     </div>
   </form>

@@ -18,7 +18,7 @@ import { ValidateAadhaarNo, ValidatePanNo } from '../../validators/custom-valida
 export class CreateCustomerComponent implements OnInit {
   public createCustomerForm: FormGroup;
   public saveBtnLabel: string = 'Save';
-  private customerId: number;
+  public customerId: number;
   private selectedCustomer: Customer;
   constructor(private alertService: AlertService,
     private loaderService: LoaderService,

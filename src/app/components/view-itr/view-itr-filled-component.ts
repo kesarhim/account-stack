@@ -59,15 +59,15 @@ export class ViewITRFilledComponent implements OnInit {
     tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks,applyFilter:true });
     tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true,applyFilter:true });
     tableColumns.push({ columnDef: 'ackNo', header: 'Acknowledgement No.', name: 'ackNo' });
-    tableColumns.push({ columnDef: 'year.description', header: 'Assesment Year', name: 'year.description' });
-    tableColumns.push({ columnDef: 'fileDate', header: 'File Date', name: 'fileDate', type: ColumnType.DATE });
     tableColumns.push({ columnDef: 'totalFees', header: 'Total Fees', name: 'totalFees' });
     tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
     tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount' });
+    tableColumns.push({ columnDef: 'doneBy', header: 'Done By', name: 'doneBy' });
+    tableColumns.push({ columnDef: 'fileDate', header: 'File Date', name: 'fileDate', type: ColumnType.DATE });
     tableColumns.push({ columnDef: 'taxAmount', header: 'Tax Amount', name: 'taxAmount' });
     tableColumns.push({ columnDef: 'refundAmount', header: 'Refund Amount', name: 'refundAmount' });
     tableColumns.push({ columnDef: 'remark', header: 'Remark', name: 'remark' });
-    tableColumns.push({ columnDef: 'doneBy', header: 'Done By', name: 'doneBy' });
+    tableColumns.push({ columnDef: 'year.description', header: 'Assesment Year', name: 'year.description' });
     this.customerTableConfig = {
       displayedColumns: tableColumns
     }
@@ -130,12 +130,4 @@ export class ViewITRFilledComponent implements OnInit {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 }

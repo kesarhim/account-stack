@@ -1,10 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;width: 100%;overflow: hidden; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 @import "~@ng-select/ng-select/themes/default.theme.css";
 label {
-  font-size: 14px;
+  font-size: 16px;
   color: #222428;
   margin-bottom: 8px;
   display: block;
@@ -12,32 +20,43 @@ label {
 }
 
 .action-button {
-  width: 146px;
+  width: 170px;
   margin: 0;
+  float: right;
+  margin-top: 24px;
+  margin-bottom: 18px;
+  bottom: 0;
+  font-size: 20px;
 }
 
-.cursor-pointer{
+.info-header {
+  margin-top: 6px !important;
+  color: #1976d2;
+  font-size: 17px;
+}
+
+.cursor-pointer {
   cursor: pointer;
 }
 
-.require{
+.require {
   color: red;
 }
 
-.mat-drawer-container{
+.mat-drawer-container {
   background-color: #fff;
 }
 
 .save-btn-row {
   position: relative;
-    float: right;
-    bottom: 0;
-    right: 0;
-    /* margin: 3px; */
-    margin-bottom: 50px;
+  float: right;
+  bottom: 0;
+  right: 0;
+  /* margin: 3px; */
+  margin-bottom: 50px;
 }
 
-button:disabled{
+button:disabled {
   cursor: not-allowed;
 }
 
@@ -45,12 +64,12 @@ a {
   text-decoration: none;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -65,26 +84,26 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 10px;
 }
 
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled,
+.form-control[readonly] {
   color: #000000;
 }
 
 .name-initial {
   height: 35px;
-    width: 35px;
-    background-color: #427bab;
-    color: #fff;
-    border-radius: 17px;
-    text-align: center;
-    display: block;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-left: 8px;
-    margin-right: 8px;
+  width: 35px;
+  background-color: #427bab;
+  color: #fff;
+  border-radius: 17px;
+  text-align: center;
+  display: block;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .form-control {
   color: #000000;
 }
-

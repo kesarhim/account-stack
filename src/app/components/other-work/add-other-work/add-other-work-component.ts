@@ -74,7 +74,7 @@ export class AddOtherWorkComponent implements OnInit {
         careOf: this.otheWorkDetails.careOf,
         fileDate: this.otheWorkDetails.fileDate,
         totalFees: this.otheWorkDetails.totalFees,
-        feesPaid: this.otheWorkDetails.feesPaid,
+       // feesPaid: this.otheWorkDetails.feesPaid,
         remark: this.otheWorkDetails.remark,
        })
      }
@@ -91,7 +91,7 @@ export class AddOtherWorkComponent implements OnInit {
       careOf: [null, Validators.required],
       fileDate: [currdate, Validators.required],
       totalFees: [null, Validators.required],
-      feesPaid: [null,feesPaidValidator()],
+    //  feesPaid: [null,feesPaidValidator()],
       remark: [null],
     });
 
@@ -107,9 +107,9 @@ export class AddOtherWorkComponent implements OnInit {
     });
   }
 
-  get feesPaid() {
-    return this.addOtheWorkForm.get('feesPaid');
-  }
+  // get feesPaid() {
+  //   return this.addOtheWorkForm.get('feesPaid');
+  // }
 
   onSaveWorkDetails = () => {
     if (this.addOtheWorkForm.valid) {

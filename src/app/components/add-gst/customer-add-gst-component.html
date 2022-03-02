@@ -29,30 +29,16 @@
     <div class="form-group">
       <div class="row">
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <label>GST Number</label> <input formControlName="gstNumber" class="form-control" placeholder="GST Number" />
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <label>Type<span class="require"> *</span></label>
           <app-catalog-loader-component [catId]="'GST_TYPE'" formControlName="gstType"
-            placeHolder="Select Assesment Year"></app-catalog-loader-component>
+            placeHolder="Select GST Type"></app-catalog-loader-component>
         </div>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-4">
-          <label>Financial Year<span class="require"> *</span></label>
-          <app-catalog-loader-component [catId]="'YEAR'" formControlName="year" placeHolder="Select Year">
-          </app-catalog-loader-component>
-        </div>
-        <div class="col-sm-4">
-          <label>Month <span class="require"> *</span></label>
-          <app-catalog-loader-component [catId]="'MONTHS'" formControlName="month" placeHolder="Select Month">
-          </app-catalog-loader-component>
-        </div>
         <div class="col-sm-4">
           <label>File Date <span class="require">*</span></label>
           <div class="input-group">
@@ -64,18 +50,39 @@
 
     <div class="form-group">
       <div class="row">
+        <div class="col-sm-4">
+          <label>Total Fees <span class="require"> *</span></label><input formControlName="totalFees"
+            class="form-control" type="number" placeholder="*Total Fees" value="0" />
+        </div>
+
+        <div class="col-sm-4">
+          <label>Financial Year<span class="require"> *</span></label>
+          <app-catalog-loader-component [catId]="'YEAR'" formControlName="year" placeHolder="Select Year">
+          </app-catalog-loader-component>
+        </div>
+        <div class="col-sm-4">
+          <label>Month <span class="require"> *</span></label>
+          <app-catalog-loader-component [catId]="'MONTHS'" formControlName="month" placeHolder="Select Month">
+          </app-catalog-loader-component>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <div class="row">
         <div class="col-sm-6">
           <label>Total Fees <span class="require"> *</span></label><input formControlName="totalFees"
             class="form-control" type="number" placeholder="*Total Fees" value="0" />
         </div>
-        <div class="col-sm-6">
+       <div class="col-sm-6">
           <label>Fees Paid</label>
           <input class="form-control" formControlName="feesPaid" type="number" placeholder="Fees Paid" />
           <p class="require" *ngIf="feesPaid?.dirty && feesPaid?.invalid && feesPaid?.errors['invalidFees']">Fees paid
             can not be greater than total fees.</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <div class="row">

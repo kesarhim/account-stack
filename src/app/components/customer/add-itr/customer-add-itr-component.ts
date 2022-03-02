@@ -73,9 +73,9 @@ export class CustomerAddITRComponent implements OnInit {
     }
   }
 
-  get feesPaid() {
-    return this.addITRForm.get('feesPaid');
-  }
+  // get feesPaid() {
+  //   return this.addITRForm.get('feesPaid');
+  // }
 
   createForm = () => {
     this.addITRForm = this.fromBuilder.group({
@@ -87,7 +87,6 @@ export class CustomerAddITRComponent implements OnInit {
       taxAmount: [ Validators.required],
       refundAmount: [Validators.required],
       totalFees: [Validators.required],
-      feesPaid: [null,feesPaidValidator() ],
       yearCode: ['4', Validators.required],
       remark: [null],
       cheuqeNumber:[null],
@@ -114,7 +113,7 @@ export class CustomerAddITRComponent implements OnInit {
       taxAmount: itrDetail.taxAmount,
       refundAmount: itrDetail.refundAmount,
       totalFees: itrDetail.totalFees,
-      feesPaid: itrDetail.feesPaid,
+  //    feesPaid: itrDetail.feesPaid,
       remark: itrDetail.remark
     })
   }

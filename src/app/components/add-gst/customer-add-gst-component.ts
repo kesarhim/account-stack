@@ -85,16 +85,11 @@ export class CustomerAddGSTComponent implements OnInit {
       gstNumber: [null],
       gstType: [null, Validators.required],
       fileDate: [currdate, Validators.required],
-      year: [currdate.getFullYear().toString(), Validators.required],
+      year: ['4', Validators.required],
       month: [currdate.getMonth().toString(), Validators.required],
       totalFees: [null, Validators.required],
-      feesPaid: [null, [Validators.required,feesPaidValidator()]],
       remark: [null],
     });
-  }
-
-  get feesPaid() {
-    return this.addGSTForm.get('feesPaid');
   }
 
   patchGStDetails = (gstDetail: GSTDetailsDTO) => {
@@ -106,7 +101,6 @@ export class CustomerAddGSTComponent implements OnInit {
         year: gstDetail?.yearCode?.code,
         month: gstDetail.monthCode.code,
         totalFees: gstDetail?.totalfees,
-        feesPaid: gstDetail.feespaid,
         remark: gstDetail.remark
       });
     }

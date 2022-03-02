@@ -43,21 +43,25 @@
 
     <div class="form-group">
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+          <label >Total Fees <span class="require"> *</span></label><input formControlName="totalFees" class="form-control" type="number"
+            placeholder="*Total Fees" value="0"  />
+        </div>
+        <div class="col-sm-4">
           <label>File Date <span class="require">*</span></label>
           <div class="input-group">
             <app-date-picker-component placeholder="Select File Date" formControlName="fileDate" style="width: 100%;">
             </app-date-picker-component>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <label >Work Done<span class="require"> *</span></label> <input formControlName="work"  class="form-control"
           placeholder="Enter Work Details"  />
         </div>
       </div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <div class="row">
         <div class="col-sm-6">
           <label >Total Fees <span class="require"> *</span></label><input formControlName="totalFees" class="form-control" type="number"
@@ -72,7 +76,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
     <div class="form-group">
       <div class="row">

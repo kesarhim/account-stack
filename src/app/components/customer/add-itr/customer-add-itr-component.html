@@ -1,8 +1,9 @@
 <div>
   <h2 class="mb-0" *ngIf="showTitle">Fill ITR Details </h2>
   <div class="form-group" *ngIf="searchAllowed">
-    <div class="row" style="justify-content: end;margin: 0px 0px 28px 0;
+    <div class="row" style="justify-content: space-between;margin: 0px 0px 28px 0;
     width: 100%;">
+      <p class="info-header">Please select client to fill ITR Details</p>
       <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
     </div>
   </div>
@@ -32,14 +33,15 @@
     <div class="form-group">
       <div class="row">
         <div class="col-sm-4">
+          <label>Acknowledgment <span class="require">*</span></label>
+          <input class="form-control" formControlName="ackNo" placeholder="Acknowledgment Number" required />
+        </div>
+        <div class="col-sm-4">
           <label>Assesment Year <span class="require">*</span></label>
           <app-catalog-loader-component [catId]="'YEAR'" [placeHolder]="'Select Assesment Year'"
             formControlName="yearCode"></app-catalog-loader-component>
         </div>
-        <div class="col-sm-4">
-          <label>Acknowledgment <span class="require">*</span></label>
-          <input class="form-control" formControlName="ackNo" placeholder="Acknowledgment Number" required />
-        </div>
+
         <div class="col-sm-4">
           <label>File Date <span class="require">*</span></label>
           <div class="input-group">
@@ -65,69 +67,23 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-6">
-          <label>Total Fees<span class="require">*</span></label>
-          <input class="form-control" type="number" formControlName="totalFees" placeholder="Total Fees" required />
-        </div>
-        <div class="col-sm-6">
-          <label>Fees Paid</label>
-
-            <input class="form-control" formControlName="feesPaid" type="number" placeholder="Fees Paid" />
-            <a class="cursor-pointer"
-              style="float: right;"
-              (click)="showFeesDetails = !showFeesDetails"
-              *ngIf="addITRForm.get('feesPaid')?.value  > 0">
-              {{showFeesDetails ? 'Hide Details' : 'Show Details'}}</a>
-
-          <p class="require" *ngIf="feesPaid?.dirty && feesPaid?.invalid && feesPaid?.errors['invalidFees']">Fees paid
-            can not be greater than total fees.</p>
-        </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label>Total Fees<span class="require">*</span></label>
+        <input class="form-control" type="number" formControlName="totalFees" placeholder="Total Fees" required />
+      </div>
+      <div class="col-md-6">
+        <label>Remark</label>
+        <textarea class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea>
       </div>
     </div>
 
-    <div class="form-group" *ngIf="showFeesDetails">
-      <div class="row">
-        <div class="col-sm-4">
-          <label>Payment Method <span class="require">*</span></label>
-          <app-catalog-loader-component [catId]="'PAYMENT'" formControlName="paymentMethod"
-            placeHolder="Please Select Payment Method"></app-catalog-loader-component>
-        </div>
-        <div class="col-sm-4" *ngIf="addITRForm.get('paymentMethod')?.value === 'CHEQUE'">
-          <label>Cheque Number </label><input formControlName="cheuqeNumber" class="form-control"
-          placeholder="Enter Cheuqe Number" required />
-        </div>
-        <div class="col-sm-4" *ngIf="addITRForm.get('paymentMethod')?.value !== 'CHEQUE'">
-          <label>Transaction Number</label>
-          <input class="form-control" formControlName="transactionNo" type="text" placeholder="Enter Transaction Number" />
-        </div>
-        <div class="col-sm-4">
-          <label>Received By <span class="require">*</span></label>
-          <input class="form-control" formControlName="receivedBy" type="text" placeholder="Received Person Name" />
-        </div>
-      </div>
-    </div>
+    <button type="submit" id="addNew" class="btn btn-primary action-button" (click)="onSaveITRFileDetails()"
+      [disabled]="addITRForm.invalid ">{{ itrDetailId >0 ? 'Update': 'Save'}}
+    </button>
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-6">
-          <label>Remark</label>
-          <textarea class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="row save-btn-row">
-        <div class="col-sm-12" style="justify-content: end;display: flex;">
-          <button type="button" id="addNew" class="btn btn-primary action-button" (click)="onSaveITRFileDetails()"
-            [disabled]=>{{ itrDetailId >0 ? 'Update': 'Save'}}
-          </button>
-        </div>
-      </div>
-    </div>
   </form>
+
 </div>
 
 <ng-template #receivePaymentTemp>

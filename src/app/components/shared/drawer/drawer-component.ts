@@ -14,6 +14,7 @@ export class DrawerComponent implements OnInit {
   @Input() opened: boolean;
   public headerTitle: string = '';
   @Output() onClose: EventEmitter<any> = new EventEmitter();
+  public icon:string;
 
   @ViewChild('drawer') drawer: MatDrawer;
   public template : TemplateRef<any> | null;
@@ -45,6 +46,7 @@ export class DrawerComponent implements OnInit {
 
     this.drawerService.drawerSubject.subscribe(value => {
       this.opened = value;
+      this.icon = this.drawerService.icon;
       this.headerTitle = this.drawerService.title;
        if(value){
          this.template = this.drawerService.template;

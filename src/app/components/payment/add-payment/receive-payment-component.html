@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-sm-12">
             <label>Cheque Number </label><input formControlName="cheuqeNumber" class="form-control"
-              placeholder="Enter Cheuqe Number" required />
+              placeholder="Enter Cheuqe Number" />
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-sm-12">
             <label>Transaction Number </label><input formControlName="transactionNumber" class="form-control"
-              placeholder="Enter Transaction Details" required />
+              placeholder="Enter Transaction Details" />
           </div>
         </div>
       </div>
@@ -75,23 +75,103 @@
       </div>
 
     </form>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-6" style="justify-content: end;display: flex; align-items: flex-end;">
-          <button type="button" id="addNew" class="btn btn-primary action-button"
-            (click)="onSavePaymentDetails()">Save</button>
+
+
+  </div>
+  <div class="col-sm-6 container" style=" justify-content: space-between;
+  flex-direction: column;
+  height: 80vh;
+  display: flex">
+    <div class="card mb-2">
+      <div class="card-header" style="padding-bottom: 0;">
+        <div class="row" style="align-items: center;">
+          <div class="col-sm-1.5">
+            <div class="name-initial" style="height: 40px;width: 40px;border-radius: 40px;">
+              {{paymentDetails?.clientName.charAt(0)}}
+            </div>
+          </div>
+          <div class="col-sm font-20">
+            <div>{{paymentDetails?.clientName}}</div>
+          </div>
         </div>
+        <p class="color-orange d-flex font-18" style="margin-left: 40px;">
+          <span>
+            <mat-icon>double_arrow</mat-icon>
+          </span>
+          <span style="text-transform: uppercase;">Pan No - {{paymentDetails?.panNo}}</span>
+        </p>
+      </div>
+
+      <div class="card-body" style="padding-bottom: 0;">
+        <div class="container font-18">
+          <div class="form-group row">
+            <div class="col-sm">
+              Total Fees
+            </div>
+            <div class="col-sm d-flex font-16">
+              <span>
+                <mat-icon>currency_rupees</mat-icon>
+              </span>
+              <span>{{paymentDetails?.totalFees}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm">
+              Fees Paid
+            </div>
+            <div class="col-sm d-flex font-16">
+              <span>
+                <mat-icon>currency_rupees</mat-icon>
+              </span>
+              <span>{{paymentDetails?.feesPaid}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm">
+              Balance
+            </div>
+            <div class="form-group col-sm d-flex balance-fees font-16">
+              <span>
+                <mat-icon>currency_rupees</mat-icon>
+              </span>
+              <span>{{paymentDetails?.balanceAmount}}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <h5 class="card-header">Featured</h5>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <div class="card " *ngIf="paymentDetails?.balanceAmount<=0">
+      <div class="card-body" style="padding-bottom: 0;">
+        <div class="container font-18 alert alert-warning">
+          <div class="d-flex ">
+            <span>
+              <mat-icon>warning</mat-icon>
+            </span> <span>Note</span>
+          </div>
+          <div class="d-flex">
+            <p class="require">No pending balance found for selected Work</p>
+          </div>
+
+        </div>
+
       </div>
     </div>
+
+    <div class="btn-holder" style="justify-content: flex-end;
+    display: flex;">
+      <button style="height: 45px;width: 150px;" type="button" id="addNew" class="btn btn-primary"
+      (click)="onSavePaymentDetails()" [disabled]="paymentDetails?.balanceAmount<=0"> Receive
+    </button>
+    </div>
+    <!-- <button style="height: 45px;" type="button" id="addNew" class="btn btn-primary action-button"
+      (click)="onSavePaymentDetails()" [disabled]="paymentDetails.balanceAmount<=0"> Receive
+    </button> -->
+
+
   </div>
+
+</div>
+

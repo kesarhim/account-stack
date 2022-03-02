@@ -25,3 +25,9 @@
 
   </app-add-other-work-component>
 </ng-template>
+
+<ng-template #receivePaymentTemp>
+  <app-receive-payment-component
+  [pendingAmount]="paymentDetail?.balanceAmount"
+  [paymentDetails]="paymentDetail"></app-receive-payment-component>
+</ng-template>

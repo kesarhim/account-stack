@@ -29,6 +29,41 @@ label {
   font-size: 20px;
 }
 
+.color-orange {
+ color: #e9a528;
+}
+
+.color-primary-blue {
+  color: #1976d2;
+}
+
+.color-warning {
+  color: #fff3cd;
+}
+.font-20 {
+  font-size: 20px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.total-fees {
+   color: brown;
+}
+
+.balance-fees {
+  color: red;
+}
+
+.fees-paid {
+  color: green;
+}
+
 .info-header {
   margin-top: 6px !important;
   color: #1976d2;

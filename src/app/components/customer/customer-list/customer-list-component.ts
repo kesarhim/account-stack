@@ -11,6 +11,7 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PaymentDetails } from '../../payment/models/payment.model';
 
 @Component({
   selector: 'app-customer-list-component',
@@ -25,9 +26,13 @@ export class CustomerListComponent implements OnInit {
   dataSource: MatTableDataSource<Customer>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
   @ViewChild('addITR') addITRTemplate: TemplateRef<any>;
   @ViewChild('addGst') addGstTemplate: TemplateRef<any>;
   @ViewChild('addOtherWork') addOtherWorkTemplate: TemplateRef<any>;
+  @ViewChild('receivePaymentTemp') receivePaymentTemplate: TemplateRef<any>;
+
+  public paymentDetail:PaymentDetails | null;
   public selectedCustomer: Customer;
   public showAddItrDrawer: boolean = false;
   public customerTableConfig: ITableConfig;
@@ -54,7 +59,7 @@ export class CustomerListComponent implements OnInit {
     actionLinks.push({ linkName: 'Add ITR', icon: 'add', showIcon: true, method: ($event: any) => this.onAddITR($event) });
     actionLinks.push({ linkName: 'Add GST', icon: 'add', showIcon: true, method: ($event: any) => this.onAddGST($event) });
     actionLinks.push({ linkName: 'Add Other Work', icon: 'add', showIcon: true, method: ($event: any) => this.onAddOtherWork($event) });
-
+    actionLinks.push({ linkName: 'Receive Payment', icon: 'payments', showIcon: true, method: ($event: any) => this.onReceivePayment($event) });
 
 
     tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks, applyFilter: true });
@@ -70,6 +75,27 @@ export class CustomerListComponent implements OnInit {
     this.customerTableConfig = {
       displayedColumns: tableColumns
     }
+  }
+
+  onReceivePayment = (value: Customer) => {
+    this.selectedCustomer = value;
+    this.paymentDetail = this.getPaymentDetails(value);
+    this.drawerService.openDrawer(this.receivePaymentTemplate, 'Receive Payment', 'payments');
+  }
+
+  getPaymentDetails = (itrDetails: Customer) : PaymentDetails | null=> {
+    if (itrDetails) {
+      let paymentDetails: PaymentDetails = new PaymentDetails();
+      paymentDetails.customerId = itrDetails.id;
+    //  paymentDetails.totalFees = itrDetails.totalFees;
+   //   paymentDetails.feesPaid = itrDetails.feesPaid;
+  //    paymentDetails.balanceAmount = itrDetails.balanceAmount;
+      paymentDetails.clientName = itrDetails.fullName;
+      paymentDetails.panNo = itrDetails.panNo;
+      paymentDetails.contextKey = 'CUSTOMER';
+      return paymentDetails;
+    }
+    return null;
   }
 
   getAllCustomers = (limitTo = 25) => {

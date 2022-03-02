@@ -12,6 +12,7 @@ import { CatalogData } from '../shared/catalog-loader/models/catalog.model';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
 import { ITableConfig, ITableColumn, ITableActionLinks, ColumnType } from '../shared/table/models/table-config';
 import { ITRDetailsDTO } from './model/itr-details-dto-model';
+import { PaymentDetails } from '../payment/models/payment.model';
 
 @Component({
   selector: 'app-view-itr-filled-component',
@@ -23,10 +24,11 @@ export class ViewITRFilledComponent implements OnInit {
   dataSource: MatTableDataSource<ITRDetailsDTO>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('receivePayment') receivePaymentTemplate:TemplateRef<any>;
+  @ViewChild('receivePayment') receivePaymentTemplate: TemplateRef<any>;
   public selectedITR: ITRDetailsDTO;
+  public paymentDetail:PaymentDetails | null;
   public showAddItrDrawer: boolean = false;
-  public selectedAssesmentYear:string = '4';
+  public selectedAssesmentYear: string = '4';
   public customerTableConfig: ITableConfig;
 
   constructor(private httpService: HttpService,
@@ -35,7 +37,7 @@ export class ViewITRFilledComponent implements OnInit {
     private router: Router,
     private dialogService: ConfirmationDialogService,
     private itrDetailService: ITRDetailService,
-    private drawerService : DrawerService) {
+    private drawerService: DrawerService) {
 
   }
 
@@ -56,8 +58,8 @@ export class ViewITRFilledComponent implements OnInit {
     actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => this.onEditITRDetail($event) });
 
 
-    tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks,applyFilter:true });
-    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true,applyFilter:true });
+    tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks, applyFilter: true });
+    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true, applyFilter: true });
     tableColumns.push({ columnDef: 'ackNo', header: 'Acknowledgement No.', name: 'ackNo' });
     tableColumns.push({ columnDef: 'totalFees', header: 'Total Fees', name: 'totalFees' });
     tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
@@ -104,23 +106,40 @@ export class ViewITRFilledComponent implements OnInit {
     this.router.navigate(['home/customer/add/itr']);
   }
 
-  onReceivePayment = (value:ITRDetailsDTO) =>{
-     this.selectedITR = value;
-     this.drawerService.openDrawer(this.receivePaymentTemplate,'Receive Payment');
+  onReceivePayment = (value: ITRDetailsDTO) => {
+    this.selectedITR = value;
+    this.paymentDetail = this.getPaymentDetails(value);
+    this.drawerService.openDrawer(this.receivePaymentTemplate, 'Receive Payment', 'payments');
   }
 
   onDeleteITR = (data: ITRDetailsDTO) => {
     this.dialogService.showConfirmationDialog("Do you really want to delete the selected item?").subscribe(value => {
       if (value) {
         this.loaderService.show();
-        this.itrDetailService.delelteITR(data.id).subscribe((result : any) => {
-          if(result && result.response){
+        this.itrDetailService.delelteITR(data.id).subscribe((result: any) => {
+          if (result && result.response) {
             this.alertService.success("ITR details deleted successfully.")
-            this.getAllITRDetails(25,this.selectedAssesmentYear);
+            this.getAllITRDetails(25, this.selectedAssesmentYear);
           }
         })
       }
     });
+  }
+
+  getPaymentDetails = (itrDetails: ITRDetailsDTO) : PaymentDetails | null=> {
+    if (itrDetails) {
+      let paymentDetails: PaymentDetails = new PaymentDetails();
+      paymentDetails.invoiceId = itrDetails.invoiceId;
+      paymentDetails.customerId = itrDetails.customerId;
+      paymentDetails.totalFees = itrDetails.totalFees;
+      paymentDetails.feesPaid = itrDetails.feesPaid;
+      paymentDetails.balanceAmount = itrDetails.balanceAmount;
+      paymentDetails.clientName = itrDetails.fullName;
+      paymentDetails.panNo = itrDetails.panNo;
+      paymentDetails.contextKey = 'ITR';
+      return paymentDetails;
+    }
+    return null;
   }
 
   ngAfterViewInit() {

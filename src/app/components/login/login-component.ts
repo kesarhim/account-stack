@@ -1,3 +1,4 @@
+import { DrawerService } from './../shared/drawer/drawer.service';
 import { AlertService } from './../core/components/alert/alert.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from './../core/services/http.service';
@@ -16,11 +17,13 @@ export class LoginComponent implements OnInit {
   public loginForm:FormGroup;
   constructor(private router: Router,
     private formBuilder: FormBuilder,private httpService : HttpService,
-    private alertService: AlertService,private userService: UserService) { }
+    private alertService: AlertService,private userService: UserService,
+    private drawerService : DrawerService) { }
 
 
   ngOnInit() {
     this.createForm();
+    this.drawerService.closeDrawer();
     this.logout();
   }
 
@@ -37,6 +40,8 @@ export class LoginComponent implements OnInit {
   }
 
   logout = () => {
+    localStorage.clear();
+   // this.userSubject.next(null);
     this.userService.logoutUser();
   }
 

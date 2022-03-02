@@ -6,15 +6,17 @@ export class DrawerService {
 
   public title:string;
   public opened = false;
+  public icon:string;
   public template:TemplateRef<ElementRef> | null;
   public drawerSubject : Subject<boolean> = new Subject();
 
   constructor() { }
 
-  openDrawer = (template:TemplateRef<ElementRef>,title:string) => {
+  openDrawer = (template:TemplateRef<ElementRef>,title:string,icon:string = '') => {
     this.title = title;
     this.opened = true;
     this.template = template;
+    this.icon = icon;
     this.drawerSubject.next(true);
   }
 

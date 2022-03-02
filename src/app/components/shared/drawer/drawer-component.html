@@ -1,6 +1,13 @@
 <div>
   <mat-drawer #drawer class="example-sidenav " [mode]="'over'" position="end" [(opened)]="opened">
-    <h2>{{headerTitle}}
+
+
+    <h2>
+      <span class="material-icons-outlined" style="padding: 12px;
+      color: #e9a528;" *ngIf="icon">
+        <mat-icon>payments</mat-icon>
+      </span >
+      {{headerTitle}}
       <button (click)="onCloseBtnClick()" class="btn btn-outline-light" style="float: right;background: transparent;
         border: none;">
         <mat-icon style="

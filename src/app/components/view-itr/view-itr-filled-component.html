@@ -30,5 +30,7 @@
 </div>
 
 <ng-template #receivePayment>
-    <app-receive-payment-component [pendingAmount]="selectedITR?.balanceAmount"></app-receive-payment-component>
+    <app-receive-payment-component
+      [pendingAmount]="selectedITR?.balanceAmount"
+      [paymentDetails]="paymentDetail"></app-receive-payment-component>
 </ng-template>

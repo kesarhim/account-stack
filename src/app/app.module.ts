@@ -54,6 +54,7 @@ import { DialogComponent } from './components/shared/dialog/dialog-component';
 import { GstListComponent } from './components/view-all-gst/view-gst-list-component';
 import { ViewOtherWorkListComponent } from './components/other-work/view-other-work-list/view-other-work-list-component';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker-component';
+import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,9 @@ import { DatePickerComponent } from './components/shared/date-picker/date-picker
     ViewOtherWorkListComponent,
     AddOtherWorkComponent,
     ReceivePaymentComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    ClientProfileComponent
+
   ],
   imports: [
     BrowserModule,

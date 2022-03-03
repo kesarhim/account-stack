@@ -49,7 +49,7 @@
               <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
                 <mat-icon>person</mat-icon>
               </button>
-              <a class="primary-name"> {{row[column.name] }}</a>
+              <a class="primary-name" (click)="onSelectPro(row)"> {{row[column.name] }}</a>
             </div>
             <div *ngIf="column.actions && column.actions.length > 0">
               <button mat-icon-button [matMenuTriggerFor]="menu">

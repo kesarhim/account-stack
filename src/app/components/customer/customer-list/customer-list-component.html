@@ -7,7 +7,7 @@
   </h2>
 </div>
 <div>
-  <app-table-component [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
+  <app-table-component (onSelectProfile)="onSelectClient($event)" [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
 
 </div>
 <ng-template #addITR>

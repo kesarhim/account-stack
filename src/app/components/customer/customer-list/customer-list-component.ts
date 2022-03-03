@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { DrawerService } from './../../shared/drawer/drawer.service';
 import { ITableConfig, ITableColumn, ColumnType, ITableActionLinks } from './../../shared/table/models/table-config';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertService } from './../../core/components/alert/alert.service';
 import { LoaderService } from './../../core/components/loader/loader.service';
 import { HttpService } from './../../core/services/http.service';
@@ -151,5 +151,10 @@ export class CustomerListComponent implements OnInit {
     this.showAddItrDrawer = false;
   }
 
+  onSelectClient=(customer:Customer )=>{
+    // alert("on custmer list component");
+    this.router.navigate(['/home/client-profile'],{ queryParams: { customerId: customer.id } });
+
+  }
 }
 

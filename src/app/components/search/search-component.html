@@ -2,10 +2,9 @@
   <div class="input-group">
     <input type="text" class="form-control" [(ngModel)]="searchText" aria-label="Searh Clients"
       (keyup.enter)="searchClients()" placeholder="Pan No / Mobile No / Aadhaar No">
-      <mat-icon class="search-close-icon" (click)="onClose()" *ngIf="customers?.length > 0 && showOptions">close</mat-icon>
-    <div class="input-group-append">
+      <mat-icon class="search-close-icon" (click)="onClose()" *ngIf="searchText">close</mat-icon>
+    <div class="input-group-append" >
       <span class="input-group-text search-icon">
-
         <button style="height: 24px;" class="mat-icon-button" (click)="searchClients()">
           <mat-icon>search</mat-icon>
         </button>

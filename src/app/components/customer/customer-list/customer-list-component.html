@@ -5,9 +5,13 @@
       <mat-icon>add</mat-icon>
     </button>
   </h2>
+  <mat-slide-toggle color="primary"
+      [(ngModel)]="showPendingPayments"
+      (toggleChange)="showOnlyPendingPayment()">{{showPendingPayments ? 'Show All' : 'Show Pending Payments'}}</mat-slide-toggle>
 </div>
 <div>
-  <app-table-component (onSelectProfile)="onSelectClient($event)" [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
+  <app-table-component (onSelectProfile)="onSelectClient($event)" [tableDataSource]="dataSource"
+    [tableConfig]="customerTableConfig"></app-table-component>
 
 </div>
 <ng-template #addITR>
@@ -16,7 +20,7 @@
 </ng-template>
 
 <ng-template #addGst>
-  <app-customer-add-gst  [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
+  <app-customer-add-gst [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
   </app-customer-add-gst>
 </ng-template>
 
@@ -27,7 +31,6 @@
 </ng-template>
 
 <ng-template #receivePaymentTemp>
-  <app-receive-payment-component
-  [pendingAmount]="paymentDetail?.balanceAmount"
-  [paymentDetails]="paymentDetail"></app-receive-payment-component>
+  <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
+  </app-receive-payment-component>
 </ng-template>

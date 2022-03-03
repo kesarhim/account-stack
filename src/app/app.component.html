@@ -1,21 +1,13 @@
-
 <!-- Toolbar -->
+<div class="d-flex" style="flex-direction: column;">
+  <app-header-component></app-header-component>
 
-<app-header-component></app-header-component>
-
-<div class="content" role="main">
-  <router-outlet></router-outlet>
+  <div class="content" role="main">
+    <router-outlet></router-outlet>
+  </div>
+  <app-alert></app-alert>
+  <app-loader></app-loader>
+  <app-drawer-component>
+  </app-drawer-component>
 </div>
-<app-alert></app-alert>
-<app-loader></app-loader>
-<app-drawer-component>
-</app-drawer-component>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 

@@ -28,5 +28,6 @@ export class DrawerService {
   resetValue = () => {
     this.opened = false;
     this.template = null;
+    this.icon = '';
   }
 }

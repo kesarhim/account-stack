@@ -1,3 +1,4 @@
+import { isFunction } from 'lodash';
 import { Subscription } from 'rxjs';
 import { DrawerService } from './../../shared/drawer/drawer.service';
 import { ITableConfig, ITableColumn, ColumnType, ITableActionLinks } from './../../shared/table/models/table-config';
@@ -32,22 +33,33 @@ export class CustomerListComponent implements OnInit {
   @ViewChild('addOtherWork') addOtherWorkTemplate: TemplateRef<any>;
   @ViewChild('receivePaymentTemp') receivePaymentTemplate: TemplateRef<any>;
 
-  public paymentDetail:PaymentDetails | null;
+  public paymentDetail: PaymentDetails | null;
   public selectedCustomer: Customer;
   public showAddItrDrawer: boolean = false;
+  public customers: Array<Customer>;
   public customerTableConfig: ITableConfig;
+  public showPendingPayments: boolean = false;
   private drawerSubscription: Subscription;
-
   constructor(private httpService: HttpService,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private router: Router, private drawerService: DrawerService) {
-
   }
 
   ngOnInit() {
     this.createTableConfiguration();
+    this.drawerSubscription = this.drawerService.drawerSubject.subscribe(value => {
+      if(!value){
+        this.getAllCustomers(25);
+      }
+    });
     this.getAllCustomers(25);
+  }
+
+  ngOnDestroy(): void {
+    if (this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)) {
+      this.drawerSubscription.unsubscribe();
+    }
   }
 
   createTableConfiguration = () => {
@@ -55,7 +67,7 @@ export class CustomerListComponent implements OnInit {
     let actionLinks: Array<ITableActionLinks> = new Array<ITableActionLinks>();
 
     actionLinks.push({ linkName: 'Edit', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditCandidate($event) });
-    actionLinks.push({ linkName: 'Edit Credentials', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditCandidate($event) });
+    //.push({ linkName: 'Edit Credentials', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditCandidate($event) });
     actionLinks.push({ linkName: 'Add ITR', icon: 'add', showIcon: true, method: ($event: any) => this.onAddITR($event) });
     actionLinks.push({ linkName: 'Add GST', icon: 'add', showIcon: true, method: ($event: any) => this.onAddGST($event) });
     actionLinks.push({ linkName: 'Add Other Work', icon: 'add', showIcon: true, method: ($event: any) => this.onAddOtherWork($event) });
@@ -64,11 +76,14 @@ export class CustomerListComponent implements OnInit {
 
     tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks, applyFilter: true });
     tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true, applyFilter: true });
+    tableColumns.push({ columnDef: 'balanceAmount', header: 'Pending Balance', name: 'balanceAmount' });
+    tableColumns.push({ columnDef: 'totalFees', header: 'Total Fees', name: 'totalFees' });
+    tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
     tableColumns.push({ columnDef: 'aadhaarNo', header: 'Aadhaar No', name: 'aadhaarNo', applyFilter: true });
     tableColumns.push({ columnDef: 'email', header: 'Email', name: 'email' });
     tableColumns.push({ columnDef: 'fatherName', header: 'Father Name', name: 'fatherName' });
     tableColumns.push({ columnDef: 'mobileNo', header: 'Mobile No', name: 'mobileNo' });
-    tableColumns.push({ columnDef: 'dob', header: 'D.O.B', name: 'dob',type: ColumnType.DATE});
+    tableColumns.push({ columnDef: 'dob', header: 'D.O.B', name: 'dob', type: ColumnType.DATE });
     tableColumns.push({ columnDef: 'street', header: 'Street', name: 'street' });
     tableColumns.push({ columnDef: 'city', header: 'City', name: 'city' });
     tableColumns.push({ columnDef: 'pinCode', header: 'Pin Code', name: 'pinCode' });
@@ -83,15 +98,15 @@ export class CustomerListComponent implements OnInit {
     this.drawerService.openDrawer(this.receivePaymentTemplate, 'Receive Payment', 'payments');
   }
 
-  getPaymentDetails = (itrDetails: Customer) : PaymentDetails | null=> {
-    if (itrDetails) {
+  getPaymentDetails = (customerDetail: Customer): PaymentDetails | null => {
+    if (customerDetail) {
       let paymentDetails: PaymentDetails = new PaymentDetails();
-      paymentDetails.customerId = itrDetails.id;
-    //  paymentDetails.totalFees = itrDetails.totalFees;
-   //   paymentDetails.feesPaid = itrDetails.feesPaid;
-  //    paymentDetails.balanceAmount = itrDetails.balanceAmount;
-      paymentDetails.clientName = itrDetails.fullName;
-      paymentDetails.panNo = itrDetails.panNo;
+      paymentDetails.customerId = customerDetail.id;
+      paymentDetails.totalFees = customerDetail.totalFees;
+      paymentDetails.feesPaid = customerDetail.feesPaid;
+      paymentDetails.balanceAmount = customerDetail.balanceAmount;
+      paymentDetails.clientName = customerDetail.fullName;
+      paymentDetails.panNo = customerDetail.panNo;
       paymentDetails.contextKey = 'CUSTOMER';
       return paymentDetails;
     }
@@ -114,12 +129,25 @@ export class CustomerListComponent implements OnInit {
             cust.fullName = `${cust.firstName} ${cust.middleName ?? ''} ${cust.lastName ?? ''}`
           });
         }
+        this.customers = data;
         this.dataSource = new MatTableDataSource(data);
+
+      //  this.showOnlyPendingPayment();
       }
       this.loaderService.hide();
     }, err => {
       this.loaderService.hide();
     })
+  }
+
+  showOnlyPendingPayment = () => {
+    if (this.customers.length > 0) {
+      if (!this.showPendingPayments) {
+        this.dataSource = new MatTableDataSource(this.customers.filter(x => x.balanceAmount > 0));
+      } else {
+        this.dataSource = new MatTableDataSource(this.customers);
+      }
+    }
   }
 
   onEditCandidate = (customer: Customer) => {
@@ -151,9 +179,9 @@ export class CustomerListComponent implements OnInit {
     this.showAddItrDrawer = false;
   }
 
-  onSelectClient=(customer:Customer )=>{
+  onSelectClient = (customer: Customer) => {
     // alert("on custmer list component");
-    this.router.navigate(['/home/client-profile'],{ queryParams: { customerId: customer.id } });
+    this.router.navigate(['/home/client-profile'], { queryParams: { customerId: customer.id } });
 
   }
 }

@@ -32,6 +32,10 @@
   color: #fff;
 }
 
+.mat-column-balanceAmount{
+  color: red;
+}
+
 .example-container {
   position: relative;
   min-width: 400px;

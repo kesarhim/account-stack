@@ -57,8 +57,6 @@ export class ViewOtherWorkListComponent implements OnInit {
     tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
     tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount' });
 
-
-
     tableColumns.push({ columnDef: 'fileDate', header: 'File Date', name: 'fileDate', type: ColumnType.DATE });
     tableColumns.push({ columnDef: 'fullName', header: 'Client Name ', name: 'fullName' });
     tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true });

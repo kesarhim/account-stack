@@ -1,6 +1,6 @@
 import { Customer } from './../customer/create/models/customer-model';
 import { HttpService } from './../core/services/http.service';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { debounce, debounceTime } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 import { MatSelectionList } from '@angular/material/list';
@@ -15,8 +15,9 @@ import { Subscriber, Subscription } from 'rxjs';
 export class SearchComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
-  public customers:Array<Customer> ;;
+  public customers:Array<Customer> | null;;
   public showOptions:boolean = false;
+  @Input() showIcon = true;
   private openSubs:Subscription;
   @Output() onSelectClient:EventEmitter<Customer> = new EventEmitter();
   @ViewChild('selectClient') matSelect :any;
@@ -48,6 +49,8 @@ export class SearchComponent implements OnInit {
 
   onClose = () =>{
     this.showOptions = false;
+    this.searchText ='';
+    this.customers = null;
   }
 
   onSelectMember(customer:Customer){

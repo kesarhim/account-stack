@@ -55,6 +55,7 @@ import { GstListComponent } from './components/view-all-gst/view-gst-list-compon
 import { ViewOtherWorkListComponent } from './components/other-work/view-other-work-list/view-other-work-list-component';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker-component';
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -86,8 +87,7 @@ import { ClientProfileComponent } from './components/client-profile/client-profi
     AddOtherWorkComponent,
     ReceivePaymentComponent,
     DatePickerComponent,
-    ClientProfileComponent
-
+    ClientProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +104,7 @@ import { ClientProfileComponent } from './components/client-profile/client-profi
     MatToolbarModule,
     MatTableModule,
     MatTabsModule,
+    MatSlideToggleModule,
     MatDialogModule,
     NgbModule,
     MatListModule,

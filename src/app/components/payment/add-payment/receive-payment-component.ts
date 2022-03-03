@@ -56,6 +56,7 @@ export class ReceivePaymentComponent implements OnInit {
       paymentMethod: ['CASH', Validators.required],
       cheuqeNumber: [null],
       transactionNumber: [null],
+      discount:[null],
       receivedBy: [null, Validators.required],
       date: [new Date(), Validators.required],
       remark: [null]
@@ -70,6 +71,7 @@ export class ReceivePaymentComponent implements OnInit {
           this.loaderService.show();
           this.receivePaymentService.savePaymentDetails(payload).subscribe(sucess => {
             this.loaderService.hide();
+            this.receivePaymentForm.reset();
             this.drawerService.closeDrawer();
             this.alertService.success("Payment has been updated successfully.");
           },err => {
@@ -101,6 +103,7 @@ export class ReceivePaymentComponent implements OnInit {
       receivePaymentDTO.receivedBy = this.receivePaymentForm.get('receivedBy')?.value;
       receivePaymentDTO.receivedMethod = this.receivePaymentForm.get('paymentMethod')?.value;
       receivePaymentDTO.receivedAmount = this.receivePaymentForm.get('amount')?.value;
+      receivePaymentDTO.discountOffered = this.receivePaymentForm.get('discount')?.value;
     }
     return receivePaymentDTO;
   }

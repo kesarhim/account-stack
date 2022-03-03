@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public clientName:string;
   public loggedInUser:User | null;
-
+  public showSearchUI:boolean = false;
   constructor(private storageService: StorageService,private userService: UserService) { }
 
   ngOnInit() {

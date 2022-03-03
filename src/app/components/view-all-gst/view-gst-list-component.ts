@@ -88,8 +88,6 @@ export class GstListComponent implements OnInit {
     tableColumns.push({ columnDef: 'fullName', header: 'Name', name: 'fullName', type: ColumnType.PRIMARY, actions: actionLinks,applyFilter:true });
     tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true,applyFilter:true });
     tableColumns.push({ columnDef: 'totalfees', header: 'Total Fees', name: 'totalfees' });
-    tableColumns.push({ columnDef: 'feespaid', header: 'Fees Paid', name: 'feespaid' });
-    tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount',applyFilter:true });
     tableColumns.push({ columnDef: 'gstNumber', header: 'GST Number', name: 'gstNumber',applyFilter:true });
     tableColumns.push({ columnDef: 'gstTypeCode.description', header: 'GST Type', name: 'gstTypeCode.description',applyFilter:true });
     tableColumns.push({ columnDef: 'yearCode.description', header: 'Assesment Year', name: 'yearCode.description' });

@@ -18,6 +18,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-component';
 import { CustomerAddITRComponent } from './components/customer/add-itr/customer-add-itr-component';
 import { ViewITRFilledComponent } from './components/view-itr/view-itr-filled-component';
+import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [
       {path:'gst-list',component: GstListComponent},
       {path:'add/other-work',component: AddOtherWorkComponent},
       {path:'other-work-list',component: ViewOtherWorkListComponent},
-      {path:'receive-payment',component: ReceivePaymentComponent}
+      {path:'receive-payment',component: ReceivePaymentComponent},
+      {path:'client-profile',component: ClientProfileComponent}
     ]
   },
 

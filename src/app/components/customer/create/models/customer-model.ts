@@ -18,6 +18,9 @@ export class Customer {
    incomeTaxId:string;
    incomeTaxPassword:string;
    fullName : string;
+   totalFees :number;
+   feesPaid :number;
+   balanceAmount :number;
 }
 
 export class Address {

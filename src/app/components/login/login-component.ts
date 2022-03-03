@@ -1,6 +1,5 @@
 import { DrawerService } from './../shared/drawer/drawer.service';
 import { AlertService } from './../core/components/alert/alert.service';
-import { HttpClient } from '@angular/common/http';
 import { HttpService } from './../core/services/http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,13 +14,17 @@ import { UserService } from '../core/services/user.service';
 
 export class LoginComponent implements OnInit {
   public loginForm:FormGroup;
+  public showPassword : boolean = false;
+  public passwordInputType  = 'password';
   constructor(private router: Router,
     private formBuilder: FormBuilder,private httpService : HttpService,
-    private alertService: AlertService,private userService: UserService,
-    private drawerService : DrawerService) { }
-
+    private userService: UserService,
+    private drawerService : DrawerService) {
+      localStorage.clear();
+    }
 
   ngOnInit() {
+    localStorage.clear();
     this.createForm();
     this.drawerService.closeDrawer();
     this.logout();
@@ -41,7 +44,6 @@ export class LoginComponent implements OnInit {
 
   logout = () => {
     localStorage.clear();
-   // this.userSubject.next(null);
     this.userService.logoutUser();
   }
 

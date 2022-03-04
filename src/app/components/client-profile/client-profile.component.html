@@ -1,6 +1,294 @@
-
+<!--
 
 <div class="div">
   <p>userprofile works!</p>
+</div> -->
+
+<div class="row">
+  <h1>Rajt kesarwani</h1>
+  &nbsp;
+  <h4>Pending payment</h4>
+  <button class="btn btn-primary" style="" [matMenuTriggerFor]="menu">Action</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 </div>
+
+<!-- <div class="row">
+  <button mat-button [matMenuTriggerFor]="menu">Action</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+</div> -->
+
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">person</mat-icon>
+      Profile
+    </ng-template>
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>Pan Number</h4></label>
+          <h2>DEJPK01928C</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Adhar Number</h4></label>
+          <h2>123412341234</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Date of Birth</h4></label>
+          <h2>26-10-1995</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Mobile Number</h4></label>
+          <h2>9506096255</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Email</h4></label>
+          <h2>rajat1872195@gmail.com</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Address</h4></label>
+          <h2>872 A Mutthiganj</h2>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">payments</mat-icon>
+      Payment Recivied
+    </ng-template>
+
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>Pan Number</h4></label>
+          <h2>DEJPK01928C</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Adhar Number</h4></label>
+          <h2>123412341234</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Date of Birth</h4></label>
+          <h2>26-10-1995</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Mobile Number</h4></label>
+          <h2>9506096255</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Email</h4></label>
+          <h2>rajat1872195@gmail.com</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Address</h4></label>
+          <h2>872 A Mutthiganj</h2>
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      ITR
+    </ng-template>
+
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>Name</h4></label>
+          <h2>Rajat Kesarwani</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Pan Number</h4></label>
+          <h2>DEJPK01928C</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Adhar Number</h4></label>
+          <h2>123412341234</h2>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Acknowledgmen Number</h4></label>
+          <h2>1234567890</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Assesment Year </h4></label>
+          <h2>2021-2022</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>File Date </h4></label>
+          <h2>22-01-22</h2>
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      GST
+    </ng-template>
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>GST Number</h4></label>
+          <h2>12121212112121212</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>GST Type</h4></label>
+          <h2>3B</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Fill Date</h4></label>
+          <h2>26-10-1995</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Financial Year</h4></label>
+          <h2>2022-2023</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Month</h4></label>
+          <h2>May</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Total Fees</h4></label>
+          <h2>2000</h2>
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Laser Account
+    </ng-template>
+
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>Pan Number</h4></label>
+          <h2>DEJPK01928C</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Adhar Number</h4></label>
+          <h2>123412341234</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Date of Birth</h4></label>
+          <h2>26-10-1995</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Mobile Number</h4></label>
+          <h2>9506096255</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Email</h4></label>
+          <h2>rajat1872195@gmail.com</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Address</h4></label>
+          <h2>872 A Mutthiganj</h2>
+        </div>
+
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Other work
+    </ng-template>
+    <div class="div">
+      <div class="row">
+
+        <div class="col-sm-4">
+          <label><h4>Pan Number</h4></label>
+          <h2>DEJPK01928C</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Adhar Number</h4></label>
+          <h2>123412341234</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Date of Birth</h4></label>
+          <h2>26-10-1995</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="div">
+      <div class="row">
+        <div class="col-sm-4">
+          <label><h4>Mobile Number</h4></label>
+          <h2>9506096255</h2>
+        </div>
+
+        <div class="col-sm-4">
+          <label><h4>Email</h4></label>
+          <h2>rajat1872195@gmail.com</h2>
+        </div>
+        <div class="col-sm-4">
+          <label><h4>Address</h4></label>
+          <h2>872 A Mutthiganj</h2>
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
 

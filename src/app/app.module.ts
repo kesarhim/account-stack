@@ -56,6 +56,7 @@ import { ViewOtherWorkListComponent } from './components/other-work/view-other-w
 import { DatePickerComponent } from './components/shared/date-picker/date-picker-component';
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ClientItrDetailsComponent } from './components/client-itr-details/client-itr-details.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReceivePaymentComponent,
     DatePickerComponent,
     ClientProfileComponent,
+    ClientItrDetailsComponent,
   ],
   imports: [
     BrowserModule,

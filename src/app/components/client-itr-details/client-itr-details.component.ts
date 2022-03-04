@@ -7,6 +7,7 @@ import { ITRDetailService } from '../customer/service/itr-details-service';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
 import { DrawerService } from '../shared/drawer/drawer.service';
 import { ColumnType, ITableActionLinks, ITableColumn } from '../shared/table/models/table-config';
+import { ITRDetailsDTO } from '../view-itr/model/itr-details-dto-model';
 
 @Component({
   selector: 'app-client-itr-details',
@@ -60,7 +61,7 @@ export class ClientItrDetailsComponent implements OnInit {
         this.itrDetailService.delelteITR(data.id).subscribe((result: any) => {
           if (result && result.response) {
             this.alertService.success("ITR details deleted successfully.")
-            this.getAllITRDetails(25, this.selectedAssesmentYear);
+            // this.getAllITRDetails(25, this.selectedAssesmentYear);
           }
         })
       }

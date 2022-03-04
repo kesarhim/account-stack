@@ -1,3 +1,4 @@
+import { DrawerService } from './../../shared/drawer/drawer.service';
 import { OtherWorkDetailDTO } from './../view-other-work-list/model/other-work-details-dto';
 import { OtherWorkDetail } from './../../customer/models/other-work-detail-model';
 import { AlertService } from './../../core/components/alert/alert.service';
@@ -21,6 +22,7 @@ import { feesPaidValidator } from '../../validators/custom-validators';
 export class AddOtherWorkComponent implements OnInit {
   @Input() searchAllowed: boolean = true;
   @Input() showTitle:boolean = true;
+  @Input() isDrawerMode : boolean = false;
 
   @Input() set customer(value: Customer) {
     if (value) {
@@ -35,7 +37,8 @@ export class AddOtherWorkComponent implements OnInit {
   constructor(private formbuilder:FormBuilder,
     private otherWorkDetailService : OtherWorkDetailService,private loaderService:LoaderService,
     private alertService:AlertService, private router: Router, private route: ActivatedRoute,
-    private storageService:StorageService) {
+    private storageService:StorageService,
+    private drawerService : DrawerService) {
        this.creatForm();
      }
 
@@ -122,13 +125,18 @@ export class AddOtherWorkComponent implements OnInit {
       otherWorkDetails.doneBy = this.loggedInUser?.username;
       if (this.otheWorkDetails) {
         otherWorkDetails.id = this.otheWorkDetails.id;
+        otherWorkDetails.invoiceId = this.otheWorkDetails.invoiceId;
       }
       this.otherWorkDetailService.saveOtherWorkDetail(otherWorkDetails).subscribe((sucess: any) => {
         this.loaderService.hide();
         this.alertService.success('Work Details Saved Successfully');
         this.selectedCustomer = null;
         this.resetForm();
-       this.goToviewOtherWorkList();
+        if(this.isDrawerMode){
+          this.drawerService.closeDrawer();
+        }else {
+          this.goToviewOtherWorkList();
+        }
       }, (err: any) => {
         this.alertService.error(err?.error?.message);
         this.loaderService.hide();

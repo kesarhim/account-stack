@@ -57,7 +57,7 @@ import { DatePickerComponent } from './components/shared/date-picker/date-picker
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ClientItrDetailsComponent } from './components/client-itr-details/client-itr-details.component';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +89,7 @@ import { ClientItrDetailsComponent } from './components/client-itr-details/clien
     ReceivePaymentComponent,
     DatePickerComponent,
     ClientProfileComponent,
-    ClientItrDetailsComponent,
+    ClientItrDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +111,7 @@ import { ClientItrDetailsComponent } from './components/client-itr-details/clien
     NgbModule,
     MatListModule,
     MatInputModule,
+    MatProgressBarModule,
     MatIconModule,
     MatSidenavModule,
     MatPaginatorModule,

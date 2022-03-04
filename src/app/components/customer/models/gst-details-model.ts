@@ -10,4 +10,5 @@ export class GstDetails{
   customerId:number;
   doneBy:string;
   id :number;
+  invoiceId:number;
 }

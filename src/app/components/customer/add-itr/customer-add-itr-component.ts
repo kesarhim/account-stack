@@ -25,6 +25,7 @@ export class CustomerAddITRComponent implements OnInit {
   public selectedCustomer: Customer | null;
   @Input() searchAllowed: boolean = true;
   @Input() showTitle: boolean = true;
+  @Input() isDrawerMode : boolean = false;
   @ViewChild('receivePaymentTemp') receivePaymentTemplate:TemplateRef<any>;
   showFeesDetails: boolean = false;
   @Input() set customer(value: Customer) {
@@ -126,14 +127,20 @@ export class CustomerAddITRComponent implements OnInit {
       itrDetails.doneBy = this.loggedInUser?.username;
       if (this.itrDetail) {
         itrDetails.id = this.itrDetail.id;
+        itrDetails.invoiceId = this.itrDetail.invoiceId;
       }
       this.httpService.post('/ITRDetail/Save', itrDetails).subscribe(sucess => {
         this.loaderService.hide();
         this.alerService.success('ITR Details Added Successfully');
         this.selectedCustomer = null;
         this.addITRForm.reset(true);
+        if(this.isDrawerMode){
+          this.drawerService.closeDrawer();
+        }else {
+          this.goToViewITRList();
+        }
         // this.router.navigateByUrl('/home/viewItr');
-        this.goToViewITRList();
+
       }, err => {
         this.alerService.error(err?.error?.message);
         this.loaderService.hide();

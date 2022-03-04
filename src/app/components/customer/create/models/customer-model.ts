@@ -21,6 +21,7 @@ export class Customer {
    totalFees :number;
    feesPaid :number;
    balanceAmount :number;
+   discountOffered:number;
 }
 
 export class Address {

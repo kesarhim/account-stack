@@ -14,6 +14,7 @@ import { Customer } from '../customer/create/models/customer-model';
 import { StorageKeys, StorageService } from '../core/services/storage.service';
 import { User } from '../shared/models/user-cred.model';
 import { feesPaidValidator } from '../validators/custom-validators';
+import { DrawerService } from '../shared/drawer/drawer.service';
 
 @Component({
   selector: 'app-customer-add-gst',
@@ -30,19 +31,22 @@ export class CustomerAddGSTComponent implements OnInit {
   private gstDetail: GSTDetailsDTO;
   @Input() searchAllowed: boolean = true;
   @Input() showTitle:boolean = true;
-
+  @Input() isDrawerMode : boolean = false;
   @Input() set customer(value: Customer) {
     if (value) {
       this.onSelectCustomer(value);
     }
   };
-  constructor(private formbuilder: FormBuilder, private httpService: HttpService,
+  constructor(private formbuilder: FormBuilder,
+    private httpService: HttpService,
     private alertService: AlertService,
     private loaderService: LoaderService,
     private storageService: StorageService,
-    private router: Router, private route: ActivatedRoute,
+    private router: Router,
+    private route: ActivatedRoute,
     private customerService: CustomerService,
-    private gstDetailService: GSTDetailService) {
+    private gstDetailService: GSTDetailService,
+    private drawerService : DrawerService) {
       this.creatForm();
     }
 
@@ -123,13 +127,18 @@ export class CustomerAddGSTComponent implements OnInit {
       gstDetails.doneBy = this.loggedInUser?.username;
       if (this.gstDetail) {
         gstDetails.id = this.gstDetail.id;
+        gstDetails.invoiceId = this.gstDetail.invoiceId;
       }
       this.httpService.post('/GstDetail/Save', gstDetails).subscribe((sucess: any) => {
         this.loaderService.hide();
         this.alertService.success('GST Details Saved Successfully');
         this.selectedCustomer = null;
         this.addGSTForm.reset(true);
-        this.goToviewGstList();
+        if(this.isDrawerMode){
+          this.drawerService.closeDrawer();
+        }else {
+          this.goToviewGstList();
+        }
       }, (err: any) => {
         this.alertService.error(err?.error?.message);
         this.loaderService.hide();

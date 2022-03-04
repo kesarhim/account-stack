@@ -14,4 +14,5 @@ export class ITRDetails {
   transactionNumber: string;
   receivedBy: string;
   paymentMethod: string
+  invoiceId:number;
 }

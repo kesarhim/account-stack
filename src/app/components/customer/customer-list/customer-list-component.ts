@@ -79,6 +79,7 @@ export class CustomerListComponent implements OnInit {
     tableColumns.push({ columnDef: 'balanceAmount', header: 'Pending Balance', name: 'balanceAmount' });
     tableColumns.push({ columnDef: 'totalFees', header: 'Total Fees', name: 'totalFees' });
     tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
+    tableColumns.push({ columnDef: 'discountOffered', header: 'Discount Offered', name: 'discountOffered' });
     tableColumns.push({ columnDef: 'aadhaarNo', header: 'Aadhaar No', name: 'aadhaarNo', applyFilter: true });
     tableColumns.push({ columnDef: 'email', header: 'Email', name: 'email' });
     tableColumns.push({ columnDef: 'fatherName', header: 'Father Name', name: 'fatherName' });

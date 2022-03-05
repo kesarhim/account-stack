@@ -9,6 +9,10 @@ export class ReceivePaymentService {
 
   }
 
+  public getReceiveDetailsByCustomerId = (customerId:number) => {
+    return this.httpService.get(`${this.baseURL}/get/${customerId}`);
+  }
+
   public savePaymentDetails = (paymentDeails:ReceivePaymentDTO) => {
     return this.httpService.post(`${this.baseURL}/save`,paymentDeails);
   }

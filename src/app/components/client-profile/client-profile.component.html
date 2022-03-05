@@ -1,294 +1,136 @@
-<!--
-
-<div class="div">
-  <p>userprofile works!</p>
-</div> -->
-
-<div class="row">
-  <h1>Rajt kesarwani</h1>
-  &nbsp;
-  <h4>Pending payment</h4>
-  <button class="btn btn-primary" style="" [matMenuTriggerFor]="menu">Action</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-</div>
-
-<!-- <div class="row">
-  <button mat-button [matMenuTriggerFor]="menu">Action</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-</div> -->
-
-<mat-tab-group>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">person</mat-icon>
-      Profile
-    </ng-template>
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>Pan Number</h4></label>
-          <h2>DEJPK01928C</h2>
+<mat-card class="p-0">
+  <mat-card-header class="mt-2" style="padding-top: 10px;">
+    <mat-card-title class="d-flex flex-row flex-fill">
+      <div class="d-flex flex-row">
+        <span>{{selectedCustomer?.fullName}}</span>
+        <div class="alert-warning font-16 ml-4 p-2" role="alert">
+          Pending Amount: &nbsp;{{selectedCustomer?.balanceAmount}}
         </div>
-        <div class="col-sm-4">
-          <label><h4>Adhar Number</h4></label>
-          <h2>123412341234</h2>
+        <!-- <div class="alert-dark font-16 ml-4 p-2" role="alert">
+          Total Bill : {{selectedCustomer?.totalFees}}
         </div>
-        <div class="col-sm-4">
-          <label><h4>Date of Birth</h4></label>
-          <h2>26-10-1995</h2>
-        </div>
+        <div class="alert-dark font-16 ml-4 p-2" role="alert">
+          Received Amount : {{selectedCustomer?.feesPaid}}
+        </div> -->
       </div>
-    </div>
 
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Mobile Number</h4></label>
-          <h2>9506096255</h2>
-        </div>
 
-        <div class="col-sm-4">
-          <label><h4>Email</h4></label>
-          <h2>rajat1872195@gmail.com</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Address</h4></label>
-          <h2>872 A Mutthiganj</h2>
-        </div>
-
+      <div class="btn-group justify-content-end" style=" right: 0;
+      position: absolute;
+      margin-right: 30px;">
+        <button class="btn btn-primary dropdown-toggle" [matMenuTriggerFor]="menu">Actions</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onEditCandidate(selectedCustomer)">Edit</button>
+          <button mat-menu-item (click)="onReceivePayment(selectedCustomer)">Receive Payment</button>
+          <button mat-menu-item (click)="onAddITR(selectedCustomer)">Add ITR</button>
+          <button mat-menu-item (click)="onAddOtherWork(selectedCustomer)">Add Other Work</button>
+          <button mat-menu-item (click)="onAddGST(selectedCustomer)">Add GST</button>
+        </mat-menu>
       </div>
-    </div>
+    </mat-card-title>
 
+    <mat-card-subtitle style="margin-bottom: 0">
 
+      <div class="d-flex align-items-center">
+        <span>
+          <mat-icon class="color-orange">double_arrow</mat-icon>
+        </span>
+        <span style="font-size: medium;
+      font-weight: 500;text-transform: uppercase;">
+          Pan No - {{selectedCustomer?.panNo}}
+        </span>
 
-  </mat-tab>
-
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">payments</mat-icon>
-      Payment Recivied
-    </ng-template>
-
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>Pan Number</h4></label>
-          <h2>DEJPK01928C</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Adhar Number</h4></label>
-          <h2>123412341234</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Date of Birth</h4></label>
-          <h2>26-10-1995</h2>
-        </div>
+        <span style="font-weight: 500;" class="ml-5">
+          Last Payment Received : {{ selectedCustomer?.lastPaymentReceivedDate | date : 'medium'}}
+        </span>
       </div>
-    </div>
 
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Mobile Number</h4></label>
-          <h2>9506096255</h2>
-        </div>
-
-        <div class="col-sm-4">
-          <label><h4>Email</h4></label>
-          <h2>rajat1872195@gmail.com</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Address</h4></label>
-          <h2>872 A Mutthiganj</h2>
-        </div>
-
-      </div>
-    </div>
-  </mat-tab>
-
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-      ITR
-    </ng-template>
-
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>Name</h4></label>
-          <h2>Rajat Kesarwani</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Pan Number</h4></label>
-          <h2>DEJPK01928C</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Adhar Number</h4></label>
-          <h2>123412341234</h2>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Acknowledgmen Number</h4></label>
-          <h2>1234567890</h2>
-        </div>
-
-        <div class="col-sm-4">
-          <label><h4>Assesment Year </h4></label>
-          <h2>2021-2022</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>File Date </h4></label>
-          <h2>22-01-22</h2>
-        </div>
-
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-      GST
-    </ng-template>
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>GST Number</h4></label>
-          <h2>12121212112121212</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>GST Type</h4></label>
-          <h2>3B</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Fill Date</h4></label>
-          <h2>26-10-1995</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Financial Year</h4></label>
-          <h2>2022-2023</h2>
-        </div>
-
-        <div class="col-sm-4">
-          <label><h4>Month</h4></label>
-          <h2>May</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Total Fees</h4></label>
-          <h2>2000</h2>
-        </div>
-
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-      Laser Account
-    </ng-template>
-
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>Pan Number</h4></label>
-          <h2>DEJPK01928C</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Adhar Number</h4></label>
-          <h2>123412341234</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Date of Birth</h4></label>
-          <h2>26-10-1995</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Mobile Number</h4></label>
-          <h2>9506096255</h2>
-        </div>
-
-        <div class="col-sm-4">
-          <label><h4>Email</h4></label>
-          <h2>rajat1872195@gmail.com</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Address</h4></label>
-          <h2>872 A Mutthiganj</h2>
-        </div>
-
-      </div>
-    </div>
-
-  </mat-tab>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-      Other work
-    </ng-template>
-    <div class="div">
-      <div class="row">
-
-        <div class="col-sm-4">
-          <label><h4>Pan Number</h4></label>
-          <h2>DEJPK01928C</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Adhar Number</h4></label>
-          <h2>123412341234</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Date of Birth</h4></label>
-          <h2>26-10-1995</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="div">
-      <div class="row">
-        <div class="col-sm-4">
-          <label><h4>Mobile Number</h4></label>
-          <h2>9506096255</h2>
-        </div>
-
-        <div class="col-sm-4">
-          <label><h4>Email</h4></label>
-          <h2>rajat1872195@gmail.com</h2>
-        </div>
-        <div class="col-sm-4">
-          <label><h4>Address</h4></label>
-          <h2>872 A Mutthiganj</h2>
-        </div>
-
-      </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2 color-primary-blue">group</mat-icon>
+        Profile
+      </ng-template>
+      <ng-template matTabContent>
+        <app-client-profile-details-component [customer]="selectedCustomer"></app-client-profile-details-component>
+      </ng-template>
 
 
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2 color-primary-blue">payments</mat-icon>
+        Payment History
+      </ng-template>
+      <ng-template matTabContent>
+        <app-client-receive-payment-component [customerId]="customerId"></app-client-receive-payment-component>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">account_balance_wallet</mat-icon>
+        Account Ledger
+      </ng-template>
+      Content 2
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">work</mat-icon>
+        ITR
+      </ng-template>
+      <ng-template matTabContent>
+        <app-client-itr-details [customerId]="customerId"></app-client-itr-details>
+      </ng-template>
+
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">work</mat-icon>
+        GST
+      </ng-template>
+      <ng-template matTabContent>
+        <app-client-gst-details [customerId]="customerId"></app-client-gst-details>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">work</mat-icon>
+        Other Work
+      </ng-template>
+      <ng-template matTabContent>
+        <app-client-other-work-details-component [customerId]="customerId"></app-client-other-work-details-component>
+      </ng-template>
+
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
 
 
+<ng-template #addITR>
+  <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
+  </app-customer-add-itr>
+</ng-template>
 
+<ng-template #addGst>
+  <app-customer-add-gst [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
+  </app-customer-add-gst>
+</ng-template>
+
+<ng-template #addOtherWork>
+  <app-add-other-work-component [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer"
+    [isDrawerMode]="true">
+
+  </app-add-other-work-component>
+</ng-template>
+
+<ng-template #receivePaymentTemp>
+  <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
+  </app-receive-payment-component>
+</ng-template>

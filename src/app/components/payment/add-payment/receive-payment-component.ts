@@ -63,8 +63,20 @@ export class ReceivePaymentComponent implements OnInit {
     });
   }
 
+  validatePayment = ():boolean => {
+     const amount = this.receivePaymentForm.get('amount')?.value;
+     const discount = this.receivePaymentForm.get('discount')?.value;
+     let total:number = amount + discount;
+     if(this.paymentDetails.balanceAmount >= total){
+      return true
+     }else {
+       this.alertService.error("Amount can not be greater than balance amount.")
+     }
+     return false;
+  }
+
   onSavePaymentDetails = () => {
-    if (this.receivePaymentForm.valid) {
+    if (this.receivePaymentForm.valid && this.validatePayment()) {
       let payload: ReceivePaymentDTO = this.getPayLoad();
       if (payload.invoiceId > 0 || payload.customerid > 0) {
         if (payload.receivedAmount > 0) {

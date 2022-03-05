@@ -9,6 +9,10 @@ export class OthweWorkDetailService {
 
   }
 
+  public getOtherWorkDetailsByCustomerId = (customerId:number) => {
+    return this.httpService.get(`${this.baseControllerName}/get/${customerId}`);
+  }
+
   public getOtherWorkDetailsById = (gstDetailId:number) => {
     return this.httpService.get(`${this.baseControllerName}/get?id=${gstDetailId}`);
   }

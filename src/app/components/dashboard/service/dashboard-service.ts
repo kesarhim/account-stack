@@ -17,6 +17,10 @@ export class DashboardService {
     return this.httpService.get(`${this.baseURL}/received-payments`);
   }
 
+  public getTotalDiscountOffered = () => {
+    return this.httpService.get(`${this.baseURL}/total-discount-offered`);
+  }
+
   public getTodayReceivedPayments = () => {
     return this.httpService.get(`${this.baseURL}/today-received-payments`);
   }
@@ -27,6 +31,10 @@ export class DashboardService {
 
   public getTotalActiveClients = () => {
     return this.httpService.get(`${this.baseURL}/total-client`);
+  }
+
+  public getTotalBill = () => {
+    return this.httpService.get(`${this.baseURL}/total-bill`);
   }
 
   public getPaymentDetails = (paymentId:number) => {

@@ -12,7 +12,7 @@ export class Customer {
    street : string;
    city:string;
    state:string;
-   pincode:number;
+   pinCode:number;
    gstId:string;
    gstPassword:string;
    incomeTaxId:string;
@@ -22,6 +22,7 @@ export class Customer {
    feesPaid :number;
    balanceAmount :number;
    discountOffered:number;
+   lastPaymentReceivedDate:Date;
 }
 
 export class Address {

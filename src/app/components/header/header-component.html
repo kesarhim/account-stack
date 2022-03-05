@@ -9,7 +9,7 @@
     <div class="search-icon d-flex">
 
 
-      <app-search-component *ngIf="showSearchUI" [showIcon]="false" style="color: black;"></app-search-component>
+      <app-search-component *ngIf="showSearchUI" (onSelectClient)="onSelectCustomer($event)" [showIcon]="false" style="color: black;"></app-search-component>
       <div class="example-button-container">
         <button mat-mini-fab color="primary" aria-label="Search Client" (click)="showSearchUI = !showSearchUI">
           <mat-icon>person_search</mat-icon>

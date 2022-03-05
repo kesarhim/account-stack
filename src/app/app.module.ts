@@ -58,6 +58,10 @@ import { ClientProfileComponent } from './components/client-profile/client-profi
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ClientItrDetailsComponent } from './components/client-itr-details/client-itr-details.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ClientGstDetailsComponent } from './components/client-gst-details/client-gst-details-component';
+import { ClientOtherWorkDetailsComponent } from './components/client-other-work/client-other-work-details-component';
+import { ClientReceivedPaymentsComponent } from './components/client-received-payments/client-receive-payment-component';
+import { ClientProfileDetailsComponent } from './components/client-profile-detail/client-profile-detail-component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +93,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ReceivePaymentComponent,
     DatePickerComponent,
     ClientProfileComponent,
-    ClientItrDetailsComponent
+    ClientItrDetailsComponent,
+    ClientGstDetailsComponent,
+    ClientOtherWorkDetailsComponent,
+    ClientReceivedPaymentsComponent,
+    ClientProfileDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -98,7 +98,7 @@ export class CreateCustomerComponent implements OnInit {
       street: [null],
       city: [null],
       state: [null],
-      pincode: [null]
+      pinCode: [null]
     });
   }
 

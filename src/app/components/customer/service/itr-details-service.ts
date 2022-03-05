@@ -8,6 +8,10 @@ export class ITRDetailService {
 
    }
 
+  public getITRDetailsByCustomerId = (customerId:number) => {
+    return this.httpService.get(`${this.baseURL}/get/${customerId}`);
+  }
+
    public getITRDetailsById = (itrDetailId:number) => {
     return this.httpService.get(`${this.baseURL}/get?id=${itrDetailId}`);
   }

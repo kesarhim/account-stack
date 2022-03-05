@@ -17,7 +17,8 @@ export class DashboardComponent implements OnInit {
   public totalReceivedPayment:number;
   public todayPendingPayments:number;
   public totalActiveClients:number;
-
+  public totalBillAmount:number;
+  public totalDiscountOffered:number;
   public showLoader:boolean = false;
 
   ngOnInit() {
@@ -30,6 +31,32 @@ export class DashboardComponent implements OnInit {
     this.getTotalReceivedPayment();
     this.getTodayPendingPayments();
     this.getTotalActiveClients();
+    this.getTotalBill();
+    this.getTotalDiscountOffered();
+  }
+
+  getTotalBill = () => {
+    this.showLoader = true;
+    this.dashboardService.getTotalBill().subscribe((result: any) => {
+      if (result) {
+        setTimeout(() => {
+          this.totalBillAmount = result.response;
+          this.showLoader = false;
+        },2000)
+      }
+    });
+  }
+
+  getTotalDiscountOffered = () => {
+    this.showLoader = true;
+    this.dashboardService.getTotalDiscountOffered().subscribe((result: any) => {
+      if (result) {
+        setTimeout(() => {
+          this.totalDiscountOffered = result.response;
+          this.showLoader = false;
+        },2000)
+      }
+    });
   }
 
   getTotalPendingPayment = () => {

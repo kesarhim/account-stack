@@ -26,6 +26,8 @@ export class Balance {
 export class TableComponentComponent implements OnInit {
   @Input() tableDataSource: MatTableDataSource<any>;
   @Input() tableConfig: ITableConfig;
+  @Input() allowSearch:boolean = true;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Output() onSelectProfile: EventEmitter<any> = new EventEmitter<any>();
 
@@ -76,7 +78,7 @@ export class TableComponentComponent implements OnInit {
 
   createTableFilter = () => {
     this.tableFilterSource = new Array<ITableFilter>();
-    if (this.tableConfig.displayedColumns.length > 0) {
+    if (this.tableConfig?.displayedColumns?.length > 0) {
       this.tableConfig.displayedColumns.forEach((coloums) => {
         if (coloums.applyFilter) {
           let filter: ITableFilter = {

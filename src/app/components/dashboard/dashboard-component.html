@@ -12,22 +12,7 @@
   </div>
   <hr/>
   <div class="row g-6 mb-6" style="margin-bottom: 16px;">
-    <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
-      <mat-card style="height: 130px;min-height: 130px;">
-        <mat-card-title>
-          <div class="alert alert-secondary font-16" style="text-align: center;" role="alert">
-            Add New User
-          </div>
-        </mat-card-title>
-        <mat-card-content>
-          <div class="d-flex flex-row justify-content-center">
-            <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
-              <mat-icon>persons</mat-icon>
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+
 
     <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
       <mat-card style="height: 130px;min-height: 130px;">
@@ -81,6 +66,55 @@
       <mat-card style="height: 130px;min-height: 130px;">
         <mat-card-title>
           <div class="alert alert-secondary font-16" style="text-align: center;color: #1b1e21;" role="alert">
+            Total Bill
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="d-flex flex-row justify-content-center">
+            <span style="font-size: 28px;">
+              <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
+            </span>
+            <span style="font-size: 25px;">{{totalBillAmount}}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-progress-bar mode="{{showLoader ? 'query' : 'completed'}}" [value]="showLoader ? 50 : 100">
+          </mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
+    <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
+      <mat-card style="height: 130px;min-height: 130px;">
+        <mat-card-title>
+          <div class="alert alert-secondary font-16" style="text-align: center;color: #1b1e21;" role="alert">
+            Discount Offered
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="d-flex flex-row justify-content-center">
+            <span style="font-size: 28px;">
+              <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
+            </span>
+            <span style="font-size: 25px;">{{totalDiscountOffered}}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <mat-progress-bar mode="{{showLoader ? 'query' : 'completed'}}" [value]="showLoader ? 50 : 100">
+          </mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
+  </div>
+
+  <div class="row g-6 mb-6">
+
+
+    <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
+      <mat-card style="height: 130px;min-height: 130px;">
+        <mat-card-title>
+          <div class="alert alert-secondary font-16" style="text-align: center;color: #1b1e21;" role="alert">
             Total Active Client
           </div>
         </mat-card-title>
@@ -96,28 +130,6 @@
           <mat-progress-bar mode="{{showLoader ? 'query' : 'completed'}}" [value]="showLoader ? 50 : 100">
           </mat-progress-bar>
         </mat-card-footer>
-      </mat-card>
-    </div>
-
-  </div>
-
-  <div class="row g-6 mb-6">
-
-    <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
-      <mat-card style="height: 130px;min-height: 130px;">
-        <mat-card-title>
-          <div class="alert alert-secondary font-16" style="text-align: center;" role="alert">
-             Total Pending Work
-          </div>
-        </mat-card-title>
-        <mat-card-content>
-          <div class="d-flex flex-row justify-content-center">
-            <span style="font-size: 28px;">
-              <mat-icon mat-mini-fab color="primary">work</mat-icon>
-            </span>
-            <span style="font-size: 25px;color: blue;">{{51054}}</span>
-          </div>
-        </mat-card-content>
       </mat-card>
     </div>
 
@@ -173,16 +185,15 @@
     <div class="col-xl-3 col-sm-3 col-12 cursor-pointer" (click)="onSelectCard()">
       <mat-card style="height: 130px;min-height: 130px;">
         <mat-card-title>
-          <div class="alert alert-secondary font-16" style="text-align: center;color: #1b1e21" role="alert">
-              Work Completed
+          <div class="alert alert-secondary font-16" style="text-align: center;" role="alert">
+            Add New User
           </div>
         </mat-card-title>
         <mat-card-content>
           <div class="d-flex flex-row justify-content-center">
-            <span style="font-size: 28px;">
-              <mat-icon mat-mini-fab color="primary">work</mat-icon>
-            </span>
-            <span style="font-size: 25px;color: blue;">{{51054}}</span>
+            <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+              <mat-icon>persons</mat-icon>
+            </button>
           </div>
         </mat-card-content>
       </mat-card>

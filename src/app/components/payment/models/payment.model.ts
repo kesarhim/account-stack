@@ -6,6 +6,7 @@ export class PaymentDetails {
   totalFees: number;
   balanceAmount: number;
   feesPaid: number;
+  discountOffered:number;
   panNo: string;
   isOtherWork: boolean;
   workDetails: string;

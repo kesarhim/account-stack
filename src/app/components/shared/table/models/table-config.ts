@@ -1,5 +1,6 @@
 export interface ITableConfig {
   displayedColumns : Array<ITableColumn>;
+
 }
 
 export interface ITableColumn {

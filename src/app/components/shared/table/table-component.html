@@ -1,4 +1,4 @@
-<div class="search-section">
+<div class="search-section" *ngIf="allowSearch">
   <div class="" style="width:33%;float: right;margin-bottom: 14px;">
     <div class="input-group">
       <input type="text" class="form-control" aria-label="Searh Clients" (keyup)="applyFilter($event)"
@@ -46,10 +46,10 @@
         <div *ngIf="column.type === coloumnType.PRIMARY;else other_content">
           <div style="display: flex;justify-content: space-between;align-items: center;">
             <div class="example-button-container">
-              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+              <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" *ngIf="column.name === 'fullName'">
                 <mat-icon>person</mat-icon>
               </button>
-              <a class="primary-name" (click)="onSelectPro(row)"> {{row[column.name] }}</a>
+              <a class="primary-name" (click)="onSelectPro(row)"> {{getPropertyValue(row,column?.name)}}</a>
             </div>
             <div *ngIf="column.actions && column.actions.length > 0">
               <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -93,4 +93,4 @@
   </table>
 
 </div>
-<mat-paginator [pageSizeOptions]="[25, 50, 100, 150]"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>

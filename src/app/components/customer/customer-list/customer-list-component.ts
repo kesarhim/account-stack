@@ -108,6 +108,7 @@ export class CustomerListComponent implements OnInit {
       paymentDetails.balanceAmount = customerDetail.balanceAmount;
       paymentDetails.clientName = customerDetail.fullName;
       paymentDetails.panNo = customerDetail.panNo;
+      paymentDetails.discountOffered = customerDetail.discountOffered;
       paymentDetails.contextKey = 'CUSTOMER';
       return paymentDetails;
     }

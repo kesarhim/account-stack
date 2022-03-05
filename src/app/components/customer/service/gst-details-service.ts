@@ -8,7 +8,11 @@ export class GSTDetailService {
 
   }
 
-   public getGstDetailsById = (gstDetailId:number) => {
+  public getGstDetailsByCustomerId = (customerId:number) => {
+    return this.httpService.get(`${this.baseURL}/get/${customerId}`);
+  }
+
+  public getGstDetailsById = (gstDetailId:number) => {
     return this.httpService.get(`${this.baseURL}/get?id=${gstDetailId}`);
   }
 

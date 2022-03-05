@@ -38,9 +38,9 @@
 
 .example-container {
   position: relative;
-  min-width: 400px;
-  min-height: 500px;
-  max-height: 560px;
+  min-width: 100%;
+  min-height:500px;
+  max-height: 500px;
   overflow: auto;
 }
 

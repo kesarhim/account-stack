@@ -53,8 +53,8 @@
   <div class="row m-0 mt-2" style="padding: 24px;padding-top: 0;padding-bottom: 5px;">
     <div class="col-3">
       <div class="d-flex flex-fill flex-column">
-        <div class="p-2 font-18 link"><label>Email</label></div>
-        <div class="p-2 font-16">{{customer?.email ?? 'N.A'}}</div>
+        <div class="p-2 font-18 "><label>Email</label></div>
+        <div class="p-2 font-16 text-primary">{{customer?.email ?? 'N.A'}}</div>
       </div>
     </div>
     <div class="col-3">
@@ -73,7 +73,7 @@
     <div class="col-3">
       <div class="d-flex flex-fill flex-column">
         <div class="p-2 font-18"><label>D.O.B</label></div>
-        <div class="p-2 font-16">{{customer.dob | date:'mediumDate'}}</div>
+        <div class="p-2 font-16">{{customer?.dob | date:'mediumDate'}}</div>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
     <div class="col-3">
       <div class="d-flex flex-fill flex-column">
         <div class="p-2 font-18"><label>Pincode</label></div>
-        <div class="p-2 font-16">{{customer.pinCode ?? 'N.A'}}</div>
+        <div class="p-2 font-16">{{customer?.pinCode ?? 'N.A'}}</div>
       </div>
     </div>
   </div>
@@ -129,7 +129,7 @@
     <div class="col-3">
       <div class="d-flex flex-fill flex-column">
         <div class="p-2 font-18"><label>Income Tax Password</label></div>
-        <div class="p-2 font-16">{{customer.incomeTaxPassword ?? 'N.A'}}</div>
+        <div class="p-2 font-16">{{customer?.incomeTaxPassword ?? 'N.A'}}</div>
       </div>
     </div>
   </div>

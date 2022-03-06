@@ -13,4 +13,8 @@ export class CustomerService {
      return this.httpService.get(`${this.baseURL}/get?customerId=${customerId}`);
    }
 
+   public getCustomerAccountLedger = (customerId:number) => {
+    return this.httpService.get(`${this.baseURL}/get/ledger/${customerId}`);
+  }
+
 }

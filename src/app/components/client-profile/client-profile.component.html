@@ -75,7 +75,9 @@
         <mat-icon class="mr-2  color-primary-blue">account_balance_wallet</mat-icon>
         Account Ledger
       </ng-template>
-      Content 2
+      <ng-template matTabContent>
+        <app-client-account-ledger-component [customerId]="customerId"></app-client-account-ledger-component>
+      </ng-template>
     </mat-tab>
 
     <mat-tab>

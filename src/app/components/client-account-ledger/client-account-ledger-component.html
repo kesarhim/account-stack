@@ -1,0 +1,62 @@
+<div class="d-flex flex-coloumn" style="height: 500px;max-height: 500px;">
+  <div class="col-6">
+    <div class="d-flex flex-fill flex-column">
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="m-0">Invoice</h2>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Total Fees</th>
+            <th scope="col">By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of accountLedger?.invoices;let index = index">
+            <th scope="row">{{index + 1}}</th>
+            <td>{{invoice?.contextType}}</td>
+            <td>{{invoice?.invoiceDate | date : 'mediumDate'}}</td>
+            <td>{{invoice?.invoiceAmount}}</td>
+            <td>{{invoice?.creator ?? 'N.A'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-6" style="border-left: 2px solid #427bab;">
+    <div class="d-flex flex-fill flex-column">
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="m-0">Payment History</h2>
+      </div>
+
+      <table class="table table-striped">
+        <thead style="">
+          <tr >
+            <th scope="col">No</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Date</th>
+            <th scope="col">By</th>
+            <th scope="col">Payment Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paymentHistory of accountLedger?.paymentHistory;let index = index">
+            <th scope="row">{{index + 1}}</th>
+            <td>{{paymentHistory?.receivedAmount}}</td>
+            <td>{{paymentHistory?.discountOffered}}</td>
+            <td>{{paymentHistory?.receivedDate | date : 'mediumDate'}}</td>
+            <td>{{paymentHistory?.receivedBy}}</td>
+            <td>{{paymentHistory?.receivedMethod}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>

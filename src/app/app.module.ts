@@ -62,6 +62,7 @@ import { ClientGstDetailsComponent } from './components/client-gst-details/clien
 import { ClientOtherWorkDetailsComponent } from './components/client-other-work/client-other-work-details-component';
 import { ClientReceivedPaymentsComponent } from './components/client-received-payments/client-receive-payment-component';
 import { ClientProfileDetailsComponent } from './components/client-profile-detail/client-profile-detail-component';
+import { ClientAccountLedgerComponent } from './components/client-account-ledger/client-account-ledger-component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,8 @@ import { ClientProfileDetailsComponent } from './components/client-profile-detai
     ClientGstDetailsComponent,
     ClientOtherWorkDetailsComponent,
     ClientReceivedPaymentsComponent,
-    ClientProfileDetailsComponent
+    ClientProfileDetailsComponent,
+    ClientAccountLedgerComponent
   ],
   imports: [
     BrowserModule,

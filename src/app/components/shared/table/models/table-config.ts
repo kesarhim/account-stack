@@ -31,5 +31,6 @@ export interface ITableFilter {
 export enum ColumnType {
   SECONDARY,
   PRIMARY,
-  DATE
+  DATE,
+  DATETIME
 }

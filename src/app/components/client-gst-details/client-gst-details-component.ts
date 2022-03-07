@@ -1,5 +1,5 @@
 import { MatPaginator } from '@angular/material/paginator';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AlertService } from '../core/components/alert/alert.service';
@@ -26,9 +26,10 @@ export class ClientGstDetailsComponent implements OnInit {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('editGst') editGstTemplate :TemplateRef<any>;
   selectedCustomerId : number;
   tableConfig: { displayedColumns: ITableColumn[]; };
-  public selectedITR: ITRDetailsDTO;
+  public selectedGst: GSTDetailsDTO;
   dataSource: MatTableDataSource<ITRDetailsDTO>;
 
   constructor(private router: Router,
@@ -78,9 +79,11 @@ export class ClientGstDetailsComponent implements OnInit {
       displayedColumns: tableColumns
     }
   }
-  onEditGSTDetail = (itrDetail: GSTDetailsDTO) => {
-    if (itrDetail) {
-      this.router.navigate(['/home/customer/add/gst'], { queryParams: { id: itrDetail.id } });
+  onEditGSTDetail = (gstDetail: GSTDetailsDTO) => {
+    if (gstDetail) {
+      this.selectedGst = gstDetail;
+      this.drawerService.openDrawer(this.editGstTemplate,'Edit Gst Detail','work');
+   //   this.router.navigate(['/home/customer/add/gst'], { queryParams: { id: itrDetail.id } });
     }
   }
 

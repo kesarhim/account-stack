@@ -9,17 +9,11 @@
   <form [formGroup]="addOtheWorkForm" [ngStyle]="{'margin-top': searchAllowed ? '0px' : '24px'}">
     <div class="form-group">
       <div class="row">
-        <div class="col-sm-4">
-          <label>Name</label>
-          <input formControlName="fullName" class="form-control" placeholder="Client Name" readonly
-            style="text-transform: uppercase" />
-        </div>
-
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <label>Pan Number</label><input formControlName="panNumber" class="form-control" placeholder="*Pan Number" style="text-transform: uppercase"
             readonly />
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <label>Aadhaar Number</label><input formControlName="aadhaarNumber" class="form-control"
             placeholder="*Aadhaar Number (XXXX-XXXX-XXXX)" pattern="^\d{4}-\d{4}-\d{4}$" readonly />
         </div>
@@ -30,8 +24,9 @@
       <div class="row">
 
         <div class="col-sm-6">
-          <label >Client Name <span class="require"> *</span></label> <input formControlName="clientName"  class="form-control"
-            placeholder="Enter client name"  />
+          <label >Client Name <span class="require"> *</span></label>
+          <input formControlName="clientName"  class="form-control"
+            placeholder="Enter client name" [readonly]="selectedCustomer?.id > 0" />
         </div>
 
         <div class="col-sm-6">
@@ -89,6 +84,9 @@
     </div>
 
         <div  style="justify-content: end;display: flex; align-items: flex-end;">
+          <button style="height: 45px;margin-right: 8px;" type="button" id="reset" class="btn btn-secondary action-button" (click)="resetForm()">Reset
+          </button>
+
           <button style="height: 45px;" type="button" id="addNew" class="btn btn-primary action-button" (click)="onSaveWorkDetails()"
           [disabled]="addOtheWorkForm.invalid ">{{ othweWorkDetailId >0 ? 'Update': 'Save'}}
           </button>

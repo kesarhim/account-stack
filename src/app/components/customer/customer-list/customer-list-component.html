@@ -1,11 +1,15 @@
-<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
-  <h2 class="mb-0">
+<div class="row"
+  style="padding-left: 19px;justify-content: space-between;padding-right: 19px;"
+  [ngClass]="{'mt-2': !allowAddNewClient}">
+  <h2 class="mb-0" *ngIf="allowAddNewClient">
     Clients
     <button mat-mini-fab color="primary" (click)="onAddCandidate()">
       <mat-icon>add</mat-icon>
     </button>
   </h2>
-  <mat-slide-toggle color="primary"
+  <mat-slide-toggle
+      *ngIf="allowAddNewClient"
+      color="primary"
       [(ngModel)]="showPendingPayments"
       (toggleChange)="showOnlyPendingPayment()">{{showPendingPayments ? 'Show All' : 'Show Pending Payments'}}</mat-slide-toggle>
 </div>

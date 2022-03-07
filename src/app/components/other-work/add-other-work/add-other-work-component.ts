@@ -15,36 +15,41 @@ import { feesPaidValidator } from '../../validators/custom-validators';
 @Component({
   selector: 'app-add-other-work-component',
   templateUrl: './add-other-work-component.html',
-  styleUrls:['./add-other-work-component.css']
+  styleUrls: ['./add-other-work-component.css']
 
 })
 
 export class AddOtherWorkComponent implements OnInit {
   @Input() searchAllowed: boolean = true;
-  @Input() showTitle:boolean = true;
-  @Input() isDrawerMode : boolean = false;
+  @Input() showTitle: boolean = true;
+  @Input() isDrawerMode: boolean = false;
 
   @Input() set customer(value: Customer) {
     if (value) {
       this.onSelectCustomer(value);
     }
   };
-  public addOtheWorkForm:FormGroup;
-  private selectedCustomer:Customer | null;
-  public othweWorkDetailId:number;
+
+  @Input() set otherWorkId(value: number) {
+    this.othweWorkDetailId = value;
+    this.getOtherWorkDetails();
+  }
+  public addOtheWorkForm: FormGroup;
+  public selectedCustomer: Customer | null;
+  public othweWorkDetailId: number;
   private loggedInUser: User;
-  private otheWorkDetails : OtherWorkDetailDTO | null;
-  constructor(private formbuilder:FormBuilder,
-    private otherWorkDetailService : OtherWorkDetailService,private loaderService:LoaderService,
-    private alertService:AlertService, private router: Router, private route: ActivatedRoute,
-    private storageService:StorageService,
-    private drawerService : DrawerService) {
-       this.creatForm();
-     }
+  private otheWorkDetails: OtherWorkDetailDTO | null;
+  constructor(private formbuilder: FormBuilder,
+    private otherWorkDetailService: OtherWorkDetailService, private loaderService: LoaderService,
+    private alertService: AlertService, private router: Router, private route: ActivatedRoute,
+    private storageService: StorageService,
+    private drawerService: DrawerService) {
+    this.creatForm();
+  }
 
   ngOnInit() {
- //   this.creatForm();
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    //   this.creatForm();
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
@@ -52,24 +57,28 @@ export class AddOtherWorkComponent implements OnInit {
       this.othweWorkDetailId = value['id'];
     });
 
-    if(this.othweWorkDetailId > 0){
+    this.getOtherWorkDetails();
+  }
+
+  getOtherWorkDetails = () => {
+    if (this.othweWorkDetailId > 0) {
       this.searchAllowed = false;
       this.loaderService.show();
-      this.otherWorkDetailService.getOtherWorkDetailsById(this.othweWorkDetailId).subscribe((result:any) => {
+      this.otherWorkDetailService.getOtherWorkDetailsById(this.othweWorkDetailId).subscribe((result: any) => {
         this.loaderService.hide();
         this.otheWorkDetails = result?.response;
         this.patchOtherWorkDetails();
 
-      },err => {
+      }, err => {
         this.loaderService.hide();
       })
     }
-   }
+  }
 
-   patchOtherWorkDetails = () => {
-     if(this.otheWorkDetails){
-       this.addOtheWorkForm.patchValue({
-        fullName: this.otheWorkDetails.fullName,
+  patchOtherWorkDetails = () => {
+    if (this.otheWorkDetails) {
+      this.addOtheWorkForm.patchValue({
+        //  fullName: this.otheWorkDetails.fullName,
         panNumber: this.otheWorkDetails.panNo,
         aadhaarNumber: this.otheWorkDetails.aadhaarNo,
         clientName: this.otheWorkDetails.clientName,
@@ -77,24 +86,24 @@ export class AddOtherWorkComponent implements OnInit {
         careOf: this.otheWorkDetails.careOf,
         fileDate: this.otheWorkDetails.fileDate,
         totalFees: this.otheWorkDetails.totalFees,
-       // feesPaid: this.otheWorkDetails.feesPaid,
+        // feesPaid: this.otheWorkDetails.feesPaid,
         remark: this.otheWorkDetails.remark,
-       })
-     }
-   }
+      })
+    }
+  }
 
   creatForm = () => {
     let currdate = new Date();
     this.addOtheWorkForm = this.formbuilder.group({
-      fullName: [null],
+      //   fullName: [null],
       panNumber: [null],
       aadhaarNumber: [null],
-      clientName: [null,Validators.required],
-      work:[null,Validators.required],
+      clientName: [null, Validators.required],
+      work: [null, Validators.required],
       careOf: [null, Validators.required],
       fileDate: [currdate, Validators.required],
       totalFees: [null, Validators.required],
-    //  feesPaid: [null,feesPaidValidator()],
+      //  feesPaid: [null,feesPaidValidator()],
       remark: [null],
     });
 
@@ -106,7 +115,8 @@ export class AddOtherWorkComponent implements OnInit {
       fullName: this.selectedCustomer?.fullName,
       panNumber: this.selectedCustomer?.panNo,
       aadhaarNumber: this.selectedCustomer?.aadhaarNo,
-      mobileNumber: this.selectedCustomer?.mobileNo
+      mobileNumber: this.selectedCustomer?.mobileNo,
+      clientName: this.selectedCustomer.fullName
     });
   }
 
@@ -118,7 +128,7 @@ export class AddOtherWorkComponent implements OnInit {
     if (this.addOtheWorkForm.valid) {
       this.loaderService.show();
       let otherWorkDetails: OtherWorkDetail = this.addOtheWorkForm.value;
-      if(this.selectedCustomer){
+      if (this.selectedCustomer) {
         otherWorkDetails.customerId = this.selectedCustomer.id;
       }
 
@@ -132,9 +142,9 @@ export class AddOtherWorkComponent implements OnInit {
         this.alertService.success('Work Details Saved Successfully');
         this.selectedCustomer = null;
         this.resetForm();
-        if(this.isDrawerMode){
+        if (this.isDrawerMode) {
           this.drawerService.closeDrawer();
-        }else {
+        } else {
           this.goToviewOtherWorkList();
         }
       }, (err: any) => {
@@ -146,7 +156,7 @@ export class AddOtherWorkComponent implements OnInit {
     }
   }
 
-  goToviewOtherWorkList =() => {
+  goToviewOtherWorkList = () => {
     this.router.navigateByUrl('/home/other-work-list')
   }
 

@@ -1,8 +1,12 @@
 <div class="d-flex flex-coloumn" style="height: 500px;max-height: 500px;">
   <div class="col-6">
     <div class="d-flex flex-fill flex-column">
-      <div class="d-flex justify-content-center align-items-center">
+      <div class="d-flex justify-content-around align-items-center p-2">
+
         <h2 class="m-0">Invoice</h2>
+        <div class="alert-primary font-16 ml-4 p-2" role="alert">
+          Total Bill : &nbsp; {{totalBill}}
+        </div>
       </div>
 
       <table class="table table-striped">
@@ -29,8 +33,11 @@
   </div>
   <div class="col-6" style="border-left: 2px solid #427bab;">
     <div class="d-flex flex-fill flex-column">
-      <div class="d-flex justify-content-center align-items-center">
+      <div class="d-flex justify-content-around align-items-center p-2">
         <h2 class="m-0">Payment History</h2>
+        <div class="alert-primary font-16 ml-4 p-2" role="alert">
+           Received Amount : &nbsp; {{totalReceivedAmount}}
+        </div>
       </div>
 
       <table class="table table-striped">

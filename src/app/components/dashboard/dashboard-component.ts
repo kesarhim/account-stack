@@ -116,6 +116,14 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  goToAccountSummary = () =>{
+    this.router.navigateByUrl('/home/account-summary');
+  }
+
+  gotoAllActiveActive = () => {
+    this.router.navigateByUrl('/home/customer/all');
+  }
+
   onSelectCard = (): void => {
     this.router.navigateByUrl('/home/add/user');
   }

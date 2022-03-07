@@ -3,3 +3,12 @@
 <div class="">
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig" [allowSearch]="false"></app-table-component>
 </div>
+
+<ng-template #editITR>
+  <app-customer-add-itr [searchAllowed]="false"
+      [showTitle]="false"
+      [customer]="selectedCustomer"
+      [isDrawerMode]="true"
+      [itrId]="selectedITR?.id">
+  </app-customer-add-itr>
+</ng-template>

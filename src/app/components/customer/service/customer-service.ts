@@ -13,6 +13,10 @@ export class CustomerService {
      return this.httpService.get(`${this.baseURL}/get?customerId=${customerId}`);
    }
 
+   public getCustomersByIds = (customerIds:Array<number>) => {
+    return this.httpService.post(`${this.baseURL}/get/customers`,customerIds);
+  }
+
    public getCustomerAccountLedger = (customerId:number) => {
     return this.httpService.get(`${this.baseURL}/get/ledger/${customerId}`);
   }

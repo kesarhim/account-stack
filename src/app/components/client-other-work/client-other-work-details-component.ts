@@ -1,5 +1,5 @@
 import { ColumnType, ITableActionLinks, ITableColumn, ITableConfig } from './../shared/table/models/table-config';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { AlertService } from '../core/components/alert/alert.service';
 import { LoaderService } from '../core/components/loader/loader.service';
 import { OthweWorkDetailService } from '../customer/service/other-work-detail-service';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
+import { DrawerService } from '../shared/drawer/drawer.service';
 
 @Component({
   selector: 'app-client-other-work-details-component',
@@ -29,13 +30,16 @@ export class ClientOtherWorkDetailsComponent implements OnInit {
       this.getCustomerOtherWorkDetails(value);
     }
   }
+
+  @ViewChild('editOtherWork') editOtherWorkTemplate:TemplateRef<any>;
   private selectedCustomerId :number;
   constructor(
     private loaderService: LoaderService,
     private alertService: AlertService,
     private router: Router,
     private dialogService: ConfirmationDialogService,
-    private otherWorkService: OthweWorkDetailService) {
+    private otherWorkService: OthweWorkDetailService,
+    private drawerService:DrawerService) {
       this.createTableConfiguration();
   }
 
@@ -85,12 +89,10 @@ export class ClientOtherWorkDetailsComponent implements OnInit {
 
   onEditOtherDetail = (otherWorkDetail: OtherWorkDetailDTO) => {
     if (otherWorkDetail) {
-      this.router.navigate(['/home/add/other-work'], { queryParams: { id: otherWorkDetail.id } });
+      this.selectedOtherWork = otherWorkDetail;
+      this.drawerService.openDrawer(this.editOtherWorkTemplate,'Edit Other Work','work');
+      //this.router.navigate(['/home/add/other-work'], { queryParams: { id: otherWorkDetail.id } });
     }
-  }
-
-  onAddOtherWork = () => {
-    this.router.navigate(['/home/add/other-work']);
   }
 
   onDeleteOtherWork = (data: OtherWorkDetailDTO) => {

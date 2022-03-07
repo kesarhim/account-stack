@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.show-pending-toggle {
+  position: absolute;
+}
+
 .mat-header-cell {
   font-size: 15px;
   color: #fff;

@@ -63,6 +63,7 @@ import { ClientOtherWorkDetailsComponent } from './components/client-other-work/
 import { ClientReceivedPaymentsComponent } from './components/client-received-payments/client-receive-payment-component';
 import { ClientProfileDetailsComponent } from './components/client-profile-detail/client-profile-detail-component';
 import { ClientAccountLedgerComponent } from './components/client-account-ledger/client-account-ledger-component';
+import { AccountSummaryComponent } from './components/account-summary/acccount-summary-component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +100,8 @@ import { ClientAccountLedgerComponent } from './components/client-account-ledger
     ClientOtherWorkDetailsComponent,
     ClientReceivedPaymentsComponent,
     ClientProfileDetailsComponent,
-    ClientAccountLedgerComponent
+    ClientAccountLedgerComponent,
+    AccountSummaryComponent
   ],
   imports: [
     BrowserModule,

@@ -20,4 +20,5 @@ export class OtherWorkDetailDTO {
   lastName:string;
   mobileNo:string;
   aadhaarNo:string;
+  discountOffered:number;
 }

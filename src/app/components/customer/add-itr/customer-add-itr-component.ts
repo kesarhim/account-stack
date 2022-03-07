@@ -26,6 +26,10 @@ export class CustomerAddITRComponent implements OnInit {
   @Input() searchAllowed: boolean = true;
   @Input() showTitle: boolean = true;
   @Input() isDrawerMode : boolean = false;
+  @Input() set itrId (value:number){
+    this.itrDetailId =value;
+    this.getITRDetails();
+  }
   @ViewChild('receivePaymentTemp') receivePaymentTemplate:TemplateRef<any>;
   showFeesDetails: boolean = false;
   @Input() set customer(value: Customer) {
@@ -58,6 +62,10 @@ export class CustomerAddITRComponent implements OnInit {
       this.searchAllowed = false;
     }
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
+    this.getITRDetails();
+  }
+
+  getITRDetails = () => {
     if (this.itrDetailId > 0) {
       this.loaderService.show();
       this.itrDetailService.getITRDetailsById(this.itrDetailId).subscribe((result: any) => {

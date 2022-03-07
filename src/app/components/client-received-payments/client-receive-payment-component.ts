@@ -24,12 +24,18 @@ export class ClientReceivedPaymentsComponent implements OnInit {
   public selectedOtherWork: OtherWorkDetailDTO;
   public showAddItrDrawer: boolean = false;
   public tableConfig: ITableConfig;
+  @Input() set invoiceId (value :number){
+    if(value){
+      this.getCustomerReceivedPaymentsByInvoiceId(value);
+    }
+  }
   @Input() set customerId(value: number) {
     if (value > 0) {
       this.selectedCustomerId = value;
       this.getCustomerReceivedPayments(value);
     }
   }
+  @Input() actionAllowed:boolean  = false;
   private selectedCustomerId :number;
   constructor(
     private loaderService: LoaderService,
@@ -49,15 +55,16 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     let tableColumns: Array<ITableColumn> = new Array<ITableColumn>();
     let actionLinks: Array<ITableActionLinks> = new Array<ITableActionLinks>();
 
-    actionLinks.push({ linkName: 'Edit', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditOtherDetail($event) });
-    actionLinks.push({ linkName: 'Delete', icon: 'delete', showIcon: true, method: ($event: any) => this.onDeleteOtherWork($event) });
-    actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => {}});
+    if(this.actionAllowed){
+      actionLinks.push({ linkName: 'Edit', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditOtherDetail($event) });
+      actionLinks.push({ linkName: 'Delete', icon: 'delete', showIcon: true, method: ($event: any) => this.onDeleteOtherWork($event) });
+      actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => {}});
+      tableColumns.push({ columnDef: 'action', header: 'Action', name: 'action', type: ColumnType.PRIMARY, actions: actionLinks });
+    }
 
-
-    tableColumns.push({ columnDef: 'action', header: 'Action', name: 'action', type: ColumnType.PRIMARY, actions: actionLinks });
 
     tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount' });
-    tableColumns.push({ columnDef: 'receivedDate', header: 'Received Date', name: 'receivedDate', type: ColumnType.DATE });
+    tableColumns.push({ columnDef: 'receivedDate', header: 'Received Date', name: 'receivedDate', type: ColumnType.DATETIME });
     tableColumns.push({ columnDef: 'receivedBy', header: 'Received By', name: 'receivedBy' });
     tableColumns.push({ columnDef: 'receivedMethod', header: 'Payment Method', name: 'receivedMethod' });
     tableColumns.push({ columnDef: 'chequeNo', header: 'Cheque No', name: 'chequeNo', showUpperCase: true });
@@ -69,6 +76,19 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     this.tableConfig = {
       displayedColumns: tableColumns
     }
+  }
+
+  getCustomerReceivedPaymentsByInvoiceId = (invoiceId: number) => {
+    this.loaderService.show();
+    this.receivePaymentService.getReceiveDetailsByInvoiceId(invoiceId).subscribe((result: any) => {
+      if (result && result.response) {
+        this.dataSource = new MatTableDataSource(result.response);
+      }else {
+        this.dataSource = new MatTableDataSource(undefined);
+      }
+      this.loaderService.hide();
+
+    }, err => this.loaderService.hide())
   }
 
   getCustomerReceivedPayments = (customerId: number) => {

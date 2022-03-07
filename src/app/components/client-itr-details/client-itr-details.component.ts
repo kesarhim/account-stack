@@ -1,5 +1,5 @@
 import { MatPaginator } from '@angular/material/paginator';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AlertService } from '../core/components/alert/alert.service';
@@ -27,7 +27,7 @@ export class ClientItrDetailsComponent implements OnInit {
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  @ViewChild('editITR') editITRTemplate :TemplateRef<any>;
   tableConfig: { displayedColumns: ITableColumn[]; };
   public selectedITR: ITRDetailsDTO;
   dataSource: MatTableDataSource<ITRDetailsDTO>;
@@ -82,7 +82,9 @@ export class ClientItrDetailsComponent implements OnInit {
 
   onEditITRDetail = (itrDetail: ITRDetailsDTO) => {
     if (itrDetail) {
-      this.router.navigate(['/home/customer/add/itr'], { queryParams: { id: itrDetail.id } });
+      this.selectedITR = itrDetail;
+      this.drawerService.openDrawer(this.editITRTemplate,'Edit ITR','work')
+      //this.router.navigate(['/home/customer/add/itr'], { queryParams: { id: itrDetail.id } });
     }
   }
 

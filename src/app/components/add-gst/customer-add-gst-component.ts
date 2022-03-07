@@ -32,6 +32,10 @@ export class CustomerAddGSTComponent implements OnInit {
   @Input() searchAllowed: boolean = true;
   @Input() showTitle:boolean = true;
   @Input() isDrawerMode : boolean = false;
+  @Input() set gstId(value : number){
+    this.gstDetailId = value;
+    this.getGstDetail();
+  }
   @Input() set customer(value: Customer) {
     if (value) {
       this.onSelectCustomer(value);
@@ -62,6 +66,10 @@ export class CustomerAddGSTComponent implements OnInit {
     if (this.gstDetailId > 0) {
       this.searchAllowed = false;
     }
+    this.getGstDetail();
+  }
+
+  getGstDetail = () => {
     if (this.gstDetailId > 0) {
       this.loaderService.show();
       this.gstDetailService.getGstDetailsById(this.gstDetailId).subscribe((result: any) => {

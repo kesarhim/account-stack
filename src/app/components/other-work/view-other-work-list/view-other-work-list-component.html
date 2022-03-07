@@ -1,6 +1,6 @@
-<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;">
-  <div class="col-6">
-    <h2>
+<div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;"
+[ngClass]="{'mt-2': !allowAddNew}">
+    <h2 class="mb-0" *ngIf="allowAddNew">
        Other Works
       <span>
         <button mat-mini-fab color="primary" (click)="onAddOtherWork()">
@@ -8,9 +8,23 @@
         </button>
       </span>
     </h2>
+    <mat-slide-toggle color="primary"
+      *ngIf="allowAddNew"
+      [(ngModel)]="showPendingPayments"
+      (toggleChange)="showOnlyPendingPayment()">{{showPendingPayments ? 'Show All' : 'Show Pending Payments'}}</mat-slide-toggle>
   </div>
-</div>
 <div class="">
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig"></app-table-component>
 </div>
+
+
+<ng-template #receivePayment>
+  <app-receive-payment-component
+    [pendingAmount]="selectedITR?.balanceAmount"
+    [paymentDetails]="paymentDetail"></app-receive-payment-component>
+</ng-template>
+
+<ng-template #paymentHistory>
+  <app-client-receive-payment-component [invoiceId]="selectedOtherWork?.invoiceId" [actionAllowed]="false"></app-client-receive-payment-component>
+</ng-template>
 

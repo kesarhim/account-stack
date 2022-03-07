@@ -1,3 +1,15 @@
 <div class="">
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig" [allowSearch]="false"></app-table-component>
 </div>
+
+<ng-template #editOtherWork>
+  <app-add-other-work-component
+    [searchAllowed]="false"
+    [showTitle]="false"
+    [customer]="selectedCustomer"
+    [isDrawerMode]="true"
+    [otherWorkId]="selectedOtherWork?.id"
+    >
+
+  </app-add-other-work-component>
+</ng-template>

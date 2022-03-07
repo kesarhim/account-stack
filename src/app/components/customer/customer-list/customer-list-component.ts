@@ -1,4 +1,5 @@
-import { isFunction } from 'lodash';
+import { CustomerService } from './../service/customer-service';
+import { isFunction, result } from 'lodash';
 import { Subscription } from 'rxjs';
 import { DrawerService } from './../../shared/drawer/drawer.service';
 import { ITableConfig, ITableColumn, ColumnType, ITableActionLinks } from './../../shared/table/models/table-config';
@@ -7,7 +8,7 @@ import { AlertService } from './../../core/components/alert/alert.service';
 import { LoaderService } from './../../core/components/loader/loader.service';
 import { HttpService } from './../../core/services/http.service';
 import { Customer } from './../create/models/customer-model';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -21,9 +22,6 @@ import { PaymentDetails } from '../../payment/models/payment.model';
 })
 
 export class CustomerListComponent implements OnInit {
-
-  displayedColumns: string[] = ['fullName', 'panNo', 'aadhaarNo', 'fatherName', 'email', 'mobileNo', 'dob', 'street',
-    'city', 'pinCode',];
   dataSource: MatTableDataSource<Customer>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,6 +31,12 @@ export class CustomerListComponent implements OnInit {
   @ViewChild('addOtherWork') addOtherWorkTemplate: TemplateRef<any>;
   @ViewChild('receivePaymentTemp') receivePaymentTemplate: TemplateRef<any>;
 
+  public selectedCustomerIds: Array<number> | null;
+  @Input() set customerIds(value: Array<number>) {
+    this.selectedCustomerIds = value;
+  }
+  @Input() allowAddNewClient: boolean = true;
+
   public paymentDetail: PaymentDetails | null;
   public selectedCustomer: Customer;
   public showAddItrDrawer: boolean = false;
@@ -40,26 +44,36 @@ export class CustomerListComponent implements OnInit {
   public customerTableConfig: ITableConfig;
   public showPendingPayments: boolean = false;
   private drawerSubscription: Subscription;
+
   constructor(private httpService: HttpService,
     private loaderService: LoaderService,
-    private alertService: AlertService,
+    private customerService: CustomerService,
     private router: Router, private drawerService: DrawerService) {
   }
 
   ngOnInit() {
     this.createTableConfiguration();
     this.drawerSubscription = this.drawerService.drawerSubject.subscribe(value => {
-      if(!value){
-        this.getAllCustomers(25);
+      if (!value) {
+        if (this.selectedCustomerIds && this.selectedCustomerIds.length> 0){
+          this.getAllCustomersByIds();
+        }else {
+          this.getAllCustomers(25);
+        }
       }
     });
-    this.getAllCustomers(25);
+    if (this.selectedCustomerIds &&this.selectedCustomerIds.length> 0){
+      this.getAllCustomersByIds();
+    }else {
+      this.getAllCustomers(25);
+    }
   }
 
   ngOnDestroy(): void {
     if (this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)) {
       this.drawerSubscription.unsubscribe();
     }
+    this.selectedCustomerIds = null;
   }
 
   createTableConfiguration = () => {
@@ -115,6 +129,25 @@ export class CustomerListComponent implements OnInit {
     return null;
   }
 
+  getAllCustomersByIds = () => {
+    this.loaderService.show();
+    if (this.selectedCustomerIds && this.selectedCustomerIds.length > 0) {
+      this.customerService.getCustomersByIds(this.selectedCustomerIds).subscribe((result: any) => {
+        let data: Array<Customer> = result?.response;
+        if (data?.length > 0) {
+          data = data.sort((a, b) => {
+            if (a.firstName > b.firstName) return 1;
+            if (a.firstName < b.firstName) return -1;
+            return 0;
+          })
+        }
+        this.customers = data;
+        this.dataSource = new MatTableDataSource(data);
+      }, err => this.loaderService.hide())
+
+    }
+  }
+
   getAllCustomers = (limitTo = 25) => {
     this.loaderService.show();
     this.httpService.get(`/Customer/GetAll?limitTo= ${limitTo}`).subscribe((result: any) => {
@@ -134,7 +167,7 @@ export class CustomerListComponent implements OnInit {
         this.customers = data;
         this.dataSource = new MatTableDataSource(data);
 
-      //  this.showOnlyPendingPayment();
+        //  this.showOnlyPendingPayment();
       }
       this.loaderService.hide();
     }, err => {

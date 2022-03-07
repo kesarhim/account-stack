@@ -6,7 +6,7 @@
       <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
     </div>
   </div>
-  <form [formGroup]="addGSTForm">
+  <form [formGroup]="addGSTForm" [ngStyle]="{'margin-top': searchAllowed ? '0px' : '24px'}">
     <div class="form-group">
       <div class="row">
         <div class="col-sm-4">

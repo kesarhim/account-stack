@@ -1,7 +1,7 @@
 import { DrawerService } from './../../shared/drawer/drawer.service';
 import { LoaderService } from './../../core/components/loader/loader.service';
 import { AlertService } from './../../core/components/alert/alert.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PaymentDetails } from '../models/payment.model';
 import { ReceivePaymentService } from '../service/receive-payment-service';
@@ -23,13 +23,6 @@ export class ReceivePaymentComponent implements OnInit {
   @Input() paymentDetails: PaymentDetails;
   @Input() showTitle: boolean = false;
 
-  @Input() set pendingAmount(value: number) {
-    if (value) {
-      this.receivePaymentForm.patchValue({
-        amount: value
-      })
-    }
-  }
   constructor(
     private formBuilder: FormBuilder,
     private receivePaymentService: ReceivePaymentService,
@@ -41,6 +34,14 @@ export class ReceivePaymentComponent implements OnInit {
     this.creatForm();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes && this.paymentDetails){
+      this.receivePaymentForm.patchValue({
+        amount:this.paymentDetails.balanceAmount
+      });
+    }
+
+  }
   ngOnInit() {
     this.loggedInUser = this.storageService.get(StorageKeys.CURRENT_USER);
     if(this.loggedInUser){

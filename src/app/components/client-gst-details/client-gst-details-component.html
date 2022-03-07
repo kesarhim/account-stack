@@ -1,3 +1,13 @@
 <div class="">
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig" [allowSearch]="false"></app-table-component>
 </div>
+
+<ng-template #editGst>
+  <app-customer-add-gst
+  [searchAllowed]="false"
+  [showTitle]="false"
+  [customer]="selectedCustomer"
+  [gstId]="selectedGst?.id"
+  [isDrawerMode]="true">
+  </app-customer-add-gst>
+</ng-template>

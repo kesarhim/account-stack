@@ -72,6 +72,14 @@
           </div>
 
           <ng-template #other_row>
+            <ng-container *ngIf="column.type===coloumnType.DATETIME;else third">
+              {{ getPropertyValue(row,column?.name) | date : 'medium'}}
+            </ng-container>
+
+
+          </ng-template>
+
+          <ng-template #third>
             {{ column.showUpperCase ? ( getPropertyValue(row,column?.name) ?? 'N.A' | uppercase) :
             getPropertyValue(row,column?.name) ?? 'N.A'}}
           </ng-template>

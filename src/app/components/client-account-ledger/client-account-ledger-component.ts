@@ -18,7 +18,9 @@ export class ClientAccountLedgerComponent implements OnInit {
     }
   };
   public selectedCustomerId: number;
-  public accountLedger: AccountLedgerDTO;
+  public accountLedger: AccountLedgerDTO  | null;
+  public totalBill : number = 0;
+  public totalReceivedAmount : number = 0;
   constructor(
     private customerService: CustomerService,
     private loaderService : LoaderService,
@@ -34,9 +36,22 @@ export class ClientAccountLedgerComponent implements OnInit {
       this.customerService.getCustomerAccountLedger(customerId).subscribe((result: any) => {
         if (result) {
           this.accountLedger = result.response;
+          this.totalBill = 0;
+          this.totalReceivedAmount = 0;
+           if(this.accountLedger && this.accountLedger?.invoices?.length > 0){
+              this.accountLedger.invoices.forEach(value => {
+                this.totalBill += value?.invoiceAmount;
+              });
+           }
+           if(this.accountLedger && this.accountLedger?.paymentHistory?.length > 0){
+            this.accountLedger.paymentHistory.forEach(payment => {
+              this.totalReceivedAmount += (payment?.receivedAmount + payment.discountOffered);
+            });
+         }
           this.loaderService.hide();
         }
       },err => {
+        this.accountLedger = null;
         this.loaderService.hide();
         this.alertService.error(err?.error?.message);
       });

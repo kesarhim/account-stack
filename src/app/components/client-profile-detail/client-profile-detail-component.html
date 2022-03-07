@@ -45,7 +45,7 @@
     <div class="col-3">
       <div class="d-flex flex-fill flex-column">
         <div class="p-2 font-18"><label>Mobile No</label></div>
-        <div class="p-2 font-16">{{customer?.mobileNo ?? 'N.A'}}</div>
+        <div class="p-2 font-16"> <span *ngIf="customer?.mobileNo">+91-</span> {{customer?.mobileNo ?? 'N.A'}}</div>
       </div>
     </div>
   </div>

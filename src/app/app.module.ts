@@ -1,3 +1,4 @@
+import { TotalPendingPaymentComponent } from './components/total-pending-payments/total-pending-payments-component';
 import { ReceivePaymentComponent } from './components/payment/add-payment/receive-payment-component';
 import { AddOtherWorkComponent } from './components/other-work/add-other-work/add-other-work-component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -103,7 +104,8 @@ import { TodayReceivedPayments } from './components/today-received-payment/today
     ClientProfileDetailsComponent,
     ClientAccountLedgerComponent,
     TodayAccountSummaryComponent,
-    TodayReceivedPayments
+    TodayReceivedPayments,
+    TotalPendingPaymentComponent
   ],
   imports: [
     BrowserModule,

@@ -116,6 +116,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  goToTotalPendingPayment =() => {
+    this.router.navigateByUrl(`/home/total-pending-payments`);
+  }
+
   gotoTodayReceivedPayment = () => {
     this.router.navigateByUrl(`/home/today-received-payments`);
   }

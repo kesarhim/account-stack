@@ -133,7 +133,7 @@ export class CustomerListComponent implements OnInit {
     this.loaderService.show();
     if (this.selectedContext && this.selectedContext.length > 0) {
       this.customerService.getCustomersDetailsByContext(this.selectedContext).subscribe((result: any) => {
-        let data: Array<Customer> = result?.response;
+        let data: Array<Customer> = result?.response?.customers;
         if (data?.length > 0) {
           data = data.sort((a, b) => {
             if (a.firstName > b.firstName) return 1;
@@ -145,7 +145,6 @@ export class CustomerListComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.loaderService.hide();
       }, err => this.loaderService.hide())
-
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="row" style="padding-left: 19px;justify-content: space-between;padding-right: 19px;"
-[ngClass]="{'mt-2': !allowAddNew}">
+[ngClass]="{'mt-2': !allowAddNew}" *ngIf="showTitle">
     <h2 class="mb-0" *ngIf="allowAddNew">
        Other Works
       <span>

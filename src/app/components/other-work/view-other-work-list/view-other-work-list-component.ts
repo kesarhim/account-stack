@@ -33,7 +33,13 @@ export class ViewOtherWorkListComponent implements OnInit {
   public showPendingPayments: boolean = false;
   public otheWorks:Array<OtherWorkDetailDTO>;
 
+  @Input() showTitle: boolean = true;
   @Input() allowAddNew :boolean = true;
+  @Input() set otherWorkList (value : Array<OtherWorkDetailDTO>){
+      this.otheWorks = value;
+      this.loadTableData();
+  }
+  @Input() fetchServer : boolean = true;
   @ViewChild('paymentHistory') paymentHistoryTemplate: TemplateRef<any>;
   @ViewChild('receivePayment') receivePaymentTemplate: TemplateRef<any>;
   constructor(
@@ -43,12 +49,13 @@ export class ViewOtherWorkListComponent implements OnInit {
     private dialogService: ConfirmationDialogService,
     private otherWorkService: OthweWorkDetailService,
     private drawerService:DrawerService) {
-
+      this.createTableConfiguration();
   }
 
   ngOnInit() {
-    this.createTableConfiguration();
-    this.getOtheWorkDetailsDetails(25);
+    if(this.fetchServer){
+      this.getOtheWorkDetailsDetails(25);
+    }
   }
 
   getPaymentDetails = (itrDetails: OtherWorkDetailDTO) : PaymentDetails | null=> {
@@ -119,16 +126,19 @@ export class ViewOtherWorkListComponent implements OnInit {
     this.loaderService.show();
     this.otherWorkService.getAllOtherWorkDetailList(limitTo).subscribe((result: any) => {
       this.otheWorks = result?.response;
-      if (result?.response && result?.response.length > 0) {
-        let data: Array<OtherWorkDetailDTO> = result?.response;
-        this.dataSource = new MatTableDataSource(data);
-      } else {
-        this.dataSource = new MatTableDataSource(undefined);
-      }
+      this.loadTableData();
       this.loaderService.hide();
     }, err => {
       this.loaderService.hide();
     })
+  }
+
+  loadTableData = () => {
+    if (this.otheWorks && this.otheWorks.length > 0) {
+      this.dataSource = new MatTableDataSource(this.otheWorks);
+    } else {
+      this.dataSource = new MatTableDataSource(undefined);
+    }
   }
 
   onEditOtherDetail = (otherWorkDetail: OtherWorkDetailDTO) => {

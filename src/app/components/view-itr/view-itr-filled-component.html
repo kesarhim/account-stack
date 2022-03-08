@@ -9,11 +9,11 @@
       </span>
     </h2>
   </div>
-  <div class="col-6 row assesment-year">
-    <div class="col-3">
-      <span style="margin-left: 17px;">Assesment Year :</span>
+  <div class="col-6 row assesment-year" style="margin-top: 11px;">
+    <div class="col-5">
+      <span style="margin-left: 17px; font-size:16px; margin-top: 10px;" >Assesment Year :</span>
     </div>
-    <div class="col-9">
+    <div class="col-7" >
        <app-catalog-loader-component [catId]="'YEAR'" placeHolder="Select Assesment Year"
       (onChangeSelection)="onSelectAssesmentYear($event)" [ngModel]="selectedAssesmentYear"></app-catalog-loader-component>
     </div>

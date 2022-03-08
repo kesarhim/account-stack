@@ -1,104 +1,80 @@
-<div class="">
-  <h1>Payment</h1>
-  <div class="row g-6 mb-6">
-    <div class="col-xl-6 col-sm-6 col-12">
-      <div class="card shadow border-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <span class="h6 font-semibold text-muted text-sm d-block mb-2">Himanshu Kesarwani</span>
-              <span class="font-bold mb-0">Pan No : BKQPK8734C</span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"> <i
-                  class="bi bi-credit-card"></i> </div>
-            </div>
-          </div>
-          <div class="mt-2 mb-0 text-sm"> <span class="badge badge-pill bg-soft-success text-success me-2"> <i
-                class="bi bi-arrow-up me-1"></i>13% </span> <span class="text-nowrap text-xs text-muted">Since last
-              month</span> </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-6 col-sm-6 col-12">
-      <div class="card shadow border-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <span class="h6 font-semibold text-muted text-sm d-block mb-2">Himanshu Kesarwani</span>
-              <span class="font-bold mb-0">Pan No : BKQPK8734C</span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle"> <i
-                  class="bi bi-credit-card"></i> </div>
-            </div>
-          </div>
-          <div class="mt-2 mb-0 text-sm"> <span class="badge badge-pill bg-soft-success text-success me-2"> <i
-                class="bi bi-arrow-up me-1"></i>13% </span> <span class="text-nowrap text-xs text-muted">Since last
-              month</span> </div>
-        </div>
-      </div>
-    </div>
-
+<div class="row">
+  <div class="col-6 d-flex" style="flex-direction: column;" >
+    <h2 class="m-0">Payment History</h2>
+  </div>
+  <div class="col-6">
+    <app-search-component (onSelectClient)="onSelectCustomer($event)"></app-search-component>
   </div>
 </div>
-<div class=" mt-5 mb-5">
 
-  <div class="row g-0">
-    <div class="col-md-12 border-right">
-      <div class="p-3 bg-white">
-        <div class="d-flex justify-content-between align-items-center">
-          <h6 class="heading1">Recently Sold Items</h6>
-          <div class="d-flex flex-row align-items-center text-muted"> <span class=" days mr-2">Last 7 Days</span> <i
-              class="fa fa-angle-down"></i> </div>
+<mat-card *ngIf="selectedCustomer?.id >0" class="p-0">
+  <mat-card-header class="mt-2" style="padding-top: 10px;">
+    <mat-card-title class="d-flex flex-row flex-fill">
+      <div class="d-flex flex-row">
+        <span>{{selectedCustomer?.fullName}}</span>
+        <div class="alert-warning font-16 ml-4 p-2" role="alert">
+          <span class="d-flex justify-content-center">Pending Amount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{selectedCustomer?.balanceAmount}}
+          </span>
         </div>
-        <div class="table-responsive">
-          <div class="demo-button-container">
-            <button  (click)="addData()" class="btn btn-primary demo-button">
-               Receive Payment
-            </button>
-            <button mat-raised-button [disabled]="!dataSource.length"  (click)="removeData()" class="demo-button btn btn-primary">
-               Delete Payment
-            </button>
-          </div>
-          <mat-tab-group [color]="'primary'" [backgroundColor]="'primary'">
-            <mat-tab label="All">
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef>No.</th>
-                  <td mat-cell *matCellDef="let element">{{element.position}}</td>
-                </ng-container>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef>Name</th>
-                  <td mat-cell *matCellDef="let element">{{element.name}}</td>
-                </ng-container>
 
-                <!-- Weight Column -->
-                <ng-container matColumnDef="weight">
-                  <th mat-header-cell *matHeaderCellDef>Weight</th>
-                  <td mat-cell *matCellDef="let element">{{element.weight}}</td>
-                </ng-container>
-
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="symbol">
-                  <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                  <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-            </mat-tab>
-            <mat-tab label="Credit"> Content 2 </mat-tab>
-            <mat-tab label="Debit"> Content 3 </mat-tab>
-          </mat-tab-group>
-
+        <!-- <div class="alert-dark font-16 ml-4 p-2" role="alert">
+          Total Bill : {{selectedCustomer?.totalFees}}
         </div>
+        <div class="alert-dark font-16 ml-4 p-2" role="alert">
+          Received Amount : {{selectedCustomer?.feesPaid}}
+        </div> -->
       </div>
-      <div class="bg-white border-top p-3"> <span class="solditems "> View Sold Items</span> </div>
-    </div>
+
+
+      <div class="btn-group justify-content-end" style=" right: 0;
+      position: absolute;
+      margin-right: 30px;">
+        <!-- <a class="font-14 cursor-pointer" style="margin-right: 20px;text-decoration: none;"
+          (click)="backClicked()"><span class="d-flex justify-content-center align-items-center">
+            <mat-icon>chevron_left</mat-icon>back
+          </span></a> -->
+        <button class="btn btn-primary dropdown-toggle" [matMenuTriggerFor]="menu">Actions</button>
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item (click)="onEditCandidate(selectedCustomer)">Edit</button> -->
+          <button mat-menu-item (click)="onReceivePayment(selectedCustomer)">Receive Payment</button>
+
+        </mat-menu>
+      </div>
+    </mat-card-title>
+
+    <mat-card-subtitle style="margin-bottom: 0">
+
+      <div class="d-flex align-items-center">
+        <span>
+          <mat-icon class="color-orange">double_arrow</mat-icon>
+        </span>
+        <span style="font-size: medium;
+      font-weight: 500;text-transform: uppercase;">
+          Pan No - {{selectedCustomer?.panNo}}
+        </span>
+
+        <span style="font-weight: 500;" class="ml-5">
+          Last Payment Received : {{ selectedCustomer?.lastPaymentReceivedDate | date : 'medium'}}
+        </span>
+      </div>
+
+    </mat-card-subtitle>
+  </mat-card-header>
+  <div>
+    <app-client-account-ledger-component [customerId]="selectedCustomer?.id"></app-client-account-ledger-component>
   </div>
-</div>
+</mat-card>
+
+<mat-card style="margin-top: 14px;"  *ngIf="selectedCustomer?.id<=0">
+  <mat-card-content class="d-flex justify-content-center align-items-center"
+      style="height: 300px;min-height: 300px;margin-top: 14px;">
+        <h2>Please select the client to see account details</h2>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #receivePaymentTemp>
+  <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
+  </app-receive-payment-component>
+</ng-template>

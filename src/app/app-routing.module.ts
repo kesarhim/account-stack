@@ -1,4 +1,4 @@
-import { AccountSummaryComponent } from './components/account-summary/acccount-summary-component';
+import { TodayAccountSummaryComponent } from './components/account-summary/today-acccount-summary-component';
 import { ReceivePaymentComponent } from './components/payment/add-payment/receive-payment-component';
 import { ViewOtherWorkListComponent } from './components/other-work/view-other-work-list/view-other-work-list-component';
 import { AddOtherWorkComponent } from './components/other-work/add-other-work/add-other-work-component';
@@ -43,7 +43,7 @@ const routes: Routes = [
       {path:'other-work-list',component: ViewOtherWorkListComponent},
       {path:'receive-payment',component: ReceivePaymentComponent},
       {path:'client-profile',component: ClientProfileComponent},
-      {path:'account-summary',component: AccountSummaryComponent}
+      {path:'account-summary',component: TodayAccountSummaryComponent}
     ]
   },
 

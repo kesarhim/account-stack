@@ -147,4 +147,10 @@ export class ViewITRFilledComponent implements OnInit {
     }
   }
 
+  onSelectClient = (itrDetailDTO: ITRDetailsDTO) => {
+    if(itrDetailDTO && itrDetailDTO?.customerId > 0){
+      this.router.navigate(['/home/client-profile'], { queryParams: { customerId: itrDetailDTO.customerId } });
+    }
+  }
+
 }

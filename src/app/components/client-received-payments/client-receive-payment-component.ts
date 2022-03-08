@@ -43,11 +43,11 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     private router: Router,
     private dialogService: ConfirmationDialogService,
     private receivePaymentService: ReceivePaymentService) {
-      this.createTableConfiguration();
+
   }
 
   ngOnInit() {
-
+    this.createTableConfiguration();
   //  this.getOtheWorkDetailsDetails(25);
   }
 
@@ -59,11 +59,11 @@ export class ClientReceivedPaymentsComponent implements OnInit {
       actionLinks.push({ linkName: 'Edit', icon: 'edit', showIcon: true, method: ($event: any) => this.onEditOtherDetail($event) });
       actionLinks.push({ linkName: 'Delete', icon: 'delete', showIcon: true, method: ($event: any) => this.onDeleteOtherWork($event) });
       actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => {}});
-      tableColumns.push({ columnDef: 'action', header: 'Action', name: 'action', type: ColumnType.PRIMARY, actions: actionLinks });
+    //  tableColumns.push({ columnDef: 'action', header: 'Action', name: 'action', type: ColumnType.PRIMARY, actions: actionLinks });
     }
 
 
-    tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount' });
+    tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount' ,type: ColumnType.PRIMARY,actions: actionLinks });
     tableColumns.push({ columnDef: 'receivedDate', header: 'Received Date', name: 'receivedDate', type: ColumnType.DATETIME });
     tableColumns.push({ columnDef: 'receivedBy', header: 'Received By', name: 'receivedBy' });
     tableColumns.push({ columnDef: 'receivedMethod', header: 'Payment Method', name: 'receivedMethod' });
@@ -120,12 +120,12 @@ export class ClientReceivedPaymentsComponent implements OnInit {
         this.loaderService.show();
         this.receivePaymentService.deletePaymentDetails(data.id).subscribe((result : any) => {
           if(result && result.response){
-            this.alertService.success("Work details deleted successfully.")
+            this.alertService.success("Deleted successfully.")
             this.getCustomerReceivedPayments(this.selectedCustomerId);
           }
         })
       }
-    });
+    },err => this.loaderService.hide());
   }
 
   ngAfterViewInit() {

@@ -5,7 +5,9 @@
 
         <h2 class="m-0">Invoice</h2>
         <div class="alert-primary font-16 ml-4 p-2" role="alert">
-          Total Bill : &nbsp; {{totalBill}}
+          <span class="d-flex justify-content-center" > Total Bill: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalBill}}</span>
+
         </div>
       </div>
 
@@ -36,7 +38,8 @@
       <div class="d-flex justify-content-around align-items-center p-2">
         <h2 class="m-0">Payment History</h2>
         <div class="alert-primary font-16 ml-4 p-2" role="alert">
-           Received Amount : &nbsp; {{totalReceivedAmount}}
+          <span class="d-flex justify-content-center" > Received Amount: &nbsp;
+          <mat-icon class="font-20">currency_rupees</mat-icon>{{totalReceivedAmount}}</span>
         </div>
       </div>
 

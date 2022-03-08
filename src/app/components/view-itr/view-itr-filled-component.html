@@ -20,7 +20,9 @@
   </div>
 </div>
 <div class="">
-  <app-table-component [tableDataSource]="dataSource" [tableConfig]="customerTableConfig"></app-table-component>
+  <app-table-component [tableDataSource]="dataSource"
+  (onSelectProfile)="onSelectClient($event)"
+  [tableConfig]="customerTableConfig"></app-table-component>
 </div>
 <div *ngIf="showAddItrDrawer">
   <app-drawer-component [opened]="showAddItrDrawer" [headerTitle]="'Add ITR Detials'" (onClose)="onCloseDrawer()">

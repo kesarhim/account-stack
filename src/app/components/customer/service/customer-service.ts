@@ -9,6 +9,10 @@ export class CustomerService {
 
    }
 
+   public getCustomersDetailsByContext = (contextKey:string) => {
+    return this.httpService.get(`${this.baseURL}/get/customers/context?contextKey=${contextKey}`);
+  }
+
    public getCustomerDetailsById = (customerId:number) => {
      return this.httpService.get(`${this.baseURL}/get?customerId=${customerId}`);
    }

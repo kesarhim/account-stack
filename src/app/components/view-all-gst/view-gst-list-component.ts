@@ -118,6 +118,14 @@ export class GstListComponent implements OnInit {
       }
     });
   }
+
+  onSelectClient = (itrDetailDTO: GSTDetailsDTO) => {
+    if(itrDetailDTO && itrDetailDTO?.customerId > 0){
+      this.router.navigate(['/home/client-profile'], { queryParams: { customerId: itrDetailDTO.customerId } });
+    }
+  }
+
+
 }
 
 

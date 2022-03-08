@@ -16,4 +16,7 @@ export class InvoiceDetailDTO {
     editingdate :Date;
     contextKey :number;
     contextType :string;
+    clientName:string;
+    panNo:string;
+    isNonExistingClient:boolean;
 }

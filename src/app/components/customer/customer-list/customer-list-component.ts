@@ -31,9 +31,9 @@ export class CustomerListComponent implements OnInit {
   @ViewChild('addOtherWork') addOtherWorkTemplate: TemplateRef<any>;
   @ViewChild('receivePaymentTemp') receivePaymentTemplate: TemplateRef<any>;
 
-  public selectedCustomerIds: Array<number> | null;
-  @Input() set customerIds(value: Array<number>) {
-    this.selectedCustomerIds = value;
+  public selectedContext: string | null;
+  @Input() set contextKey(value: string) {
+    this.selectedContext = value;
   }
   @Input() allowAddNewClient: boolean = true;
 
@@ -55,15 +55,15 @@ export class CustomerListComponent implements OnInit {
     this.createTableConfiguration();
     this.drawerSubscription = this.drawerService.drawerSubject.subscribe(value => {
       if (!value) {
-        if (this.selectedCustomerIds && this.selectedCustomerIds.length> 0){
-          this.getAllCustomersByIds();
+        if (this.selectedContext && this.selectedContext.length> 0){
+          this.getAllCustomersByContext();
         }else {
           this.getAllCustomers(25);
         }
       }
     });
-    if (this.selectedCustomerIds &&this.selectedCustomerIds.length> 0){
-      this.getAllCustomersByIds();
+    if (this.selectedContext &&this.selectedContext.length> 0){
+      this.getAllCustomersByContext();
     }else {
       this.getAllCustomers(25);
     }
@@ -73,7 +73,7 @@ export class CustomerListComponent implements OnInit {
     if (this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)) {
       this.drawerSubscription.unsubscribe();
     }
-    this.selectedCustomerIds = null;
+    this.selectedContext = null;
   }
 
   createTableConfiguration = () => {
@@ -129,10 +129,10 @@ export class CustomerListComponent implements OnInit {
     return null;
   }
 
-  getAllCustomersByIds = () => {
+  getAllCustomersByContext = () => {
     this.loaderService.show();
-    if (this.selectedCustomerIds && this.selectedCustomerIds.length > 0) {
-      this.customerService.getCustomersByIds(this.selectedCustomerIds).subscribe((result: any) => {
+    if (this.selectedContext && this.selectedContext.length > 0) {
+      this.customerService.getCustomersDetailsByContext(this.selectedContext).subscribe((result: any) => {
         let data: Array<Customer> = result?.response;
         if (data?.length > 0) {
           data = data.sort((a, b) => {
@@ -143,6 +143,7 @@ export class CustomerListComponent implements OnInit {
         }
         this.customers = data;
         this.dataSource = new MatTableDataSource(data);
+        this.loaderService.hide();
       }, err => this.loaderService.hide())
 
     }

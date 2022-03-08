@@ -1,0 +1,75 @@
+<mat-card class="p-0">
+  <div class="d-flex justify-content-center align-items-center">
+    <h2 class="m-0">Today's Bill
+
+    </h2>
+    <div class="alert-primary font-16 ml-4 p-2" role="alert">
+      <span class="d-flex justify-content-center" style="color: black;">Total: &nbsp;
+        <mat-icon class="font-20">currency_rupees</mat-icon>{{totalBill}}
+      </span>
+    </div>
+    <div class="d-flex" style="position: absolute;right: 0;">
+      <a  class="d-flex font-14 cursor-pointer" style="margin-right: 20px;text-decoration: none;" (click)="backClicked()"><span class="d-flex justify-content-center align-items-center"><mat-icon>chevron_left</mat-icon>back</span></a>
+    </div>
+
+  </div>
+
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab style="margin-bottom: 10px;">
+      <ng-template mat-tab-label style="margin-bottom: 10px;">
+
+
+        <div class="alert-warning font-16 mr-4 p-2" role="alert">
+          <span class="d-flex justify-content-center" style="color: black;">TotalAmount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalActiveClientBill}}
+          </span>
+        </div>
+        <mat-icon class="mr-2 color-primary-blue">group</mat-icon>
+        Active Clients
+      </ng-template>
+      <ng-template matTabContent>
+        <app-table-component [tableDataSource]="clientDataSource" (onSelectProfile)="onSelectClient($event)"
+          [tableConfig]="tableConfig"></app-table-component>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">work</mat-icon>
+        Others
+        <div class="alert-warning font-16 ml-4 p-2" role="alert">
+          <span class="d-flex justify-content-center" style="color: black;">Total Amount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalNonActiveClientBill}}
+          </span>
+        </div>
+      </ng-template>
+      <ng-template matTabContent>
+        <app-table-component [tableDataSource]="otherClientdataSource" [tableConfig]="tableConfig">
+        </app-table-component>
+      </ng-template>
+
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<!--
+<ng-template #addITR>
+  <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
+  </app-customer-add-itr>
+</ng-template>
+
+<ng-template #addGst>
+  <app-customer-add-gst [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
+  </app-customer-add-gst>
+</ng-template>
+
+<ng-template #addOtherWork>
+  <app-add-other-work-component [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer"
+    [isDrawerMode]="true">
+
+  </app-add-other-work-component>
+</ng-template>
+
+<ng-template #receivePaymentTemp>
+  <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
+  </app-receive-payment-component>
+</ng-template> -->

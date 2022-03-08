@@ -116,8 +116,8 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  goToAccountSummary = () =>{
-    this.router.navigateByUrl('/home/account-summary');
+  goToAccountSummary = (contextKey:string) =>{
+    this.router.navigateByUrl(`/home/account-summary?contextKey=${contextKey}`);
   }
 
   gotoAllActiveActive = () => {

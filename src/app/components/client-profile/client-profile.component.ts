@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../core/components/alert/alert.service';
 import { PaymentDetails } from '../payment/models/payment.model';
 import { DrawerService } from '../shared/drawer/drawer.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-client-profile',
@@ -28,6 +29,7 @@ export class ClientProfileComponent implements OnInit {
     private customerService: CustomerService,
     private loaderService: LoaderService,
     private alertService: AlertService,
+    private _location:Location,
     private router: Router, private drawerService: DrawerService
   ) { }
 
@@ -49,6 +51,9 @@ export class ClientProfileComponent implements OnInit {
     this.drawerService.openDrawer(this.receivePaymentTemplate, 'Receive Payment', 'payments');
   }
 
+  backClicked() {
+    this._location.back();
+  }
 
   getPaymentDetails = (customerDetail: Customer): PaymentDetails | null => {
     if (customerDetail) {

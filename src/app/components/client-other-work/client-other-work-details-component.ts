@@ -48,6 +48,10 @@ export class ClientOtherWorkDetailsComponent implements OnInit {
   //  this.getOtheWorkDetailsDetails(25);
   }
 
+  refresh = () => {
+    this.getCustomerOtherWorkDetails(this.selectedCustomerId);
+  }
+
   createTableConfiguration = () => {
     let tableColumns: Array<ITableColumn> = new Array<ITableColumn>();
     let actionLinks: Array<ITableActionLinks> = new Array<ITableActionLinks>();

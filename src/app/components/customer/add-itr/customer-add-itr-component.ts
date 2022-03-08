@@ -46,8 +46,18 @@ export class CustomerAddITRComponent implements OnInit {
     private loaderService: LoaderService, private storageService: StorageService,
     private itrDetailService: ITRDetailService,
     private customerService: CustomerService,
-    private route: ActivatedRoute,private drawerService : DrawerService) {
+    private route: ActivatedRoute,
+    private drawerService : DrawerService) {
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+  //   if(this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)){
+  //     this.drawerSubscription.unsubscribe();
+  //   }
+  //   if(this.routerSubscription && isFunction(this.routerSubscription.unsubscribe)){
+  //    this.routerSubscription.unsubscribe();
+  //  }
   }
 
 

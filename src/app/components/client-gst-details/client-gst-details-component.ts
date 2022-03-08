@@ -44,6 +44,13 @@ export class ClientGstDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+  }
+
+  refresh = () => {
+    this.getCustomerGstDetails(this.selectedCustomerId);
   }
 
   getCustomerGstDetails = (customerId: number) => {

@@ -12,4 +12,5 @@ export class ClientProfileDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
 }

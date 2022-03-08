@@ -50,7 +50,7 @@
 
     </mat-card-subtitle>
   </mat-card-header>
-  <mat-tab-group mat-stretch-tabs>
+  <mat-tab-group mat-stretch-tabs (selectedTabChange)="onTabChanges($event)" [selectedIndex]="selectedTab">
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="mr-2 color-primary-blue">group</mat-icon>
@@ -119,24 +119,24 @@
 </mat-card>
 
 
-<ng-template #addITR>
+<ng-template #addITRClientProfile>
   <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
   </app-customer-add-itr>
 </ng-template>
 
-<ng-template #addGst>
+<ng-template #addGstClientProfile>
   <app-customer-add-gst [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer" [isDrawerMode]="true">
   </app-customer-add-gst>
 </ng-template>
 
-<ng-template #addOtherWork>
+<ng-template #addOtherWorkClientProfile>
   <app-add-other-work-component [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer"
     [isDrawerMode]="true">
 
   </app-add-other-work-component>
 </ng-template>
 
-<ng-template #receivePaymentTemp>
+<ng-template #receivePaymentTempClientProfile>
   <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
   </app-receive-payment-component>
 </ng-template>

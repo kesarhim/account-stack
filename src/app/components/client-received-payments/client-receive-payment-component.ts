@@ -75,6 +75,10 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     }
   }
 
+  refresh = () => {
+    this.getCustomerReceivedPayments(this.selectedCustomerId);
+  }
+
   getCustomerReceivedPaymentsByInvoiceId = (invoiceId: number) => {
     this.loaderService.show();
     this.receivePaymentService.getReceiveDetailsByInvoiceId(invoiceId).subscribe((result: any) => {

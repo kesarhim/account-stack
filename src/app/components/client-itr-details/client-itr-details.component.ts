@@ -44,6 +44,13 @@ export class ClientItrDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+  }
+
+  refresh = () => {
+    this.getCustomerITRDetails(this.selectedCustomerId);
   }
 
   getCustomerITRDetails = (customerId: number) => {

@@ -28,7 +28,12 @@ export class ClientAccountLedgerComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
+  refresh = () => {
+    this.getAccountLedger(this.selectedCustomerId);
+  }
 
   getAccountLedger = (customerId: number) => {
     if (customerId && customerId > 0) {

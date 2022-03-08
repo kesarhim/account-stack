@@ -64,6 +64,7 @@ import { ClientReceivedPaymentsComponent } from './components/client-received-pa
 import { ClientProfileDetailsComponent } from './components/client-profile-detail/client-profile-detail-component';
 import { ClientAccountLedgerComponent } from './components/client-account-ledger/client-account-ledger-component';
 import { TodayAccountSummaryComponent } from './components/account-summary/today-acccount-summary-component';
+import { TodayReceivedPayments } from './components/today-received-payment/today-received-payment-component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +102,8 @@ import { TodayAccountSummaryComponent } from './components/account-summary/today
     ClientReceivedPaymentsComponent,
     ClientProfileDetailsComponent,
     ClientAccountLedgerComponent,
-    TodayAccountSummaryComponent
+    TodayAccountSummaryComponent,
+    TodayReceivedPayments
   ],
   imports: [
     BrowserModule,

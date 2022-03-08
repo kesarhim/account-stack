@@ -21,6 +21,9 @@ export class ReceivePaymentService {
     return this.httpService.post(`${this.baseURL}/save`,paymentDeails);
   }
 
+  public getTodayPaymentDetails = () => {
+    return this.httpService.get(`${this.baseURL}/get/today-received-payments`);
+  }
 
   public getPaymentDetails = (paymentId:number) => {
     return this.httpService.get(`${this.baseURL}/get?id=${paymentId}`);

@@ -116,6 +116,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  gotoTodayReceivedPayment = () => {
+    this.router.navigateByUrl(`/home/today-received-payments`);
+  }
   goToAccountSummary = (contextKey:string) =>{
     this.router.navigateByUrl(`/home/account-summary?contextKey=${contextKey}`);
   }

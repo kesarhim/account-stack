@@ -1,40 +1,27 @@
-import { ReceivePaymentDTO } from './../payment/models/receive-payment-dto';
-import { ReceivePaymentService } from './../payment/service/receive-payment-service';
-import { ColumnType, ITableActionLinks, ITableColumn, ITableConfig } from './../shared/table/models/table-config';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Location } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AlertService } from '../core/components/alert/alert.service';
 import { LoaderService } from '../core/components/loader/loader.service';
-import { OthweWorkDetailService } from '../customer/service/other-work-detail-service';
+import { ReceivePaymentDTO } from '../payment/models/receive-payment-dto';
+import { ReceivePaymentService } from '../payment/service/receive-payment-service';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
+import { ITableConfig, ITableColumn, ITableActionLinks, ColumnType } from '../shared/table/models/table-config';
 
 @Component({
-  selector: 'app-client-receive-payment-component',
-  templateUrl: './client-receive-payment-component.html',
-  styleUrls:['./client-receive-payment-component.css']
+  selector: 'app-today-received-payment',
+  templateUrl: 'today-received-payment-component.html',
+  styleUrls:['./today-received-payment-component.css']
 })
 
-export class ClientReceivedPaymentsComponent implements OnInit {
+export class TodayReceivedPayments implements OnInit {
   dataSource: MatTableDataSource<ReceivePaymentDTO>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  otherClientdataSource:MatTableDataSource<ReceivePaymentDTO>;
   public selectedOtherWork: ReceivePaymentDTO;
   public showAddItrDrawer: boolean = false;
   public tableConfig: ITableConfig;
-  @Input() set invoiceId (value :number){
-    if(value){
-      this.getCustomerReceivedPaymentsByInvoiceId(value);
-    }
-  }
-  @Input() set customerId(value: number) {
-    if (value > 0) {
-      this.selectedCustomerId = value;
-      this.getCustomerReceivedPayments(value);
-    }
-  }
+  public totalAmountReceived : number = 0;
   @Input() actionAllowed:boolean  = false;
   private selectedCustomerId :number;
   constructor(
@@ -42,13 +29,20 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private dialogService: ConfirmationDialogService,
-    private receivePaymentService: ReceivePaymentService) {
-
+    private receivePaymentService: ReceivePaymentService,
+    private _location:Location) {
+      this.createTableConfiguration();
   }
 
   ngOnInit() {
-    this.createTableConfiguration();
+    this.getTodayReceivedPayment();
   //  this.getOtheWorkDetailsDetails(25);
+  }
+
+  onSelectClient = (itrDetailDTO: ReceivePaymentDTO) => {
+    if(itrDetailDTO && itrDetailDTO?.customerid > 0){
+      this.router.navigate(['/home/client-profile'], { queryParams: { customerId: itrDetailDTO.customerid } });
+    }
   }
 
   createTableConfiguration = () => {
@@ -60,7 +54,10 @@ export class ClientReceivedPaymentsComponent implements OnInit {
       actionLinks.push({ linkName: 'Delete', icon: 'delete', showIcon: true, method: ($event: any) => this.onDeletePayment($event) });
       actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => {}});
     }
-    tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount' ,type: ColumnType.PRIMARY,actions: actionLinks });
+
+    tableColumns.push({ columnDef: 'clientName', header: 'Client Name', name: 'clientName' ,type: ColumnType.PRIMARY,actions: actionLinks });
+    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo',showUpperCase:true});
+    tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount'});
     tableColumns.push({ columnDef: 'receivedDate', header: 'Received Date', name: 'receivedDate', type: ColumnType.DATETIME });
     tableColumns.push({ columnDef: 'receivedBy', header: 'Received By', name: 'receivedBy' });
     tableColumns.push({ columnDef: 'receivedMethod', header: 'Payment Method', name: 'receivedMethod' });
@@ -75,35 +72,40 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     }
   }
 
-  getCustomerReceivedPaymentsByInvoiceId = (invoiceId: number) => {
+  calculateSum(data:Array<ReceivePaymentDTO>){
+    let total = 0;
+    if (data && data?.length > 0) {
+      data.forEach(value => {
+        total += value?.receivedAmount;
+      });
+    }
+    return total;
+  }
+
+  getTodayReceivedPayment = () => {
     this.loaderService.show();
-    this.receivePaymentService.getReceiveDetailsByInvoiceId(invoiceId).subscribe((result: any) => {
+    this.totalAmountReceived =0;
+    this.receivePaymentService.getTodayPaymentDetails().subscribe((result: any) => {
       if (result && result.response) {
-        this.dataSource = new MatTableDataSource(result.response);
+        let data :Array<ReceivePaymentDTO> = result.response;
+        if(data && data.length > 0){
+          this.dataSource = new MatTableDataSource(data.filter(x=> !x.isNonExistingClient));
+          this.otherClientdataSource = new MatTableDataSource(data.filter(x=> x.isNonExistingClient));
+        }
+        this.totalAmountReceived = this.calculateSum(data);
       }else {
         this.dataSource = new MatTableDataSource(undefined);
+        this.otherClientdataSource = new MatTableDataSource(undefined);
       }
       this.loaderService.hide();
 
     }, err => this.loaderService.hide())
   }
 
-  getCustomerReceivedPayments = (customerId: number) => {
-    this.loaderService.show();
-    this.receivePaymentService.getReceiveDetailsByCustomerId(customerId).subscribe((result: any) => {
-      if (result && result.response) {
-        this.dataSource = new MatTableDataSource(result.response);
-      }else {
-        this.dataSource = new MatTableDataSource(undefined);
-      }
-      this.loaderService.hide();
-
-    }, err => this.loaderService.hide())
-  }
 
   onEditPaymentDetail = (otherWorkDetail: ReceivePaymentDTO) => {
     if (otherWorkDetail) {
-    //  this.router.navigate(['/home/add/other-work'], { queryParams: { id: otherWorkDetail.id } });
+      //this.router.navigate(['/home/add/other-work'], { queryParams: { id: otherWorkDetail.id } });
     }
   }
 
@@ -114,26 +116,14 @@ export class ClientReceivedPaymentsComponent implements OnInit {
         this.receivePaymentService.deletePaymentDetails(data.id).subscribe((result : any) => {
           if(result && result.response){
             this.alertService.success("Deleted successfully.")
-            this.getCustomerReceivedPayments(this.selectedCustomerId);
+            this.getTodayReceivedPayment();
           }
         })
       }
     },err => this.loaderService.hide());
   }
 
-  ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  backClicked() {
+    this._location.back();
   }
 }

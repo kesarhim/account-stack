@@ -13,4 +13,8 @@ export class ReceivePaymentDTO {
   remark :string;
   receivedMethodCat :CatalogData;
   panNo:string;
+
+  clientName :string;
+
+  isNonExistingClient :boolean;
 }

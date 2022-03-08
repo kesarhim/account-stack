@@ -1,0 +1,55 @@
+<mat-card class="p-0">
+  <div class="d-flex justify-content-center align-items-center" style="padding: 14px;">
+    <h2 class="m-0">Today's Received Payments
+
+    </h2>
+    <div class="alert-primary font-16 ml-4 p-2" role="alert">
+      <span class="d-flex justify-content-center" style="color: black;">Total: &nbsp;
+        <mat-icon class="font-20">currency_rupees</mat-icon>{{totalAmountReceived}}
+      </span>
+    </div>
+    <div class="d-flex" style="position: absolute;right: 0;">
+      <a class="d-flex font-14 cursor-pointer" style="margin-right: 20px;text-decoration: none;"
+        (click)="backClicked()"><span class="d-flex justify-content-center align-items-center">
+          <mat-icon>chevron_left</mat-icon>back
+        </span></a>
+    </div>
+
+  </div>
+
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab style="margin-bottom: 10px;">
+      <ng-template mat-tab-label style="margin-bottom: 10px;">
+        <!-- <div class="alert-warning font-16 mr-4 p-2" role="alert">
+          <span class="d-flex justify-content-center" style="color: black;">otalAmount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalActiveClientBTill}}
+          </span>
+        </div> -->
+        <mat-icon class="mr-2 color-primary-blue">group</mat-icon>
+        Active Clients ( {{dataSource?.data?.length}} )
+      </ng-template>
+      <ng-template matTabContent>
+        <div class="">
+          <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig"
+            (onSelectProfile)="onSelectClient($event)"></app-table-component>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mr-2  color-primary-blue">work</mat-icon>
+        Other Clients ( {{otherClientdataSource?.data?.length}} )
+        <!-- <div class="alert-warning font-16 ml-4 p-2" role="alert">
+          <span class="d-flex justify-content-center" style="color: black;">Total Amount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalNonActiveClientBill}}
+          </span>
+        </div> -->
+      </ng-template>
+      <ng-template matTabContent>
+        <app-table-component [tableDataSource]="otherClientdataSource" [tableConfig]="tableConfig">
+        </app-table-component>
+      </ng-template>
+
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

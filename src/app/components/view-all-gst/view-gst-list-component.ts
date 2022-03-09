@@ -5,13 +5,16 @@ import { HttpService } from './../core/services/http.service';
 import { LoaderService } from './../core/components/loader/loader.service';
 import { Router } from '@angular/router';
 import { style } from '@angular/animations';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { CatalogData } from '../shared/catalog-loader/models/catalog.model';
 import { GSTDetailsDTO } from './model/gst-details-dto';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnType, ITableActionLinks, ITableColumn, ITableConfig } from '../shared/table/models/table-config';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { isFunction } from 'lodash';
+import { DrawerService } from '../shared/drawer/drawer.service';
 
 @Component({
   selector: 'app-gst-list-component',
@@ -24,24 +27,39 @@ export class GstListComponent implements OnInit {
   dataSource: MatTableDataSource<GSTDetailsDTO>;
   public selectedAssesmentYear:string = '4';
   public selectGstType : string ;
+  public selectedGst:GSTDetailsDTO;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('showAddGstDrawerViewGST') addGstTemtemplate:TemplateRef<any>;
 
 
   public tableConfig: ITableConfig;
-
+  private drawerSubscription :Subscription;
   constructor(private router:Router,
     private loaderService:LoaderService,
     private httpService :HttpService,
     private alertService:AlertService,
     private dialogService:ConfirmationDialogService,
-    private gstDetailService: GSTDetailService) { }
+    private gstDetailService: GSTDetailService,
+    private drawerService:DrawerService) { }
 
   ngOnInit() {
     this.createTableConfiguration();
     this.getAllGSTDetails(25,"1");
-
+    this.drawerSubscription = this.drawerService.drawerSubject.subscribe((value) => {
+      if(!value){
+        this.getAllGSTDetails(25, '4');
+      }
+    });
    }
+
+
+  ngOnDestroy(): void {
+    if(this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)){
+      this.drawerSubscription.unsubscribe();
+    }
+  }
 
   onAddGST = () => {
     this.router.navigate(['home/customer/add/gst']);
@@ -101,7 +119,9 @@ export class GstListComponent implements OnInit {
   }
   onEditGSTDetail = (itrDetail: GSTDetailsDTO) => {
     if (itrDetail) {
-      this.router.navigate(['/home/customer/add/gst'], { queryParams: { id: itrDetail.id } });
+      this.selectedGst = itrDetail;
+      this.drawerService.openDrawer(this.addGstTemtemplate,'Edit GST','work');
+     // this.router.navigate(['/home/customer/add/gst'], { queryParams: { id: itrDetail.id } });
     }
   }
 

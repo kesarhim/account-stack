@@ -105,12 +105,12 @@ export class ViewOtherWorkListComponent implements OnInit {
     actionLinks.push({ linkName: 'Receive Payment', icon: 'payments', showIcon: true, method: ($event: any) => this.onReceivePayment($event) });
     actionLinks.push({ linkName: 'Payment History', icon: 'history', showIcon: true, method: ($event: any) => this.viewPaymentHistory($event) });
 
-    tableColumns.push({ columnDef: 'clientName', header: 'Client Name', name: 'clientName', type: ColumnType.PRIMARY, actions: actionLinks });
-    tableColumns.push({ columnDef: 'careOf', header: 'Care Of.', name: 'careOf' });
+    tableColumns.push({ columnDef: 'clientName', header: 'Client Name', name: 'clientName', type: ColumnType.PRIMARY, actions: actionLinks,applyFilter:true });
+    tableColumns.push({ columnDef: 'careOf', header: 'Care Of.', name: 'careOf',applyFilter:true });
     tableColumns.push({ columnDef: 'totalFees', header: 'Total Fees', name: 'totalFees' });
     tableColumns.push({ columnDef: 'feesPaid', header: 'Fees Paid', name: 'feesPaid' });
     tableColumns.push({ columnDef: 'balanceAmount', header: 'Balance', name: 'balanceAmount' });
-
+    tableColumns.push({ columnDef: 'work', header: 'Work', name: 'work' });
     tableColumns.push({ columnDef: 'fileDate', header: 'File Date', name: 'fileDate', type: ColumnType.DATE });
   //  tableColumns.push({ columnDef: 'fullName', header: 'Client Name ', name: 'fullName' });
     tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo', showUpperCase: true });

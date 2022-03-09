@@ -26,3 +26,8 @@
     [tableDataSource]="dataSource"
     [tableConfig]="tableConfig" (onSelectProfile)="onSelectClient($event)"></app-table-component>
 </div>
+
+<ng-template #showAddGstDrawerViewGST>
+  <app-customer-add-gst [searchAllowed]="false" [showTitle]="false" [gstId]="selectedGst?.id" [isDrawerMode]="true">
+  </app-customer-add-gst>
+</ng-template>

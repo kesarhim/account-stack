@@ -26,7 +26,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;color: red;">{{totalPendingPayment}}</span>
+            <span style="font-size: 25px;color: red;">{{totalPendingPayment ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-divider inset></mat-divider>
@@ -50,7 +50,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab style="color: green;">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;color: green;">{{totalReceivedPayment}}</span>
+            <span style="font-size: 25px;color: green;">{{totalReceivedPayment ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-divider inset></mat-divider>
@@ -74,7 +74,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;">{{totalBillAmount}}</span>
+            <span style="font-size: 25px;">{{totalBillAmount ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-card-footer>
@@ -96,7 +96,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;">{{totalDiscountOffered}}</span>
+            <span style="font-size: 25px;">{{totalDiscountOffered ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-card-footer>
@@ -123,7 +123,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab color="primary">persons</mat-icon>
             </span>
-            <span style="font-size: 25px;">{{totalActiveClients}}</span>
+            <span style="font-size: 25px;">{{totalActiveClients ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-card-footer>
@@ -145,7 +145,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab color="primary">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;color: red;">{{todayPendingPayments}}</span>
+            <span style="font-size: 25px;color: red;">{{todayPendingPayments ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-divider inset></mat-divider>
@@ -169,7 +169,7 @@
             <span style="font-size: 28px;">
               <mat-icon mat-mini-fab style="color: green;">currency_rupees</mat-icon>
             </span>
-            <span style="font-size: 25px;color: green;">{{todayReceivedPayment}}</span>
+            <span style="font-size: 25px;color: green;">{{todayReceivedPayment ?? 0}}</span>
           </div>
         </mat-card-content>
         <mat-divider inset></mat-divider>

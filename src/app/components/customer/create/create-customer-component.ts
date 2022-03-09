@@ -123,6 +123,12 @@ export class CreateCustomerComponent implements OnInit {
           aadhaarNo: value
         });
       }
+    }else if (aadhaarNumber && aadhaarNumber.length > 12){
+      if (ValidateAadhaarNo(aadhaarNumber)) {
+        this.createCustomerForm.patchValue({
+          aadhaarNo: aadhaarNumber
+        });
+      }
     } else {
       this.aaDhharNumber?.setErrors({ invalidAadhaarNo: true })
     }

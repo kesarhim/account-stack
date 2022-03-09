@@ -11,7 +11,7 @@
   <mat-card-header class="mt-2" style="padding-top: 10px;">
     <mat-card-title class="d-flex flex-row flex-fill">
       <div class="d-flex flex-row">
-        <span>{{selectedCustomer?.fullName}}</span>
+        <span class="link cursor-pointer color-primary-blue">{{selectedCustomer?.fullName}}</span>
         <div class="alert-warning font-16 ml-4 p-2" role="alert">
           <span class="d-flex justify-content-center">Pending Amount: &nbsp;
             <mat-icon class="font-20">currency_rupees</mat-icon>{{selectedCustomer?.balanceAmount}}

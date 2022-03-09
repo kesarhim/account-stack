@@ -55,8 +55,8 @@ export class TodayReceivedPayments implements OnInit {
       actionLinks.push({ linkName: 'Print Invoice', icon: 'print', showIcon: true, method: ($event: any) => {}});
     }
 
-    tableColumns.push({ columnDef: 'clientName', header: 'Client Name', name: 'clientName' ,type: ColumnType.PRIMARY,actions: actionLinks });
-    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo',showUpperCase:true});
+    tableColumns.push({ columnDef: 'clientName', header: 'Client Name', name: 'clientName' ,type: ColumnType.PRIMARY,actions: actionLinks,applyFilter:true });
+    tableColumns.push({ columnDef: 'panNo', header: 'Pan No', name: 'panNo',showUpperCase:true,applyFilter:true});
     tableColumns.push({ columnDef: 'receivedAmount', header: 'Received Amount', name: 'receivedAmount'});
     tableColumns.push({ columnDef: 'receivedDate', header: 'Received Date', name: 'receivedDate', type: ColumnType.DATETIME });
     tableColumns.push({ columnDef: 'receivedBy', header: 'Received By', name: 'receivedBy' });

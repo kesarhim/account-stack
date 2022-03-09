@@ -24,14 +24,13 @@
   (onSelectProfile)="onSelectClient($event)"
   [tableConfig]="customerTableConfig"></app-table-component>
 </div>
-<div *ngIf="showAddItrDrawer">
-  <app-drawer-component [opened]="showAddItrDrawer" [headerTitle]="'Add ITR Detials'" (onClose)="onCloseDrawer()">
-    <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [customer]="selectedCustomer">
-    </app-customer-add-itr>
-  </app-drawer-component>
-</div>
 
-<ng-template #receivePayment>
+<ng-template #showAddItrDrawerViewITR>
+  <app-customer-add-itr [searchAllowed]="false" [showTitle]="false" [itrId]="selectedITR?.id" [isDrawerMode]="true">
+  </app-customer-add-itr>
+</ng-template>
+
+<ng-template #receivePaymentViewITR>
     <app-receive-payment-component
       [pendingAmount]="selectedITR?.balanceAmount"
       [paymentDetails]="paymentDetail"></app-receive-payment-component>

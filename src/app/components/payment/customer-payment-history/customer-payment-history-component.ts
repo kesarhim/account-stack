@@ -105,6 +105,13 @@ export class CustomerPaymentHistoryComponent implements OnInit, OnDestroy {
     );
   };
 
+
+  goToProfile = (customerId:number) => {
+    if(customerId > 0){
+    this.router.navigate(['/home/client-profile'], { queryParams: { customerId: customerId } });
+    }
+  }
+
   onEditCandidate = (customer: Customer) => {
     if (customer) {
       this.router.navigate(['/home/customer/create'], {

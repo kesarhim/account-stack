@@ -1,3 +1,5 @@
+import { isFunction } from 'lodash';
+import { Subscription } from 'rxjs';
 import { DrawerService } from './../shared/drawer/drawer.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -24,13 +26,13 @@ export class ViewITRFilledComponent implements OnInit {
   dataSource: MatTableDataSource<ITRDetailsDTO>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('receivePayment') receivePaymentTemplate: TemplateRef<any>;
+  @ViewChild('receivePaymentViewITR') receivePaymentTemplate: TemplateRef<any>;
+  @ViewChild('showAddItrDrawerViewITR') addItrTemplate: TemplateRef<any>;
   public selectedITR: ITRDetailsDTO;
   public paymentDetail:PaymentDetails | null;
-  public showAddItrDrawer: boolean = false;
   public selectedAssesmentYear: string = '4';
   public customerTableConfig: ITableConfig;
-
+  private drawerSubscription :Subscription;
   constructor(private httpService: HttpService,
     private loaderService: LoaderService,
     private alertService: AlertService,
@@ -44,8 +46,21 @@ export class ViewITRFilledComponent implements OnInit {
   ngOnInit() {
     this.createTableConfiguration();
     this.getAllITRDetails(25, '4');
+   this.drawerSubscription = this.drawerService.drawerSubject.subscribe((value) => {
+      if(!value){
+        this.getAllITRDetails(25, '4');
+      }
+    });
+  }
 
+  ngOnDestroy(): void {
+    if(this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)){
+      this.drawerSubscription.unsubscribe();
+    }
+  }
 
+  onAddITR = () => {
+    this.router.navigate(['home/customer/add/itr']);
   }
 
   createTableConfiguration = () => {
@@ -90,7 +105,9 @@ export class ViewITRFilledComponent implements OnInit {
 
   onEditITRDetail = (itrDetail: ITRDetailsDTO) => {
     if (itrDetail) {
-      this.router.navigate(['/home/customer/add/itr'], { queryParams: { id: itrDetail.id } });
+      this.selectedITR = itrDetail;
+      this.drawerService.openDrawer(this.addItrTemplate, 'Edit ITR', 'work');
+     // this.router.navigate(['/home/customer/add/itr'], { queryParams: { id: itrDetail.id } });
     }
   }
 
@@ -98,10 +115,6 @@ export class ViewITRFilledComponent implements OnInit {
     if (assesmentYear?.code) {
       this.getAllITRDetails(25, assesmentYear.code);
     }
-  }
-
-  onAddITR = () => {
-    this.router.navigate(['home/customer/add/itr']);
   }
 
   onReceivePayment = (value: ITRDetailsDTO) => {

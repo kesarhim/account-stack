@@ -11,6 +11,7 @@ import { User } from '../../shared/models/user-cred.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageKeys, StorageService } from '../../core/services/storage.service';
 import { feesPaidValidator } from '../../validators/custom-validators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-other-work-component',
@@ -43,7 +44,7 @@ export class AddOtherWorkComponent implements OnInit {
     private otherWorkDetailService: OtherWorkDetailService, private loaderService: LoaderService,
     private alertService: AlertService, private router: Router, private route: ActivatedRoute,
     private storageService: StorageService,
-    private drawerService: DrawerService) {
+    private drawerService: DrawerService,private _location:Location) {
     this.creatForm();
   }
 
@@ -58,6 +59,10 @@ export class AddOtherWorkComponent implements OnInit {
     });
 
     this.getOtherWorkDetails();
+  }
+
+  cancel = () => {
+    this._location.back();
   }
 
   getOtherWorkDetails = () => {

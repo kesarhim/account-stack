@@ -45,4 +45,8 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+  GoToInvoice(){
+    
+    this.router.navigateByUrl(`/home/create-invoice`);
+  }
 }

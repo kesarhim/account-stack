@@ -19,4 +19,5 @@ export class InvoiceDetailDTO {
     clientName:string;
     panNo:string;
     isNonExistingClient:boolean;
+    creator:string;
 }

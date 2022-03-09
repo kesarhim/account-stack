@@ -1,8 +1,11 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { isFunction } from 'lodash';
+import { Subscription } from 'rxjs';
+import { ClientAccountLedgerComponent } from '../../client-account-ledger/client-account-ledger-component';
 import { AlertService } from '../../core/components/alert/alert.service';
 import { LoaderService } from '../../core/components/loader/loader.service';
 import { Customer } from '../../customer/create/models/customer-model';
@@ -15,8 +18,12 @@ import { PaymentDetails } from '../models/payment.model';
   templateUrl: './customer-payment-history-component.html',
   styleUrls: ['./customer-payment-history-component.css'],
 })
-export class CustomerPaymentHistoryComponent implements OnInit {
-  @ViewChild('receivePaymentTemp') receivePaymentTemplate: TemplateRef<any>;
+export class CustomerPaymentHistoryComponent implements OnInit, OnDestroy {
+  @ViewChild('receivePaymentTemplate') receivePaymentTemplate: TemplateRef<any>;
+  @ViewChild('invoiceTemplate') invoiceTemplate: TemplateRef<any>;
+
+  @ViewChild(ClientAccountLedgerComponent) clientAccountLedgerComponent: ClientAccountLedgerComponent;
+  public drawerSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,19 +39,40 @@ export class CustomerPaymentHistoryComponent implements OnInit {
   public customerId: number;
   public paymentDetail: PaymentDetails | null;
 
-  ngOnInit() {}
-
-  onSelectCustomer = (customer: Customer) => {
-    this.selectedCustomer = null;
-    this.loaderService.show();
-    this.customerService
-      .getCustomerDetailsById(customer.id)
-      .subscribe((result: any) => {
-        this.loaderService.hide();
-        if (result) {
-          this.selectedCustomer = result.response;
+  ngOnInit() {
+    this.drawerSubscription = this.drawerService.drawerSubject.subscribe(
+      (value) => {
+        if (!value) {
+          this.onSelectCustomer(this.selectedCustomer);
+          this.clientAccountLedgerComponent.refresh()
         }
-      },err=>this.loaderService.hide());
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (
+      this.drawerSubscription &&
+      isFunction(this.drawerSubscription.unsubscribe)
+    ) {
+      this.drawerSubscription.unsubscribe();
+    }
+  }
+
+  onSelectCustomer = (customer: Customer | null) => {
+    this.selectedCustomer = customer;
+    if (this.selectedCustomer) {
+      this.loaderService.show();
+      this.customerService.getCustomerDetailsById(this.selectedCustomer.id).subscribe(
+        (result: any) => {
+          this.loaderService.hide();
+          if (result) {
+            this.selectedCustomer = result.response;
+          }
+        },
+        (err) => this.loaderService.hide()
+      );
+    }
   };
 
   backClicked() {
@@ -84,4 +112,12 @@ export class CustomerPaymentHistoryComponent implements OnInit {
       });
     }
   };
+
+  onCreateInvoice() {
+    this.drawerService.openDrawer(
+      this.invoiceTemplate,
+      'Create Invoice',
+      'payments'
+    );
+  }
 }

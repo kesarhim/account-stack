@@ -1,0 +1,69 @@
+<!-- <p>create-invoice works!</p> -->
+
+<div class="createInvoice">
+  <h2>Create Invoice</h2>
+  <form [formGroup]="InvoiceForm" autocomplete="disabled">
+
+    <div class="from">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Work Type <span class="require">*</span></label>
+            <input formControlName="workType" class="form-control" type="text" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Date <span class="require">*</span></label>
+
+            <app-date-picker-component formControlName="date" style="width: 100%;">
+            </app-date-picker-component>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Total Fees <span class="require">*</span></label>
+            <input class="form-control" type="text" formControlName="totalFees" required />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <label>Create By <span class="require">*</span></label>
+            <input class="form-control" id="confirmpassword" type="text" formControlName="createBy" required />
+
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- <label>Remark</label>
+            <textarea class="form-control" id="remark" formControlName="remark" rows="3" cols="50"></textarea> -->
+          </div>
+
+          <div class="col-sm-6">
+            <div class="row save-btn-row" style="justify-content: end;display: flex; margin-top: 40px;">
+              <!-- <div class="col-sm-12" style="justify-content: end;display: flex;"> -->
+                <button type="button" class="btn btn-primary action-button" (click)="onSave()">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+
+
+
+
+
+
+  </form>
+</div>

@@ -2,7 +2,7 @@ import { AlertService } from './../core/components/alert/alert.service';
 import { LoaderService } from './../core/components/loader/loader.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomerService } from '../customer/service/customer-service';
-import { AccountLedgerDTO } from './account-ledger-model';
+import { AccountLedgerDTO, InvoiceDetailDTO } from './account-ledger-model';
 
 @Component({
   selector: 'app-client-account-ledger-component',
@@ -35,6 +35,13 @@ export class ClientAccountLedgerComponent implements OnInit {
     this.getAccountLedger(this.selectedCustomerId);
   }
 
+  onDeleteInvoice = (invoice:InvoiceDetailDTO) => {
+
+  }
+
+  onEditInvoice = (invoice:InvoiceDetailDTO) => {
+
+  }
   getAccountLedger = (customerId: number) => {
     if (customerId && customerId > 0) {
       this.loaderService.show();

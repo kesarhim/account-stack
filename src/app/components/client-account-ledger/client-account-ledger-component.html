@@ -19,6 +19,9 @@
             <th scope="col">Date</th>
             <th scope="col">Total Fees</th>
             <th scope="col">By</th>
+            <th scope="col">Action</th>
+
+
           </tr>
         </thead>
         <tbody>
@@ -28,6 +31,20 @@
             <td>{{invoice?.invoiceDate | date : 'mediumDate'}}</td>
             <td>{{invoice?.invoiceAmount}}</td>
             <td>{{invoice?.creator ?? 'N.A'}}</td>
+            <td><button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onDeleteInvoice(invoice)" >
+                <span style="margin-right: 14px;">Delete</span>
+                <mat-icon mat-mini-fab color="primary">delete</mat-icon>
+              </button>
+              <button mat-menu-item (click)="onEditInvoice(invoice)" >
+                <span style="margin-right: 14px;">Edit</span>
+                <mat-icon mat-mini-fab color="primary">edit</mat-icon>
+              </button>
+            </mat-menu></td>
+
           </tr>
         </tbody>
       </table>

@@ -66,6 +66,7 @@ import { ClientProfileDetailsComponent } from './components/client-profile-detai
 import { ClientAccountLedgerComponent } from './components/client-account-ledger/client-account-ledger-component';
 import { TodayAccountSummaryComponent } from './components/account-summary/today-acccount-summary-component';
 import { TodayReceivedPayments } from './components/today-received-payment/today-received-payment-component';
+import { CreateInvoiceComponent } from './components/create-invoice/create-invoice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +106,8 @@ import { TodayReceivedPayments } from './components/today-received-payment/today
     ClientAccountLedgerComponent,
     TodayAccountSummaryComponent,
     TodayReceivedPayments,
-    TotalPendingPaymentComponent
+    TotalPendingPaymentComponent,
+    CreateInvoiceComponent
   ],
   imports: [
     BrowserModule,

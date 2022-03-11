@@ -50,7 +50,7 @@ export class ClientAccountLedgerComponent implements OnInit {
       if (event?.target?.checked) {
         this.selectedInvoices.push(invoice);
       } else {
-        this.selectedInvoices.splice(invoice)
+       // this.selectedInvoices(invoice)
       }
     }
   }

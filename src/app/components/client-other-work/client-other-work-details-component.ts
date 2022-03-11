@@ -105,7 +105,8 @@ export class ClientOtherWorkDetailsComponent implements OnInit {
         this.loaderService.show();
         this.otherWorkService.delelteOtherWorkDetails(data.id).subscribe((result : any) => {
           if(result && result.response){
-            this.alertService.success("Work details deleted successfully.")
+            this.alertService.success("Work details deleted successfully.");
+            this.drawerService.closeDrawer();
             this.getCustomerOtherWorkDetails(this.selectedCustomerId);
           }
         })

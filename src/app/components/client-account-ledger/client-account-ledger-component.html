@@ -1,13 +1,17 @@
-<div class="d-flex flex-coloumn" >
+<div class="d-flex flex-coloumn">
   <div class="col-6" style="height: 500px;max-height: 500px;overflow: auto;">
-    <div class="d-flex flex-fill flex-column" >
+    <div class="d-flex flex-fill flex-column">
       <div class="d-flex justify-content-around align-items-center p-2">
 
         <h2 class="m-0">Invoice</h2>
         <div class="alert-primary font-16 ml-4 p-2" role="alert">
-          <span class="d-flex justify-content-center" > Total Bill: &nbsp;
-            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalBill}}</span>
+          <span class="d-flex justify-content-center"> Total Bill: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalBill}}
+          </span>
 
+        </div>
+        <div class="cursor-pointor" style="cursor: pointer;">
+           <mat-icon color="primary" >print</mat-icon>
         </div>
       </div>
 
@@ -20,30 +24,31 @@
             <th scope="col">Total Fees</th>
             <th scope="col">By</th>
             <th scope="col">Action</th>
-
-
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let invoice of accountLedger?.invoices;let index = index">
-            <th scope="row">{{index + 1}}</th>
+            <th scope="row" class="d-flex justify-content-center align-items-center">
+              {{index + 1}} &nbsp;
+              <input type="checkbox" (change)="selectInvoice($event,invoice?.id)"/></th>
             <td>{{invoice?.contextType}}</td>
             <td>{{invoice?.invoiceDate | date : 'mediumDate'}}</td>
             <td>{{invoice?.invoiceAmount}}</td>
             <td>{{invoice?.creator ?? 'N.A'}}</td>
             <td><button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="onDeleteInvoice(invoice)" >
-                <span style="margin-right: 14px;">Delete</span>
-                <mat-icon mat-mini-fab color="primary">delete</mat-icon>
+                <mat-icon>more_vert</mat-icon>
               </button>
-              <button mat-menu-item (click)="onEditInvoice(invoice)" >
-                <span style="margin-right: 14px;">Edit</span>
-                <mat-icon mat-mini-fab color="primary">edit</mat-icon>
-              </button>
-            </mat-menu></td>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [useExistingCss]="true" printTitle="Piyush Kesharwani & Associates"
+                  printSectionId="print-section" ngxPrint>
+                  <span style="margin-right: 14px;" (click)="onPrintInvoice(invoice)">Print Invoice</span>
+                  <mat-icon mat-mini-fab color="primary">print</mat-icon>
+                </button>
+              </mat-menu>
+              <div id="print-section" class="d-none">
+                <app-print-invoice-component [invoices]="selectedInvoices" [customer]="customer"></app-print-invoice-component>
+              </div>
+            </td>
 
           </tr>
         </tbody>
@@ -55,20 +60,22 @@
       <div class="d-flex justify-content-around align-items-center p-2">
         <h2 class="m-0">Payment History</h2>
         <div class="alert-primary font-16 ml-4 p-2" role="alert">
-          <span class="d-flex justify-content-center" > Received Amount: &nbsp;
-          <mat-icon class="font-20">currency_rupees</mat-icon>{{totalReceivedAmount}}</span>
+          <span class="d-flex justify-content-center"> Received Amount: &nbsp;
+            <mat-icon class="font-20">currency_rupees</mat-icon>{{totalReceivedAmount}}
+          </span>
         </div>
       </div>
 
       <table class="table table-striped">
         <thead style="">
-          <tr >
+          <tr>
             <th scope="col">No</th>
             <th scope="col">Amount</th>
             <th scope="col">Discount</th>
             <th scope="col">Date</th>
             <th scope="col">By</th>
             <th scope="col">Payment Method</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +86,20 @@
             <td>{{paymentHistory?.receivedDate | date : 'mediumDate'}}</td>
             <td>{{paymentHistory?.receivedBy}}</td>
             <td>{{paymentHistory?.receivedMethod}}</td>
+            <td><button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [useExistingCss]="true" printTitle="Piyush Kesharwani & Associates"
+                printSectionId="print-receipt" ngxPrint>
+                <span style="margin-right: 14px;" (click)="onPrintReceipt(paymentHistory)">Print Receipt</span>
+                <mat-icon mat-mini-fab color="primary">print</mat-icon>
+              </button>
+            </mat-menu>
+
+            <div id="print-receipt" class="d-none">
+              <app-print-receipt-component [receivedPayment]="selectedReceipt" [customer]="customer"></app-print-receipt-component>
+            </div></td>
           </tr>
         </tbody>
       </table>

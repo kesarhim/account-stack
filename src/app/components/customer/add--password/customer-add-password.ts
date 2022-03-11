@@ -26,6 +26,7 @@ export class CustomerAddPasswordComponent implements OnInit {
   onSelectCustomer = (customer: Customer) => {
     this.selectedCustomer = customer;
     this.patchCustomer();
+    this.patchData(this.selectedCustomer);
   }
 
   createForm = () => {

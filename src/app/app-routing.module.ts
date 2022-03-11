@@ -1,3 +1,4 @@
+import { PrintInvoiceComponent } from './components/print-invoice/print-invoice-component';
 import { TodayReceivedPayments } from './components/today-received-payment/today-received-payment-component';
 import { TodayAccountSummaryComponent } from './components/account-summary/today-acccount-summary-component';
 import { ReceivePaymentComponent } from './components/payment/add-payment/receive-payment-component';
@@ -49,7 +50,7 @@ const routes: Routes = [
       {path:'account-summary',component: TodayAccountSummaryComponent},
       {path:'today-received-payments',component:TodayReceivedPayments},
       {path:'total-pending-payments',component:TotalPendingPaymentComponent},
-      {path:'create-invoice',component:CreateInvoiceComponent}
+      {path:'create-invoice',component:CreateInvoiceComponent},
     ]
   },
 

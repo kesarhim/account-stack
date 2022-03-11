@@ -15,6 +15,8 @@ import { ConfirmationDialogService } from '../../shared/confim-dialog/confimatio
 import { ITableConfig, ITableColumn, ITableActionLinks, ColumnType } from '../../shared/table/models/table-config';
 import { OtherWorkDetailDTO } from './model/other-work-details-dto';
 import { PaymentDetails } from '../../payment/models/payment.model';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { isFunction } from 'lodash';
 
 @Component({
   selector: 'app-view-other-work-list-component',
@@ -42,6 +44,7 @@ export class ViewOtherWorkListComponent implements OnInit {
   @Input() fetchServer : boolean = true;
   @ViewChild('paymentHistory') paymentHistoryTemplate: TemplateRef<any>;
   @ViewChild('receivePayment') receivePaymentTemplate: TemplateRef<any>;
+  private drawerSubscription :Subscription;
   constructor(
     private loaderService: LoaderService,
     private alertService: AlertService,
@@ -55,6 +58,20 @@ export class ViewOtherWorkListComponent implements OnInit {
   ngOnInit() {
     if(this.fetchServer){
       this.getOtheWorkDetailsDetails(25);
+    }
+    this.drawerSubscription = this.drawerService.drawerSubject.subscribe((value) => {
+      if(this.fetchServer){
+        this.getOtheWorkDetailsDetails(25);
+      }else{
+        this.loadTableData();
+      }
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    if(this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)){
+      this.drawerSubscription.unsubscribe();
     }
   }
 

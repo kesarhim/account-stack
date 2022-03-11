@@ -102,6 +102,7 @@ export class ClientItrDetailsComponent implements OnInit {
         this.itrDetailService.delelteITR(data.id).subscribe((result: any) => {
           if (result && result.response) {
             this.alertService.success("ITR details deleted successfully.")
+            this.drawerService.closeDrawer();
             this.getCustomerITRDetails(this.selectedCustomerId);
           }
         })

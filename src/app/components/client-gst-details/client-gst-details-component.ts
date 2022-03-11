@@ -105,7 +105,8 @@ export class ClientGstDetailsComponent implements OnInit {
         this.gstDetailService.delelteGstDetails(data.id).subscribe((result: any) => {
           if (result && result.response) {
             this.loaderService.hide();
-            this.alertService.success("GST details deleted successfully.")
+            this.alertService.success("GST details deleted successfully.");
+            this.drawerService.closeDrawer();
             this.getCustomerGstDetails(this.selectedCustomerId);
           }
         })

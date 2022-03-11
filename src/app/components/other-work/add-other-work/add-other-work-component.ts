@@ -103,7 +103,7 @@ export class AddOtherWorkComponent implements OnInit {
       //   fullName: [null],
       panNumber: [null],
       aadhaarNumber: [null],
-      clientName: [null, Validators.required],
+      clientName: [null],
       work: [null, Validators.required],
       careOf: [null, Validators.required],
       fileDate: [currdate, Validators.required],

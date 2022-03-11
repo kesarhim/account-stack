@@ -1,3 +1,4 @@
+import { PrintReceiptComponent } from './components/print-receipt/print-receipt-component';
 import { TotalPendingPaymentComponent } from './components/total-pending-payments/total-pending-payments-component';
 import { ReceivePaymentComponent } from './components/payment/add-payment/receive-payment-component';
 import { AddOtherWorkComponent } from './components/other-work/add-other-work/add-other-work-component';
@@ -67,6 +68,9 @@ import { ClientAccountLedgerComponent } from './components/client-account-ledger
 import { TodayAccountSummaryComponent } from './components/account-summary/today-acccount-summary-component';
 import { TodayReceivedPayments } from './components/today-received-payment/today-received-payment-component';
 import { CreateInvoiceComponent } from './components/create-invoice/create-invoice.component';
+import { PrintInvoiceComponent } from './components/print-invoice/print-invoice-component';
+import {NgxPrintModule} from 'ngx-print';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,7 +111,9 @@ import { CreateInvoiceComponent } from './components/create-invoice/create-invoi
     TodayAccountSummaryComponent,
     TodayReceivedPayments,
     TotalPendingPaymentComponent,
-    CreateInvoiceComponent
+    CreateInvoiceComponent,
+    PrintInvoiceComponent,
+    PrintReceiptComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +121,7 @@ import { CreateInvoiceComponent } from './components/create-invoice/create-invoi
     AppRoutingModule,
     MatSliderModule,
     CommonModule,
+    NgxPrintModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,

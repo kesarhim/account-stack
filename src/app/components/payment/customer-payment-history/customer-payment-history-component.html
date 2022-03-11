@@ -11,7 +11,7 @@
   <mat-card-header class="mt-2" style="padding-top: 10px;">
     <mat-card-title class="d-flex flex-row flex-fill">
       <div class="d-flex flex-row">
-        <span class="link cursor-pointer color-primary-blue">{{selectedCustomer?.fullName}}</span>
+        <span class="link cursor-pointer color-primary-blue" (click)="goToProfile(selectedCustomer?.id)">{{selectedCustomer?.fullName}}</span>
         <div class="alert-warning font-16 ml-4 p-2" role="alert">
           <span class="d-flex justify-content-center">Pending Amount: &nbsp;
             <mat-icon class="font-20">currency_rupees</mat-icon>{{selectedCustomer?.balanceAmount}}
@@ -39,7 +39,7 @@
         <mat-menu #menu="matMenu">
           <!-- <button mat-menu-item (click)="onEditCandidate(selectedCustomer)">Edit</button> -->
           <button mat-menu-item (click)="onReceivePayment(selectedCustomer)">Receive Payment</button>
-          <button mat-menu-item (click)="onCreateInvoice(selectedCustomer)">Create Invoice</button>
+          <!-- <button mat-menu-item (click)="onCreateInvoice(selectedCustomer)">Create Invoice</button> -->
 
         </mat-menu>
       </div>
@@ -64,7 +64,7 @@
     </mat-card-subtitle>
   </mat-card-header>
   <div>
-    <app-client-account-ledger-component [customerId]="selectedCustomer?.id"></app-client-account-ledger-component>
+    <app-client-account-ledger-component [customerId]="selectedCustomer?.id" [customer]="selectedCustomer"></app-client-account-ledger-component>
   </div>
 </mat-card>
 

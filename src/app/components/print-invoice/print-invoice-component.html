@@ -1,0 +1,87 @@
+<div class="container-fluid invoice-container">
+  <!-- Header -->
+  <header class="mt-4">
+    <div class="row">
+      <div class="col-sm-7 text-sm-start mb-3 mb-sm-0">
+        <h5>Piyuesh Kesharwani & Associates</h5>
+      </div>
+      <div class="col-sm-5 text-center text-sm-end">
+        <h5 class="text-7 mb-0"><strong>Date: </strong>{{ currentDate| date :'medium'}}</h5>
+      </div>
+    </div>
+    <hr>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="row">
+      <div class="col-sm-6"> <strong>Pay To: </strong>
+        <address>
+          Peeyush Kesharwani & Associates<br>
+          10/2A/8 Tashkant Marg<br>
+          Civil Lines, Prayag Raj<br>
+          Phone: +91- 9415235737 / 9453029883<br>
+          Email: peeyushKesharwaniandassociates@gmail.com
+        </address>
+      </div>
+      <div class="col-sm-6"> <strong>Invoiced To: </strong>
+        <address>
+          {{customer?.fullName}}<br>
+          Pan No: {{customer?.panNo | uppercase}}<br>
+          Mobile No: {{customer?.mobileNo}}<br>
+          {{customer?.street}}<br>
+          {{customer?.city}}, {{customer?.state}}, {{customer?.pinCode}}<br>
+        </address>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table mb-0">
+            <thead class="card-header">
+              <tr>
+
+                <td class="col-4"><strong>Description</strong></td>
+                <td class="col-2"><strong>Service</strong></td>
+                <td class="col-3"><strong>Date</strong></td>
+                <td class="col-2 text-end"><strong>Amount</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoice of invoices">
+                <td class="col-4">
+                  {{invoice?.contextType?.toUpperCase() == 'ITR' ? 'ITR Filing for Asssesment Year 2021-2022' :
+                  (invoice?.contextType?.toUpperCase() == 'GST' ? 'Gst Filing' :'Work Detail')
+                  }}
+                </td>
+
+                <td class="col-2">{{invoice?.contextType | uppercase}}</td>
+                <td class="col-3">{{invoice?.invoiceDate | date :'mediumDate'}}</td>
+                <td class="col-2 text-end"><span class="d-flex align-items-center">
+                    <mat-icon>currency_rupees</mat-icon>{{invoice?.invoiceAmount}}
+                  </span></td>
+              </tr>
+            </tbody>
+            <tfoot class="card-footer">
+              <tr>
+                <td colspan="4" class="text-end border-bottom-0"><strong>Total:</strong></td>
+                <td class="text-end border-bottom-0"><span class="d-flex align-items-center">
+                    <mat-icon>currency_rupees</mat-icon>{{total}}
+                  </span></td>
+              </tr>
+              <tr>
+                <td colspan="4" class="text-end border-bottom-0"></td>
+                <td class="text-end border-bottom-0">Signature</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="text-center mt-4">
+    <p class="text-1"><strong>NOTE :</strong> This is computer generated receipt.</p>
+  </footer>
+</div>

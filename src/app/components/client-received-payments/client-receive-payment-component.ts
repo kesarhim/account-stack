@@ -10,6 +10,7 @@ import { AlertService } from '../core/components/alert/alert.service';
 import { LoaderService } from '../core/components/loader/loader.service';
 import { OthweWorkDetailService } from '../customer/service/other-work-detail-service';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
+import { DrawerService } from '../shared/drawer/drawer.service';
 
 @Component({
   selector: 'app-client-receive-payment-component',
@@ -42,7 +43,8 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     private alertService: AlertService,
     private router: Router,
     private dialogService: ConfirmationDialogService,
-    private receivePaymentService: ReceivePaymentService) {
+    private receivePaymentService: ReceivePaymentService,
+    private drawerService:DrawerService) {
 
   }
 
@@ -118,6 +120,7 @@ export class ClientReceivedPaymentsComponent implements OnInit {
         this.receivePaymentService.deletePaymentDetails(data.id).subscribe((result : any) => {
           if(result && result.response){
             this.alertService.success("Deleted successfully.")
+             this.drawerService.closeDrawer();
             this.getCustomerReceivedPayments(this.selectedCustomerId);
           }
         })

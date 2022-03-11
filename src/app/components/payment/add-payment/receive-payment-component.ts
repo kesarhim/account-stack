@@ -8,6 +8,7 @@ import { ReceivePaymentService } from '../service/receive-payment-service';
 import { ReceivePaymentDTO } from '../models/receive-payment-dto';
 import { User } from '../../shared/models/user-cred.model';
 import { StorageKeys, StorageService } from '../../core/services/storage.service';
+import { Customer } from '../../customer/create/models/customer-model';
 
 @Component({
   selector: 'app-receive-payment-component',
@@ -22,6 +23,7 @@ export class ReceivePaymentComponent implements OnInit {
   private loggedInUser: User;
   @Input() paymentDetails: PaymentDetails;
   @Input() showTitle: boolean = false;
+  private isEditMode :boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,8 +40,23 @@ export class ReceivePaymentComponent implements OnInit {
     if(changes && this.paymentDetails){
       this.receivePaymentForm.patchValue({
         amount:this.paymentDetails.balanceAmount
+
       });
+      if(this.paymentDetails.id > 0){
+        this.isEditMode = true;
+        this.receivePaymentForm.patchValue({
+          paymentMethod: this.paymentDetails.receivedMethod,
+          cheuqeNumber: this.paymentDetails.chequeNo,
+          transactionNumber: this.paymentDetails.transactionNo,
+          discount:this.paymentDetails.discount,
+          receivedBy: this.paymentDetails.receivedBy,
+          date: new Date(this.paymentDetails.receivedDate),
+          remark: this.paymentDetails.remark
+        });
+      }
     }
+
+
 
   }
   ngOnInit() {
@@ -120,4 +137,5 @@ export class ReceivePaymentComponent implements OnInit {
     }
     return receivePaymentDTO;
   }
+
 }

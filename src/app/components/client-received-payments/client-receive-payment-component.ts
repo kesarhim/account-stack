@@ -1,7 +1,7 @@
 import { ReceivePaymentDTO } from './../payment/models/receive-payment-dto';
 import { ReceivePaymentService } from './../payment/service/receive-payment-service';
 import { ColumnType, ITableActionLinks, ITableColumn, ITableConfig } from './../shared/table/models/table-config';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,7 @@ import { LoaderService } from '../core/components/loader/loader.service';
 import { OthweWorkDetailService } from '../customer/service/other-work-detail-service';
 import { ConfirmationDialogService } from '../shared/confim-dialog/confimation-dialog-service';
 import { DrawerService } from '../shared/drawer/drawer.service';
+import { PaymentDetails } from '../payment/models/payment.model';
 
 @Component({
   selector: 'app-client-receive-payment-component',
@@ -20,6 +21,7 @@ import { DrawerService } from '../shared/drawer/drawer.service';
 
 export class ClientReceivedPaymentsComponent implements OnInit {
   dataSource: MatTableDataSource<ReceivePaymentDTO>;
+  @ViewChild('editPaymentTemplate') editPaymentTemplate: TemplateRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public selectedOtherWork: ReceivePaymentDTO;
@@ -36,6 +38,7 @@ export class ClientReceivedPaymentsComponent implements OnInit {
       this.getCustomerReceivedPayments(value);
     }
   }
+  public paymentDetail:PaymentDetails | null;
   @Input() actionAllowed:boolean  = false;
   private selectedCustomerId :number;
   constructor(
@@ -109,9 +112,41 @@ export class ClientReceivedPaymentsComponent implements OnInit {
 
   onEditPaymentDetail = (otherWorkDetail: ReceivePaymentDTO) => {
     if (otherWorkDetail) {
+      this.paymentDetail = this.getPaymentDetails(otherWorkDetail);
     //  this.router.navigate(['/home/add/other-work'], { queryParams: { id: otherWorkDetail.id } });
+    this.drawerService.openDrawer(
+      this.editPaymentTemplate,
+      'Edit Payment',
+      'payments'
+    );
     }
   }
+
+  getPaymentDetails = (receivePaymentDTO: ReceivePaymentDTO): PaymentDetails | null => {
+    if (receivePaymentDTO) {
+      let paymentDetails: PaymentDetails = new PaymentDetails();
+      paymentDetails.customerId = receivePaymentDTO.customerid;
+      paymentDetails.totalFees = receivePaymentDTO.receivedAmount;
+      paymentDetails.feesPaid = receivePaymentDTO.receivedAmount;
+      paymentDetails.balanceAmount = receivePaymentDTO.receivedAmount;
+      paymentDetails.clientName = receivePaymentDTO.clientName;
+      paymentDetails.panNo = receivePaymentDTO.panNo;
+      paymentDetails.chequeNo = receivePaymentDTO.chequeNo;
+      paymentDetails.receivedBy = receivePaymentDTO.receivedBy
+      paymentDetails.receivedMethod = receivePaymentDTO.receivedMethod;
+      paymentDetails.transactionNo = receivePaymentDTO.transactionNo;
+      paymentDetails.discountOffered = receivePaymentDTO.discountOffered;
+      paymentDetails.contextKey = 'CUSTOMER';
+      paymentDetails.id = receivePaymentDTO.id;
+      paymentDetails.discount = receivePaymentDTO.discountOffered;
+      paymentDetails.remark = receivePaymentDTO.remark;
+      return paymentDetails;
+    }
+    return null;
+  }
+
+
+
 
   onDeletePayment = (data: ReceivePaymentDTO) => {
     this.dialogService.showConfirmationDialog("Do you really want to delete the selected item?").subscribe(value => {
@@ -142,5 +177,13 @@ export class ClientReceivedPaymentsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onEditPayment() {
+    this.drawerService.openDrawer(
+      this.editPaymentTemplate,
+      'Create Invoice',
+      'payments'
+    );
   }
 }

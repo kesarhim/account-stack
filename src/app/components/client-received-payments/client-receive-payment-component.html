@@ -1,3 +1,9 @@
 <div class="">
   <app-table-component [tableDataSource]="dataSource" [tableConfig]="tableConfig" [allowSearch]="false"></app-table-component>
 </div>
+
+
+<ng-template #editPaymentTemplate>
+  <app-receive-payment-component [pendingAmount]="paymentDetail?.balanceAmount" [paymentDetails]="paymentDetail">
+  </app-receive-payment-component>
+</ng-template>

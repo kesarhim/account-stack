@@ -39,8 +39,8 @@ export class ClientProfileComponent implements OnInit {
   @ViewChild(ClientGstDetailsComponent) private clientGstDetailsComponent: ClientGstDetailsComponent;
   @ViewChild(ClientAccountLedgerComponent) private clientAccountLedgerComponent: ClientAccountLedgerComponent;
 
-  public drawerSubscription :Subscription;
-  public routerSubscription :Subscription;
+  public drawerSubscription: Subscription;
+  public routerSubscription: Subscription;
   constructor(
     private route: ActivatedRoute,
     private customerService: CustomerService,
@@ -55,7 +55,7 @@ export class ClientProfileComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
-  this.routerSubscription = this.route.queryParams.subscribe((value) => {
+    this.routerSubscription = this.route.queryParams.subscribe((value) => {
       this.customerId = value['customerId'];
     });
     if (this.customerId > 0) {
@@ -69,14 +69,14 @@ export class ClientProfileComponent implements OnInit {
     });
   }
 
- ngOnDestroy(): void {
-   if(this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)){
-     this.drawerSubscription.unsubscribe();
-   }
-   if(this.routerSubscription && isFunction(this.routerSubscription.unsubscribe)){
-    this.routerSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.drawerSubscription && isFunction(this.drawerSubscription.unsubscribe)) {
+      this.drawerSubscription.unsubscribe();
+    }
+    if (this.routerSubscription && isFunction(this.routerSubscription.unsubscribe)) {
+      this.routerSubscription.unsubscribe();
+    }
   }
- }
 
   onTabChanges = (data: any) => {
     this.selectedTab = data.index;

@@ -44,7 +44,8 @@
         </span>
 
         <span style="font-weight: 500;" class="ml-5">
-          Last Payment Received : {{ selectedCustomer?.lastPaymentReceivedDate | date : 'medium'}}
+          Last Payment Received :
+          {{(selectedCustomer?.lastPaymentReceivedDate | date:'yy') !== '01' ? ( selectedCustomer.lastPaymentReceivedDate | date : 'medium') : 'N.A'}}
         </span>
       </div>
 

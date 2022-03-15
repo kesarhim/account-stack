@@ -70,6 +70,7 @@ import { TodayReceivedPayments } from './components/today-received-payment/today
 import { CreateInvoiceComponent } from './components/create-invoice/create-invoice.component';
 import { PrintInvoiceComponent } from './components/print-invoice/print-invoice-component';
 import {NgxPrintModule} from 'ngx-print';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import {NgxPrintModule} from 'ngx-print';
     TotalPendingPaymentComponent,
     CreateInvoiceComponent,
     PrintInvoiceComponent,
-    PrintReceiptComponent
+    PrintReceiptComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,

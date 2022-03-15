@@ -24,6 +24,7 @@ import { ViewITRFilledComponent } from './components/view-itr/view-itr-filled-co
 import { ClientProfileComponent } from './components/client-profile/client-profile.component';
 import { TotalPendingPaymentComponent } from './components/total-pending-payments/total-pending-payments-component';
 import { CreateInvoiceComponent } from './components/create-invoice/create-invoice.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
       {path:'today-received-payments',component:TodayReceivedPayments},
       {path:'total-pending-payments',component:TotalPendingPaymentComponent},
       {path:'create-invoice',component:CreateInvoiceComponent},
+      {path:'to-do',component:TicketComponent},
     ]
   },
 

@@ -16,8 +16,8 @@
     <div class="from" style="margin-top: 40px;">
       <div class="form-group">
         <div class="row">
-          <div class="col-sm-6" >
-            <label>Client Name <span class="require">*</span></label>
+          <div class="col-sm-6">
+            <label>Name <span class="require">*</span></label>
             <input formControlName="clientName" class="form-control" type="text" required />
           </div>
 
@@ -33,13 +33,16 @@
       <div class="form-group">
         <div class="row">
           <div class="col-sm-6">
-            <label>Fees <span class="require"></span></label>
-            <input class="form-control" type="text" formControlName="taskFees" />
-          </div>
-
-          <div class="col-sm-6">
             <label>Status <span class="require">*</span></label>
             <app-catalog-loader-component [catId]="'TODO'" formControlName="status" required>
+            </app-catalog-loader-component>
+          </div>
+
+
+
+          <div class="col-sm-6">
+            <label>Assign To <span class="require">*</span></label>
+            <app-catalog-loader-component [catId]="''" formControlName="assignMember" required>
             </app-catalog-loader-component>
           </div>
 
@@ -51,6 +54,10 @@
           <div class="col-sm-6">
             <label>Description </label>
             <textarea class="form-control" formControlName="taskDescription" rows="3" cols="50"></textarea>
+          </div>
+          <div class="col-sm-6">
+            <label>Fees <span class="require"></span></label>
+            <input class="form-control" type="text" formControlName="taskFees" />
           </div>
         </div>
       </div>
@@ -64,6 +71,8 @@
           <button type="button" class="btn btn-primary action-button" (click)="onSavetask()">Save</button>
         </div>
       </div>
+
+
     </div>
 
   </form>

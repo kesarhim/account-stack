@@ -4,6 +4,7 @@ import { AlertService } from '../core/components/alert/alert.service';
 import { LoaderService } from '../core/components/loader/loader.service';
 import { UserService } from '../core/services/user.service';
 import { Customer } from '../customer/create/models/customer-model';
+import { TicketDetailService } from '../payment/service/to-do-service';
 import { GSTDetailsDTO } from '../view-all-gst/model/gst-details-dto';
 
 @Component({
@@ -31,13 +32,20 @@ export class TicketComponent implements OnInit {
     this.todoTaskForm = this.formBuilder.group({
       clientName: [null, [Validators.required]],
       taskTitle: [null, [Validators.required]],
+      assignMember: [null, [Validators.required]],
       taskFees:[null ],
       taskDescription:[null ],
       status:[null,[Validators.required] ],
     });
   }
-  onSavetask()
-  {
+  onSavetask = () =>{
+    if(this.todoTaskForm.valid )
+    {
+      let payload: TicketDetailService = this.getPayload();
+    }
+
+
+
 
   }
 
@@ -50,5 +58,5 @@ export class TicketComponent implements OnInit {
     });
   }
 
-  
+
 }

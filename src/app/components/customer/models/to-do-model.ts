@@ -1,9 +1,10 @@
-export class ToDoTask{
+export class Ticket{
 
+  id :number;
   clientName:string;
   title:string;
-  taskFees:number;
-  taskDescription:string;
+  fees:number;
+  description:string;
   status:string;
-
+  assignedMember:string;
 }
